@@ -3,12 +3,20 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
+const languageStrings = {
+    es:{
+        translation: {
+            WELCOME_MSG: '¿Bienvenido! Qué deseas hacer: guardar, encontrar o listar un objeto?'
+        }
+    }
+}
+
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Bienvenido. Puedes añadir un nuevo almacen o buscar uno ya existente. Que deseas hacer?';
+        const speakOutput = WELCOME_MSG;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
