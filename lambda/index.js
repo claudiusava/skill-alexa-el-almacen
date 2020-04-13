@@ -12,11 +12,13 @@ const i18n = require('i18next');
 const languageStrings = {
     es:{
         translation: {
-            WELCOME_MSG: 'Bienvenido! Qué deseas hacer: guardar, encontrar o listar un objeto?'
+            WELCOME_MSG: 'Bienvenido! ¿Qué deseas hacer: guardar, encontrar o listar un objeto?'
         }
     }
 }
 
+
+//SOLICITUD DE LANZAMIENTO
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
