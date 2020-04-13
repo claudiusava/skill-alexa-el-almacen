@@ -7,6 +7,13 @@ const Alexa = require('ask-sdk-core');
 const i18n = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
 
+
+
+
+
+
+
+
 // We create a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
 // e.g. requestAttributes.t('WELCOME_MSG')
