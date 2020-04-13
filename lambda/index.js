@@ -37,6 +37,11 @@ const RegisterWerehouseIntentHandler = {
             .getResponse();
     }
 };
+
+
+
+
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -64,6 +69,12 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
+
+
+
+
+
+
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
@@ -73,6 +84,12 @@ const SessionEndedRequestHandler = {
         return handlerInput.responseBuilder.getResponse();
     }
 };
+
+
+
+
+
+
 
 // The intent reflector is used for interaction model testing and debugging.
 // It will simply repeat the intent the user said. You can create custom handlers
@@ -93,6 +110,15 @@ const IntentReflectorHandler = {
     }
 };
 
+
+
+
+
+
+
+
+
+
 // Generic error handling to capture any syntax or routing errors. If you receive an error
 // stating the request handler chain is not found, you have not implemented a handler for
 // the intent being invoked or included it in the skill builder below.
@@ -111,6 +137,13 @@ const ErrorHandler = {
     }
 };
 
+
+
+
+
+
+
+
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
@@ -124,6 +157,14 @@ exports.handler = Alexa.SkillBuilders.custom()
         IntentReflectorHandler, // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
     .addErrorHandlers(
-        ErrorHandler,
+        ErrorHandler
     )
     .lambda();
+    
+    
+    
+    
+    
+    
+    
+    
