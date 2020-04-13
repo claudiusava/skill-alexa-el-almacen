@@ -5,13 +5,13 @@ const Alexa = require('ask-sdk-core');
 
 
 
-
+//SOLICITUD DE LANZAMIENTO
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput = 'Bienvenido! Puedes guardar, buscar o listar todos los bojetos. ¿Qué deseas hacer?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -23,7 +23,7 @@ const LaunchRequestHandler = {
 
 
 
-
+//SOLICITUD DE GUARDAR
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -37,6 +37,11 @@ const HelloWorldIntentHandler = {
             .getResponse();
     }
 };
+
+
+
+
+//SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -55,7 +60,7 @@ const HelpIntentHandler = {
 
 
 
-
+//SOLICITUD DE CANCELAR
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -73,7 +78,7 @@ const CancelAndStopIntentHandler = {
 
 
 
-
+//SOLICITUD DE FINALIZAR SESION
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
@@ -114,9 +119,7 @@ const IntentReflectorHandler = {
 
 
 
-// Generic error handling to capture any syntax or routing errors. If you receive an error
-// stating the request handler chain is not found, you have not implemented a handler for
-// the intent being invoked or included it in the skill builder below.
+//MENSAJE DE ERROR
 const ErrorHandler = {
     canHandle() {
         return true;
@@ -132,9 +135,12 @@ const ErrorHandler = {
     }
 };
 
-// The SkillBuilder acts as the entry point for your skill, routing all request and response
-// payloads to the handlers above. Make sure any new handlers or interceptors you've
-// defined are included below. The order matters - they're processed top to bottom.
+
+
+
+
+
+//INSTANCIAS
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
