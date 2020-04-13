@@ -3,8 +3,10 @@
 // Persistencia de sesión, llamadas de API y más.
 const Alexa = require('ask-sdk-core');
 
+
 //LIBRERIA PARA LOCALIZAR INTERCEPTORES 
 const i18n = require('i18next');
+
 
 //MENSAJES
 const languageStrings = {
