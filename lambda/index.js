@@ -6,6 +6,7 @@ const Alexa = require('ask-sdk-core');
 
 //LIBRERIA PARA LOCALIZAR INTERCEPTORES 
 const i18n = require('i18next');
+const sprintf = require('i18next-sprintf-postprocessor');
 
 
 //MENSAJES
@@ -27,7 +28,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAtributes();
-        const speakOutput = handlerInput.t('MSG_BIENVENIDA');
+        const speakOutput = requestAttributes.t('MSG_BIENVENIDA');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -147,10 +148,16 @@ const ErrorHandler = {
 //INTERCEPTOR DE LANZAMIENTO
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
-        i18n.init({
-            lng: Alexa.getLocale(handlerInput.requestEnvelope),
-            resources: languageStrings}).then((t) => {handlerInput.t = (...args) => t(...args);
+        const localizationClient = i18n.use(sprintf).init({
+            lng: handlerInput.requestEnvelope.request.locale,
+            overloadTranslationOptionHandler:sprintf.overloadTranslationOptionHandler,
+            resources: languageStrings,
+            returnObjects: true
         });
+        const attibutes = handlerInput.attributesManager.getRequestAtributes();
+        attibutes.t = function (...args){
+            return localizationClient.t(...args);
+        }
     }
 };
 
