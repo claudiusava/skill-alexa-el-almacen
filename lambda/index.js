@@ -12,7 +12,8 @@ const i18n = require('i18next');
 const languageStrings = {
     es:{
         translation: {
-            WELCOME_MSG: 'Bienvenido! ¿Qué deseas hacer: guardar, encontrar o listar un objeto?'
+            MSG_BIENVENIDA: 'Bienvenido! ¿Qué deseas hacer: guardar, encontrar o listar un objeto?',
+            MSG_GUARDAR: '¿Que vas a guardar?'
         }
     }
 }
@@ -26,7 +27,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAtributes();
-        const speakOutput = requestAttributes.t('WELCOME_MSG');
+        const speakOutput = requestAttributes.t('MSG_BIENVENIDA');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -36,6 +37,7 @@ const LaunchRequestHandler = {
 
 
 
+//SOLICITUD DE GUARDAR 
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -51,6 +53,8 @@ const HelloWorldIntentHandler = {
 };
 
 
+
+//SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -67,6 +71,8 @@ const HelpIntentHandler = {
 };
 
 
+
+//SOLICITUD DE CANCELAR
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -82,6 +88,7 @@ const CancelAndStopIntentHandler = {
 };
 
 
+//SOLICITUD DE FINALIZAR SESIÓN
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
@@ -91,6 +98,8 @@ const SessionEndedRequestHandler = {
         return handlerInput.responseBuilder.getResponse();
     }
 };
+
+
 
 
 // El reflector de intención se utiliza para probar y depurar modelos de interacción.
@@ -112,6 +121,8 @@ const IntentReflectorHandler = {
     }
 };
 
+
+
 // Manejo de errores genérico para capturar cualquier sintaxis o errores de enrutamiento. Si recibes un error
 // indicando que no se encuentra la cadena del controlador de solicitudes, no ha implementado un controlador para
 // la intención se invoca o la incluye en el generador de habilidades a continuación.
@@ -129,6 +140,8 @@ const ErrorHandler = {
             .getResponse();
     }
 };
+
+
 
 
 //INTERCEPTOR DE LANZAMIENTO
@@ -155,9 +168,13 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler,
         IntentReflectorHandler, // asegúrese de que IntentReflectorHandler sea el último para que no anule sus manejadores de intención personalizados
     )
-    .addErrorHandlers(
-        ErrorHandler,
-    )
-    .addRequestInterceptors(
-        LocalisationRequestInterceptor)
+    .addErrorHandlers(ErrorHandler)
+    .addRequestInterceptors(LocalisationRequestInterceptor)
     .lambda();
+    
+    
+    
+    
+    
+    
+    
