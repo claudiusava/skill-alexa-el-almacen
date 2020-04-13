@@ -43,10 +43,10 @@ const LaunchRequestHandler = {
 
 
 
-const RegisterWerehouseIntentHandler = {
+const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterWerehouseIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'Hecho! Puedo ayudarte con algo más?';
@@ -175,7 +175,7 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        RegisterWerehouseIntentHandler,
+        RegistrarProductoIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
