@@ -145,6 +145,7 @@ const LocalisationRequestInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
+        languageStrings,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
