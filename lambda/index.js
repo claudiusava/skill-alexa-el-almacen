@@ -49,10 +49,10 @@ const RegisterWerehouseIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterWerehouseIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hecho!';
+        const speakOutput = 'Hecho! Puedo ayudarte con algo más?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt(speakOutput)
             .getResponse();
     }
 };
