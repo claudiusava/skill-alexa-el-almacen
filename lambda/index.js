@@ -154,4 +154,6 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler,
     )
+    .addRequestInterceptors(
+        LocalisationRequestInterceptor)
     .lambda();
