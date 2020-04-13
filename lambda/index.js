@@ -11,7 +11,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Bienvenido! Puedes guardar, buscar o listar todos los bojetos. ¿Qué deseas hacer?';
+        const speakOutput = 'Bienvenido! Puedes guardar, buscar o listar todos los objetos. ¿Qué deseas hacer?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
