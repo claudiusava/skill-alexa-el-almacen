@@ -16,7 +16,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = WELCOME_MSG;
+        const speakOutput = languageStrings;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
