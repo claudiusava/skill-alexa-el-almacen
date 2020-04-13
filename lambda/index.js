@@ -11,12 +11,11 @@ const sprintf = require('i18next-sprintf-postprocessor');
 
 
 
-
-
-
 // We create a language strings object containing all of our strings. 
 // The keys for each string will then be referenced in our code
 // e.g. requestAttributes.t('WELCOME_MSG')
+
+/*
 const languageStrings = {
   es:{
     translation: {
@@ -30,6 +29,7 @@ const languageStrings = {
     }
   }
 }
+*/
 
 
 
@@ -40,9 +40,15 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
+        
+        /*
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speechText = requestAttributes.t('WELCOME_MSG');
+        */
+        //requestAttributes.t('WELCOME_MSG')
+        
+        
+        const speechText = 'Bienvenido!';
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -261,8 +267,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestInterceptors(
         LocalizationRequestInterceptor,
         LoggingRequestInterceptor)
-    .addResponseInterceptors(
-        LoggingResponseInterceptor)
+    .addResponseInterceptors(LoggingResponseInterceptor)
     .lambda();
     
     
