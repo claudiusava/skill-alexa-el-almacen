@@ -3,6 +3,10 @@
 // Persistencia de sesión, llamadas de API y más.
 const Alexa = require('ask-sdk-core');
 
+//LIBRERIA PARA LOCALIZAR INTERCEPTORES 
+const i18n = require('i18next');
+
+//MENSAJES
 const languageStrings = {
     es:{
         translation: {
@@ -16,7 +20,9 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Puedes decir hola o ayuda';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAtributes();
+        const speakOutput = requestAttributes.t('WELCOME_MSG');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -119,6 +125,19 @@ const ErrorHandler = {
             .getResponse();
     }
 };
+
+
+//INTERCEPTOR DE LANZAMIENTO
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.init({
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            resources: languageStrings}).then((t) => {handlerInput.t = (...args) => t(...args);
+        });
+    }
+};
+
+
 
 // SkillBuilder actúa como el punto de entrada para su habilidad, enrutando todas las solicitudes y respuestas
 // cargas útiles a los controladores anteriores. Asegúrese de que haya nuevos manipuladores o interceptores que haya
