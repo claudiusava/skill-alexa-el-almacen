@@ -4,6 +4,9 @@
 const Alexa = require('ask-sdk-core');
 
 
+
+
+
 const languageStrings = {
   es:{
     translation: {
@@ -17,6 +20,9 @@ const languageStrings = {
     }
   }
 }
+
+
+
 
 
 const LaunchRequestHandler = {
