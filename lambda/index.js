@@ -160,7 +160,7 @@ const ErrorHandler = {
 
 
 //INTERCEPTOR
-const LocalisationRequestInterceptor = {
+const LocalizationRequestInterceptor = {
     process(handlerInput) {
         const localizationClient = i18n.use(sprintf).init({
             lng: handlerInput.requestEnvelope.request.locale,
@@ -190,7 +190,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler,
         IntentReflectorHandler)
     .addErrorHandlers(ErrorHandler)
-    .addRequestInterceptors(LocalisationRequestInterceptor)
+    .addRequestInterceptors(LocalizationRequestInterceptor)
     .lambda();
     
     
