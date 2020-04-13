@@ -5,13 +5,34 @@ const Alexa = require('ask-sdk-core');
 
 
 
+//LIBRERIAS DE LOCALIZACION 
+const i18n = require('i18next');
+const sprintf = require('i18next-sprintf-postprocessor');
+
+
+
+
+//MENSAJES
+const languageStrings = {
+    es:{
+        translation: {
+            MSG_BIENVENIDA: 'Bienvenido! ¿Qué deseas hacer: guardar, encontrar o listar un objeto?',
+            MSG_GUARDAR: '¿Que vas a guardar?'
+        }
+    }
+}
+
+
+
 //SOLICITUD DE LANZAMIENTO
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Bienvenido! Puedes guardar, buscar o listar todos los objetos. ¿Qué deseas hacer?';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAtributes();
+        const speakOutput = requestAttributes.t('MSG_BIENVENIDA');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -24,7 +45,7 @@ const LaunchRequestHandler = {
 
 
 //SOLICITUD DE GUARDAR
-const HelloWorldIntentHandler = {
+const RegisterWerehouseIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterWerehouseIntent';
@@ -132,6 +153,25 @@ const ErrorHandler = {
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
+    }
+};
+
+
+
+
+//INTERCEPTOR
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        const localizationClient = i18n.use(sprintf).init({
+            lng: handlerInput.requestEnvelope.request.locale,
+            overloadTranslationOptionHandler:sprintf.overloadTranslationOptionHandler,
+            resources: languageStrings,
+            returnObjects: true
+        });
+        const attibutes = handlerInput.attributesManager.getRequestAtributes();
+        attibutes.t = function (...args){
+            return localizationClient.t(...args);
+        }
     }
 };
 
