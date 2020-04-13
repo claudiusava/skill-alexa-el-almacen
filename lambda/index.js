@@ -1,34 +1,17 @@
-// Este ejemplo demuestra las intenciones de manejo de una habilidad de Alexa usando el kit de habilidades de Alexa SDK (v2).
-// Visite https://alexa.design/cookbook para ver ejemplos adicionales sobre la implementación de slots, gestión de diálogos.
-// Persistencia de sesión, llamadas de API y más.
+// This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
+// Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
+// session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
 
-//LIBRERIA PARA LOCALIZAR INTERCEPTORES 
-const i18n = require('i18next');
-const sprintf = require('i18next-sprintf-postprocessor');
 
 
-//MENSAJES
-const languageStrings = {
-    es:{
-        translation: {
-            MSG_BIENVENIDA: 'Bienvenido! ¿Qué deseas hacer: guardar, encontrar o listar un objeto?',
-            MSG_GUARDAR: '¿Que vas a guardar?'
-        }
-    }
-}
-
-
-//SOLICITUD DE LANZAMIENTO
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAtributes();
-        const speakOutput = requestAttributes.t('MSG_BIENVENIDA');
+        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -38,7 +21,9 @@ const LaunchRequestHandler = {
 
 
 
-//SOLICITUD DE GUARDAR 
+
+
+
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -52,10 +37,6 @@ const HelloWorldIntentHandler = {
             .getResponse();
     }
 };
-
-
-
-//SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -73,7 +54,8 @@ const HelpIntentHandler = {
 
 
 
-//SOLICITUD DE CANCELAR
+
+
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -89,13 +71,15 @@ const CancelAndStopIntentHandler = {
 };
 
 
-//SOLICITUD DE FINALIZAR SESIÓN
+
+
+
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
     },
     handle(handlerInput) {
-        // Cualquier lógica de limpieza va aquí.
+        // Any cleanup logic goes here.
         return handlerInput.responseBuilder.getResponse();
     }
 };
@@ -103,10 +87,12 @@ const SessionEndedRequestHandler = {
 
 
 
-// El reflector de intención se utiliza para probar y depurar modelos de interacción.
-// Simplemente repetirá la intención que dijo el usuario. Puedes crear manejadores personalizados.
-// para sus intenciones definiéndolas anteriormente, y luego agregándolas a la solicitud
-// cadena de manejador debajo.
+
+
+// The intent reflector is used for interaction model testing and debugging.
+// It will simply repeat the intent the user said. You can create custom handlers
+// for your intents by defining them above, then also adding them to the request
+// handler chain below.
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
@@ -124,16 +110,20 @@ const IntentReflectorHandler = {
 
 
 
-// Manejo de errores genérico para capturar cualquier sintaxis o errores de enrutamiento. Si recibes un error
-// indicando que no se encuentra la cadena del controlador de solicitudes, no ha implementado un controlador para
-// la intención se invoca o la incluye en el generador de habilidades a continuación.
+
+
+
+
+// Generic error handling to capture any syntax or routing errors. If you receive an error
+// stating the request handler chain is not found, you have not implemented a handler for
+// the intent being invoked or included it in the skill builder below.
 const ErrorHandler = {
     canHandle() {
         return true;
     },
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.stack}`);
-        const speakOutput = `Perdona, tengo problemas para hacer lo que me has pedido. Intentalo de nuevo.`;
+        const speakOutput = `Sorry, I had trouble doing what you asked. Please try again.`;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -142,30 +132,9 @@ const ErrorHandler = {
     }
 };
 
-
-
-
-//INTERCEPTOR DE LANZAMIENTO
-const LocalisationRequestInterceptor = {
-    process(handlerInput) {
-        const localizationClient = i18n.use(sprintf).init({
-            lng: handlerInput.requestEnvelope.request.locale,
-            overloadTranslationOptionHandler:sprintf.overloadTranslationOptionHandler,
-            resources: languageStrings,
-            returnObjects: true
-        });
-        const attibutes = handlerInput.attributesManager.getRequestAtributes();
-        attibutes.t = function (...args){
-            return localizationClient.t(...args);
-        }
-    }
-};
-
-
-
-// SkillBuilder actúa como el punto de entrada para su habilidad, enrutando todas las solicitudes y respuestas
-// cargas útiles a los controladores anteriores. Asegúrese de que haya nuevos manipuladores o interceptores que haya
-// definidos se incluyen a continuación. El orden importa: se procesan de arriba a abajo.
+// The SkillBuilder acts as the entry point for your skill, routing all request and response
+// payloads to the handlers above. Make sure any new handlers or interceptors you've
+// defined are included below. The order matters - they're processed top to bottom.
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
@@ -173,11 +142,13 @@ exports.handler = Alexa.SkillBuilders.custom()
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
-        IntentReflectorHandler, // asegúrese de que IntentReflectorHandler sea el último para que no anule sus manejadores de intención personalizados
+        IntentReflectorHandler, // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
-    .addErrorHandlers(ErrorHandler)
-    .addRequestInterceptors(LocalisationRequestInterceptor)
+    .addErrorHandlers(
+        ErrorHandler,
+    )
     .lambda();
+    
     
     
     
