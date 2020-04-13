@@ -27,7 +27,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAtributes();
-        const speakOutput = requestAttributes.t('MSG_BIENVENIDA');
+        const speakOutput = 'Bienvenido';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
