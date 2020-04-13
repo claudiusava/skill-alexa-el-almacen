@@ -4,6 +4,19 @@
 const Alexa = require('ask-sdk-core');
 
 
+const languageStrings = {
+  es:{
+    translation: {
+      WELCOME_MSG:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
+      REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
+      HELP_MSG: 'Por favor dime el día, mes y año de tu nacimiento',
+      GOODBYE_MSG: 'Hasta luego!',
+      REFLECTOR_MSG: 'Acabas de activar %s',
+      FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+    }
+  }
+}
 
 
 const LaunchRequestHandler = {
@@ -15,7 +28,7 @@ const LaunchRequestHandler = {
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
-            //.getResponse();
+            .getResponse();
     }
 };
 
@@ -56,6 +69,12 @@ const HelpIntentHandler = {
             .getResponse();
     }
 };
+
+
+
+
+
+
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
