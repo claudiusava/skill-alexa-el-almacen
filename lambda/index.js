@@ -3,43 +3,46 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
-
-
-//LIBRERIAS DE LOCALIZACION 
+// i18n dependencies. i18n is the main module, sprintf allows us to include variables with '%s'.
 const i18n = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
 
-
-
-
-//MENSAJES
+// We create a language strings object containing all of our strings. 
+// The keys for each string will then be referenced in our code
+// e.g. requestAttributes.t('WELCOME_MSG')
 const languageStrings = {
-    es:{
-        translation: {
-            MSG_BIENVENIDA: 'Bienvenido! ¿Qué deseas hacer: guardar, encontrar o listar un objeto?',
-            MSG_GUARDAR: '¿Que vas a guardar?'
-        }
+  es:{
+    translation: {
+      WELCOME_MSG:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
+      REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
+      HELP_MSG: 'Por favor dime el día, mes y año de tu nacimiento',
+      GOODBYE_MSG: 'Hasta luego!',
+      REFLECTOR_MSG: 'Acabas de activar %s',
+      FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
     }
+  }
 }
 
 
 
-//SOLICITUD DE LANZAMIENTO
+
+//SOLICITUD DE BINVENIDA
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAtributes();
-        const speakOutput = requestAttributes.t('MSG_BIENVENIDA');
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const speechText = requestAttributes.t('WELCOME_MSG');
+
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
-
 
 
 
@@ -47,17 +50,26 @@ const LaunchRequestHandler = {
 //SOLICITUD DE GUARDAR
 const RegisterWerehouseIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterWerehouseIntent';
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'RegisterWerehouseIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World!';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+
+        const day = intent.slots.day.value;
+        const month = intent.slots.month.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        const year = intent.slots.year.value;
+
+        const speechText = requestAttributes.t('REGISTER_MSG', day, month, year); // we'll save these values later
+
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .speak(speechText)
             .getResponse();
     }
 };
+
 
 
 
@@ -65,15 +77,17 @@ const RegisterWerehouseIntentHandler = {
 //SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const speechText = requestAttributes.t('HELP_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -81,17 +95,42 @@ const HelpIntentHandler = {
 
 
 
-//SOLICITUD DE CANCELAR
+//SOLCTUD DE CANCELAR
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
-                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+                || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const speechText = requestAttributes.t('GOODBYE_MSG');
+
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(speechText)
+            .getResponse();
+    }
+};
+
+
+
+
+
+
+const FallbackIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent';
+    },
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const speechText = requestAttributes.t('FALLBACK_MSG');
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -102,7 +141,7 @@ const CancelAndStopIntentHandler = {
 //SOLICITUD DE FINALIZAR SESION
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
     },
     handle(handlerInput) {
         // Any cleanup logic goes here.
@@ -113,22 +152,19 @@ const SessionEndedRequestHandler = {
 
 
 
-
-
-// The intent reflector is used for interaction model testing and debugging.
-// It will simply repeat the intent the user said. You can create custom handlers
-// for your intents by defining them above, then also adding them to the request
-// handler chain below.
+//
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest';
     },
     handle(handlerInput) {
-        const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = `You just triggered ${intentName}`;
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const intentName = handlerInput.requestEnvelope.request.intent.name;
+        const speechText = requestAttributes.t('REFLECTOR_MSG', intentName);
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(speechText)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
@@ -137,21 +173,21 @@ const IntentReflectorHandler = {
 
 
 
-
-
-
-//MENSAJE DE ERROR
+// MENSAGE DE ERROR
 const ErrorHandler = {
     canHandle() {
         return true;
     },
     handle(handlerInput, error) {
-        console.log(`~~~~ Error handled: ${error.stack}`);
-        const speakOutput = `Lo siento, tengo problemas para hacer lo que me has pedido. Intentalo de nuevo.`;
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const speechText = requestAttributes.t('ERROR_MSG');
+
+        console.log(`~~~~ Error handled: ${error.message}`);
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -159,21 +195,45 @@ const ErrorHandler = {
 
 
 
-//INTERCEPTOR
-const LocalizationRequestInterceptor = {
+
+// This request interceptor will log all incoming requests to this lambda
+const LoggingRequestInterceptor = {
     process(handlerInput) {
-        const localizationClient = i18n.use(sprintf).init({
-            lng: handlerInput.requestEnvelope.request.locale,
-            overloadTranslationOptionHandler:sprintf.overloadTranslationOptionHandler,
-            resources: languageStrings,
-            returnObjects: true
-        });
-        const attibutes = handlerInput.attributesManager.getRequestAtributes();
-        attibutes.t = function (...args){
-            return localizationClient.t(...args);
-        }
+        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope.request)}`);
     }
 };
+
+
+
+
+// This response interceptor will log all outgoing responses of this lambda
+const LoggingResponseInterceptor = {
+    process(handlerInput, response) {
+      console.log(`Outgoing response: ${JSON.stringify(response)}`);
+    }
+};
+
+
+
+
+
+
+// This request interceptor will bind a translation function 't' to the requestAttributes.
+const LocalizationRequestInterceptor = {
+  process(handlerInput) {
+    const localizationClient = i18n.use(sprintf).init({
+      lng: handlerInput.requestEnvelope.request.locale,
+      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+      resources: languageStrings,
+      returnObjects: true
+    });
+    const attributes = handlerInput.attributesManager.getRequestAttributes();
+    attributes.t = function (...args) {
+      return localizationClient.t(...args);
+    }
+  }
+};
+
 
 
 
@@ -184,16 +244,19 @@ const LocalizationRequestInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        RegisterWerehouseIntentHandler,
+        RegisterBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
-        IntentReflectorHandler)
-    .addErrorHandlers(ErrorHandler)
-    .addRequestInterceptors(LocalizationRequestInterceptor)
+        IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+    .addErrorHandlers(
+        ErrorHandler)
+    .addRequestInterceptors(
+        LocalizationRequestInterceptor,
+        LoggingRequestInterceptor)
+    .addResponseInterceptors(
+        LoggingResponseInterceptor)
     .lambda();
-    
-    
     
     
     
