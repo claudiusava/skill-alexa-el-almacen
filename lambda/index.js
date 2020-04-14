@@ -61,6 +61,7 @@ const LaunchRequestHandler = {
                 slots: {}
             })
             */
+            .reprompt(speechText)
             .getResponse();
     }
 };
