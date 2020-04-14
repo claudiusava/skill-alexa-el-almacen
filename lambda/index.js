@@ -12,7 +12,7 @@ const i18n = require('i18next');
 const languageStrings = {
   es:{
     translation: {
-      MSG_BIENVENIDA:  'Hola caraanchoa! Puedes guardar, listar, buscar o eliminar. ¿Qué poyas quieres hacer?',
+      MSG_BIENVENIDA:  '¿Qué pasa cabezón?! Puedes guardar, listar, buscar o eliminar. ¿Qué poyas quieres hacer?',
       MSG_PRODUCTO_REGITRADO: 'Lo que tu digas! ¿Me vas a tocar los huevos con algo más?',
       MSG_AYUDA: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
       MSG_REFLACTOR: 'Acabas de activar %s',
