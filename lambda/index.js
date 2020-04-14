@@ -1,10 +1,6 @@
-// This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
-// Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
-// session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
 const i18n = require('i18next');
-
 
 
 
@@ -24,7 +20,6 @@ const languageStrings = {
     }
   }
 }
-
 
 
 
@@ -125,6 +120,9 @@ const CancelAndStopIntentHandler = {
 
 
 
+
+
+
 //SOLICITUD DE FINALIZAR SESION
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
@@ -142,6 +140,10 @@ const SessionEndedRequestHandler = {
 
 
 
+
+
+
+/*
 // The intent reflector is used for interaction model testing and debugging.
 // It will simply repeat the intent the user said. You can create custom handlers
 // for your intents by defining them above, then also adding them to the request
@@ -160,7 +162,7 @@ const IntentReflectorHandler = {
             .getResponse();
     }
 };
-
+*/
 
 
 
@@ -195,7 +197,11 @@ const ErrorHandler = {
 
 
 
-// This request interceptor will log all incoming requests to this lambda
+
+
+
+
+//ESTE INTERCEPTOR DE SOLICITUDES REGISTRARÁ TODAS LAS SOLICITUDES ENTRANTES EN ESTE LAMBDA
 const LoggingRequestInterceptor = {
     process(handlerInput) {
         console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope)}`);
@@ -209,7 +215,10 @@ const LoggingRequestInterceptor = {
 
 
 
-// This response interceptor will log all outgoing responses of this lambda
+
+
+
+//ESTE INTERCEPTOR DE RESPUESTA REGISTRARÁ TODAS LAS RESPUESTAS SALIENTES DE ESTE LAMBDA
 const LoggingResponseInterceptor = {
     process(handlerInput, response) {
         console.log(`Outgoing response: ${JSON.stringify(response)}`);
@@ -224,7 +233,8 @@ const LoggingResponseInterceptor = {
 
 
 
-// This request interceptor will bind a translation function 't' to the handlerInput
+
+//ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
@@ -244,9 +254,7 @@ const LocalisationRequestInterceptor = {
 
 
 
-// The SkillBuilder acts as the entry point for your skill, routing all request and response
-// payloads to the handlers above. Make sure any new handlers or interceptors you've
-// defined are included below. The order matters - they're processed top to bottom.
+//INSTANCIAS
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
