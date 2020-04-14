@@ -12,7 +12,7 @@ const i18n = require('i18next');
 const languageStrings = {
   es:{
     translation: {
-      WELCOME_MSG:  'Bienvenido! Dime. Cuando es tu fecha de cumpleaños?',
+      WELCOME_MSG:  'Bienvenido! Puedes guardar, eliminar, buscar o listar. ¿Qué deseas hacer?',
       REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
       HELP_MSG: 'Por favor dime el día, mes y año de tu nacimiento',
       GOODBYE_MSG: 'Hasta luego!',
