@@ -54,11 +54,13 @@ const LaunchRequestHandler = {
         return handlerInput.responseBuilder
             .speak(speechText)
             // we use intent chaining to trigger the birthday registration multi-turn
+            /*
             .addDelegateDirective({
                 name: 'RegistrarProductoIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
             })
+            */
             .getResponse();
     }
 };
