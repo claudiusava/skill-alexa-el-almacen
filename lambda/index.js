@@ -49,7 +49,7 @@ const RegistrarProductoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hecho! Puedo ayudarte con algo más?';
+        const speakOutput = 'Hecho! ¿Puedo ayudarte con algo más?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -67,7 +67,7 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const speakOutput = '¿En que puedo ayudarte?';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -88,7 +88,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const speakOutput = 'Hasta luego!';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
