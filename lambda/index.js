@@ -7,10 +7,12 @@ const i18n = require('i18next');
 
 
 
+
+
 const languageStrings = {
   es:{
     translation: {
-      WELCOME_MSG:  'Bienvenido! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
+      MSG_BIENVENIDA:  'Bienvenido! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
       REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
       HELP_MSG: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
       REFLECTOR_MSG: 'Acabas de activar %s',
@@ -35,7 +37,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('WELCOME_MSG');
+        const speechText = handlerInput.t('MSG_BIENVENIDA');
 
         return handlerInput.responseBuilder
             .speak(speechText)
