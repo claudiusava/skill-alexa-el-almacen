@@ -37,7 +37,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('MSG_PRODUCTO_REGITRADO');
+        const speechText = handlerInput.t('MSG_BIENVENIDA');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -61,7 +61,7 @@ const RegistrarProductoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('MSG_BIENVENIDA');
+        const speechText = handlerInput.t('MSG_PRODUCTO_REGITRADO');
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
