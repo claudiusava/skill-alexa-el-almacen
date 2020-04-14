@@ -13,12 +13,12 @@ const languageStrings = {
   es:{
     translation: {
       MSG_BIENVENIDA:  'Bienvenido! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
-      REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
-      HELP_MSG: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
-      REFLECTOR_MSG: 'Acabas de activar %s',
-      FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
-      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
-      GOODBYE_MSG: 'Hasta luego!'
+      MSG_PRODUCTO_REGITRADO: 'Hecho! ¿Puedo ayudarte con algo más?',
+      MSG_AYUDA: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
+      MSG_REFLACTOR: 'Acabas de activar %s',
+      MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+      MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
+      MSG_DESPEDIDA: 'Hasta luego!'
     }
   }
 }
@@ -37,7 +37,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('MSG_BIENVENIDA');
+        const speechText = handlerInput.t('MSG_PRODUCTO_REGITRADO');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -61,10 +61,10 @@ const RegistrarProductoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hecho! ¿Puedo ayudarte con algo más?';
+        const speechText = handlerInput.t('MSG_BIENVENIDA');
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
