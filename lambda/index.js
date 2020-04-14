@@ -13,7 +13,7 @@ const languageStrings = {
   es:{
     translation: {
       MSG_BIENVENIDA:  'Hola hijo de puta! Puedes guardar, listar, buscar o eliminar. ¿Qué cojones quieres hacer?',
-      MSG_PRODUCTO_REGITRADO: 'Hecho! ¿Puedo ayudarte con algo más?',
+      MSG_PRODUCTO_REGITRADO: 'Lo que tu digas! ¿Me vas a tocar los huevos con algo más?',
       MSG_AYUDA: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
       MSG_REFLACTOR: 'Acabas de activar %s',
       MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
