@@ -143,7 +143,7 @@ const SessionEndedRequestHandler = {
 
 
 
-/*
+
 // The intent reflector is used for interaction model testing and debugging.
 // It will simply repeat the intent the user said. You can create custom handlers
 // for your intents by defining them above, then also adding them to the request
@@ -162,7 +162,7 @@ const IntentReflectorHandler = {
             .getResponse();
     }
 };
-*/
+
 
 
 
