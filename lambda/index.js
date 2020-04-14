@@ -4,6 +4,8 @@
 const Alexa = require('ask-sdk-core');
 
 
+const i18n = require('i18next');
+
 
 
 
@@ -24,7 +26,7 @@ const languageStrings = {
 
 
 
-
+/*
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
@@ -37,7 +39,29 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };
+*/
 
+
+
+
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        const speechText = handlerInput.t('WELCOME_MSG');
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            // we use intent chaining to trigger the birthday registration multi-turn
+            .addDelegateDirective({
+                name: 'RegistrarProductoIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            })
+            .getResponse();
+    }
+};
 
 
 
@@ -164,6 +188,37 @@ const ErrorHandler = {
 
 
 
+// This request interceptor will log all incoming requests to this lambda
+const LoggingRequestInterceptor = {
+    process(handlerInput) {
+        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope)}`);
+    }
+};
+
+
+
+
+// This response interceptor will log all outgoing responses of this lambda
+const LoggingResponseInterceptor = {
+    process(handlerInput, response) {
+        console.log(`Outgoing response: ${JSON.stringify(response)}`);
+    }
+};
+
+
+
+// This request interceptor will bind a translation function 't' to the handlerInput
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.init({
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            resources: languageStrings
+        }).then((t) => {
+            handlerInput.t = (...args) => t(...args);
+        });
+    }
+};
+
 
 
 
@@ -184,6 +239,9 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler
     )
+     .addRequestInterceptors(
+        LocalisationRequestInterceptor,
+        LoggingRequestInterceptor)
     .lambda();
     
     
