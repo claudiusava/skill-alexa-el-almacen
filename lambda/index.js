@@ -3,8 +3,10 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
-
 const i18n = require('i18next');
+
+
+
 
 
 
@@ -12,13 +14,13 @@ const i18n = require('i18next');
 const languageStrings = {
   es:{
     translation: {
-      WELCOME_MSG:  'Bienvenido! Puedes guardar, lstar, buscar o eliminar. ¿Qué deseas hacer?',
+      WELCOME_MSG:  'Bienvenido! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
       REGISTER_MSG: 'Tu fecha de cumpleaños es el %s de %s de %s',
-      HELP_MSG: 'Por favor dime el día, mes y año de tu nacimiento',
-      GOODBYE_MSG: 'Hasta luego!',
+      HELP_MSG: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
       REFLECTOR_MSG: 'Acabas de activar %s',
       FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
-      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+      ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
+      GOODBYE_MSG: 'Hasta luego!'
     }
   }
 }
@@ -26,24 +28,13 @@ const languageStrings = {
 
 
 
-/*
-const LaunchRequestHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
-    },
-    handle(handlerInput) {
-        const speakOutput = 'Bienvenido! Puedes guardar, eliminar, buscar o listar. ¿Qué deseas hacer?';
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
-*/
 
 
 
 
+
+
+//MENSAJE DE BINVENIDA
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
@@ -53,14 +44,6 @@ const LaunchRequestHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            // we use intent chaining to trigger the birthday registration multi-turn
-            /*
-            .addDelegateDirective({
-                name: 'RegistrarProductoIntent',
-                confirmationStatus: 'NONE',
-                slots: {}
-            })
-            */
             .reprompt(speechText)
             .getResponse();
     }
@@ -70,6 +53,11 @@ const LaunchRequestHandler = {
 
 
 
+
+
+
+
+//SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -88,6 +76,11 @@ const RegistrarProductoIntentHandler = {
 
 
 
+
+
+
+
+//SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -108,6 +101,10 @@ const HelpIntentHandler = {
 
 
 
+
+
+
+//SOLICITUD DE CANCELAR
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -127,6 +124,8 @@ const CancelAndStopIntentHandler = {
 
 
 
+
+//SOLICITUD DE FINALIZAR SESION
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
@@ -191,6 +190,11 @@ const ErrorHandler = {
 
 
 
+
+
+
+
+
 // This request interceptor will log all incoming requests to this lambda
 const LoggingRequestInterceptor = {
     process(handlerInput) {
@@ -201,12 +205,22 @@ const LoggingRequestInterceptor = {
 
 
 
+
+
+
+
 // This response interceptor will log all outgoing responses of this lambda
 const LoggingResponseInterceptor = {
     process(handlerInput, response) {
         console.log(`Outgoing response: ${JSON.stringify(response)}`);
     }
 };
+
+
+
+
+
+
 
 
 
@@ -221,6 +235,9 @@ const LocalisationRequestInterceptor = {
         });
     }
 };
+
+
+
 
 
 
