@@ -6,6 +6,8 @@ const sprintf = require('i18next-sprintf-postprocessor');
 const languageStrings = require('./localisation');
 
 
+var persistenceAdapter = getPersistenceAdapter();
+
 //FUNCION DE PERSISTENCIA
 function getPersistenceAdapter(tableName) {
     // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
