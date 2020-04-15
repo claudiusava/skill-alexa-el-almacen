@@ -65,7 +65,7 @@ const RegistrarProductoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('MSG_PRODUCTO_REGISTRADO');
+        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -235,7 +235,7 @@ const LoggingResponseInterceptor = {
 
 
 
-/*
+
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
@@ -247,14 +247,15 @@ const LocalisationRequestInterceptor = {
         });
     }
 };
-*/
 
+
+/*
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
     const localizationClient = i18n-use(sprintf).init({
-        lng: handlerInput.requestEnvelope.request.locale,
-        overloanTranslationOptionHandler: sprintf:overloanTranslationOptionHandler,
+        lng: Alexa.getLocale(handlerInput.requestEnvelope),
+        overloadTranslationOptionHandler = sprintf.overloadTranslationOptionHandler,
         resources: languageStrings,
         returnObjects: true
     });
@@ -264,8 +265,7 @@ const LocalisationRequestInterceptor = {
        }
     }
 };
-
-
+*/
 
 
 
