@@ -262,7 +262,9 @@ const LoadAttributesRequestInterceptor = {
     }
 };
 
-// INTERCEPTOR PARA GUARDAR ATRIBUTOS
+
+
+//INTERCEPTOR QUE OBTIENE LOS ATRIBUTOS DE SESIÓN Y SI LA SESIÓN VA A TERMINAR, GUARDA LOS ATRIBUTOS DE SESIÓN EN ATRIBUTOS PERSISTENTES
 const SaveAttributesResponseInterceptor = {
     async process(handlerInput, response) {
         if (!response) return; // avoid intercepting calls that have no outgoing response due to errors
