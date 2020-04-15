@@ -5,6 +5,7 @@ const i18n = require('i18next');
 const languageStrings = require('./localisation');
 
 
+
 //MENSAJE DE BINVENIDA
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -12,7 +13,7 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         const speechText = handlerInput.t('MSG_BIENVENIDA');
-
+        
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
