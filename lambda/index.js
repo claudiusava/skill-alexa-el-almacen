@@ -7,10 +7,6 @@ const languageStrings = ('./localisation');
 
 
 
-
-
-
-
 //MENSAJE DE BINVENIDA
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
