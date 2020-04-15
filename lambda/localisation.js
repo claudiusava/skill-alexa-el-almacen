@@ -1,4 +1,4 @@
-module.exports = {
+module.export = {
     es:{
         translation: {
       MSG_BIENVENIDA:  'Hola! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
