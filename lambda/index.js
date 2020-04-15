@@ -1,5 +1,6 @@
 const Alexa = require('ask-sdk-core');
 
+//LIBRERIAS DE LOCALIZACIÓN
 const i18n = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
 
@@ -234,7 +235,7 @@ const LoggingResponseInterceptor = {
 
 
 
-
+/*
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
@@ -246,6 +247,24 @@ const LocalisationRequestInterceptor = {
         });
     }
 };
+*/
+
+//ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+    const localizationClient = i18n-use(sprintf).init({
+        lng: handlerInput.requestEnvelope.request.locale,
+        overloanTranslationOptionHandler: sprintf:overloanTranslationOptionHandler,
+        resources: languageStrings,
+        returnObjects: true
+    });
+       const attributes = handlerInput.attributesManager.getRequestAttributes();
+       attributes.t = function(...args){
+           return localizationClient.t(...args);
+       }
+    }
+};
+
 
 
 
