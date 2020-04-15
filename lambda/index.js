@@ -39,13 +39,6 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         
        
-        const speechText = handlerInput.t('MSG_BIENVENIDA');
-        /*
-        return handlerInput.t('MSG_BIENVENIDA')
-            .speak(speechText)
-            .reprompt(speechText)
-            .getResponse();
-          */  
         return handlerInput.responseBuilder
             .speak(handlerInput.t('MSG_BIENVENIDA'))
             .reprompt(handlerInput.t('MSG_BIENVENIDA'))
