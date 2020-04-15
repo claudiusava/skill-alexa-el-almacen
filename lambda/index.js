@@ -301,7 +301,8 @@ exports.handler = Alexa.SkillBuilders.custom()
     )
      .addRequestInterceptors(
         LocalisationRequestInterceptor,
-        LoggingRequestInterceptor)
+        LoggingRequestInterceptor,
+        LoadAttributesRequestInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
     .lambda();
     
