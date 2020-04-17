@@ -32,6 +32,9 @@ function getPersistenceAdapter(tableName) {
 
 
 
+
+
+
 //MENSAJE DE BINVENIDA
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
