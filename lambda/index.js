@@ -71,6 +71,9 @@ const RegistrarProductoIntentHandler = {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = handlerInput.requestEnvelope.request;
+        
+        sessionAttributes ['producto']= producto;
         
         const producto = sessionAttributes['producto'];
         
