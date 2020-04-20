@@ -266,6 +266,10 @@ const LocalizationRequestInterceptor = {
         resources: languageStrings,
         returnObjects: true
     });
+    const attributes = handlerInput.attributesManager.getRequestAttributes();
+       attributes.t = function(...args){
+           return localizationClient.t(...args);
+       }
   }
 };
 
