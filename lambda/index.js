@@ -330,7 +330,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler
     )
     .addRequestInterceptors(
-        LocalizationRequestInterceptor,
+        LocalizationInterceptor,
         LoggingRequestInterceptor,
         LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
