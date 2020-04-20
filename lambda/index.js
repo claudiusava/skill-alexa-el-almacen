@@ -282,11 +282,6 @@ const LocalisationInterceptor = {
         }).then((t) => {
             handlerInput.t = (...args) => t(...args);
         });
-        
-        const attributes = handlerInput.attributesManager.getRequestAttributes();
-        attributes.t = function (...args) {
-        return localizationClient.t(...args);
-    }
     }
 }
 
