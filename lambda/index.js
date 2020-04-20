@@ -238,26 +238,6 @@ const LoggingResponseInterceptor = {
 
 
 /*
-//ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
-const LocalisationRequestInterceptor = {
-    process(handlerInput) {
-        const localizationClient = i18n-use(sprintf).init({
-            lng: Alexa.getLocale(handlerInput.requestEnvelope),
-            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-            resources: languageStrings,
-            returnObjects: true
-        }).then((t) => {
-            handlerInput.t = (...args) => t(...args);
-        });
-        const attributes = handlerInput.attributesManager.getRequestAttributes();
-       attributes.t = function(...args){
-           return localizationClient.t(...args);
-       }
-    }
-};
-*/
-
-
 const LocalizationRequestInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
@@ -272,8 +252,20 @@ const LocalizationRequestInterceptor = {
        }
   }
 };
+*/
 
 
+const LocalizationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.init({
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+            resources: languageStrings
+        }).then((t) => {
+            handlerInput.t = (...args) => t(...args);
+        });
+    }
+};
 
 
 
