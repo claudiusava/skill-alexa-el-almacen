@@ -224,8 +224,6 @@ const LoggingRequestInterceptor = {
     }
 };
 
-
-
 //ESTE INTERCEPTOR DE RESPUESTA REGISTRARÁ TODAS LAS RESPUESTAS SALIENTES DE ESTE LAMBDA
 const LoggingResponseInterceptor = {
     process(handlerInput, response) {
@@ -240,23 +238,19 @@ const LoggingResponseInterceptor = {
 
 
 
-
-
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
             lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
             resources: languageStrings,
+            returnObjects: true
         }).then((t) => {
             handlerInput.t = (...args) => t(...args);
         });
     }
 };
-
-
-
-
 
 
 /*
@@ -265,7 +259,7 @@ const LocalisationRequestInterceptor = {
     process(handlerInput) {
     const localizationClient = i18n-use(sprintf).init({
         lng: Alexa.getLocale(handlerInput.requestEnvelope),
-        overloadTranslationOptionHandler = sprintf.overloadTranslationOptionHandler,
+        overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
         resources: languageStrings,
         returnObjects: true
     });
@@ -276,6 +270,12 @@ const LocalisationRequestInterceptor = {
     }
 };
 */
+
+
+
+
+
+
 
 
 
@@ -293,8 +293,6 @@ const LoadAttributesRequestInterceptor = {
         }
     }
 };
-
-
 
 //INTERCEPTOR QUE OBTIENE LOS ATRIBUTOS DE SESIÓN Y SI LA SESIÓN VA A TERMINAR, GUARDA LOS ATRIBUTOS DE SESIÓN EN ATRIBUTOS PERSISTENTES
 const SaveAttributesResponseInterceptor = {
