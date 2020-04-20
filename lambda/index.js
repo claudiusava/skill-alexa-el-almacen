@@ -42,11 +42,9 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         
-        //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-
-        const producto = requestAttributes['producto'];
+        const producto = sessionAttributes['producto'];
        
         return handlerInput.responseBuilder
             .speak(handlerInput.t('MSG_BIENVENIDA'))
@@ -71,13 +69,12 @@ const RegistrarProductoIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        //const sessionAttributes = attributesManager.getSessionAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
         
         const producto = intent.slots.producto.value;
         
-        requestAttributes ['producto']= producto;
+        sessionAttributes ['producto']= producto;
         
         //const producto = sessionAttributes['producto'];
         
@@ -356,10 +353,6 @@ exports.handler = Alexa.SkillBuilders.custom()
         SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
     .lambda();
-    
-    
-    
-    
     
     
     
