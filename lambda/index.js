@@ -226,14 +226,6 @@ const LoggingRequestInterceptor = {
 
 
 
-
-
-
-
-
-
-
-
 //ESTE INTERCEPTOR DE RESPUESTA REGISTRARÁ TODAS LAS RESPUESTAS SALIENTES DE ESTE LAMBDA
 const LoggingResponseInterceptor = {
     process(handlerInput, response) {
@@ -255,7 +247,7 @@ const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
             lng: Alexa.getLocale(handlerInput.requestEnvelope),
-            resources: languageStrings
+            resources: languageStrings,
         }).then((t) => {
             handlerInput.t = (...args) => t(...args);
         });
