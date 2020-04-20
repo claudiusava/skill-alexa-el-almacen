@@ -68,6 +68,12 @@ const RegistrarProductoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        
+        const producto = sessionAttributes['producto'];
+        
         const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
         return handlerInput.responseBuilder
             .speak(speechText)
