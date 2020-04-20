@@ -258,6 +258,7 @@ const LocalisationRequestInterceptor = {
 
 
 
+
 /*
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
