@@ -73,11 +73,13 @@ const RegistrarProductoIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
         
+        const producto = intent.slots.producto.value;
+        
         sessionAttributes ['producto']= producto;
         
-        const producto = sessionAttributes['producto'];
+        //const producto = sessionAttributes['producto'];
         
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
+        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto);
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
