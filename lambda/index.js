@@ -272,22 +272,16 @@ const LocalizationInterceptor = {
 }
 */
 
-const LocalizationInterceptor = {
-  process(handlerInput) {
-    const localizationClient = i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      fallbackLng: 'en',
-      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageStrings,
-      returnObjects: true
-    });
-
-    const attributes = handlerInput.attributesManager.getRequestAttributes();
-    attributes.t = function (...args) {
-      return localizationClient.t(...args);
+const LocalisationInterceptor = {
+    process(handlerInput) {
+        i18n.init({
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            resources: languageStrings
+        }).then((t) => {
+            handlerInput.t = (...args) => t(...args);
+        });
     }
-  }
-}
+};
 
 
 
