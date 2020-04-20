@@ -259,7 +259,7 @@ const LocalizationInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
       lng: handlerInput.requestEnvelope.request.locale,
-      fallbackLng: 'en',
+      fallbackLng: 'es',
       overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
       resources: languageStrings,
       returnObjects: true
