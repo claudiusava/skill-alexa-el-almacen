@@ -264,6 +264,7 @@ const LocalizationRequestInterceptor = {
         }).then((t) => {
             handlerInput.t = (...args) => t(...args);
         });
+        const attributes = handlerInput.attributesManager.getRequestAttributes();
     }
 };
 
