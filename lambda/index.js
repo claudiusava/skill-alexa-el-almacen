@@ -73,7 +73,7 @@ const RegistrarProductoIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
         
-        const producto = intent.slots.producto.value;
+        const producto = intent.slots.producto.name;
         
         sessionAttributes ['producto']= producto;
         
