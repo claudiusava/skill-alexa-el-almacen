@@ -43,6 +43,8 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
 
         const producto = sessionAttributes['producto'];
        
@@ -69,7 +71,7 @@ const RegistrarProductoIntentHandler = {
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
         
