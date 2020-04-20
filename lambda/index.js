@@ -272,7 +272,8 @@ const LocalizationInterceptor = {
 }
 */
 
-const LocalisationInterceptor = {
+//ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
+const LocalizationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
             lng: Alexa.getLocale(handlerInput.requestEnvelope),
@@ -282,7 +283,6 @@ const LocalisationInterceptor = {
         });
     }
 };
-
 
 
 
@@ -339,7 +339,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler
     )
     .addRequestInterceptors(
-        LocalizationInterceptor,
+        LocalizationRequestInterceptor,
         LoggingRequestInterceptor,
         LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
