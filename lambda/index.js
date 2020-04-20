@@ -237,11 +237,11 @@ const LoggingResponseInterceptor = {
 
 
 
-
+/*
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
-        i18n.init({
+        const localizationClient = i18n-use(sprintf).init({
             lng: Alexa.getLocale(handlerInput.requestEnvelope),
             overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
             resources: languageStrings,
@@ -249,27 +249,28 @@ const LocalisationRequestInterceptor = {
         }).then((t) => {
             handlerInput.t = (...args) => t(...args);
         });
-    }
-};
-
-
-/*
-//ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
-const LocalisationRequestInterceptor = {
-    process(handlerInput) {
-    const localizationClient = i18n-use(sprintf).init({
-        lng: Alexa.getLocale(handlerInput.requestEnvelope),
-        overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-        resources: languageStrings,
-        returnObjects: true
-    });
-       const attributes = handlerInput.attributesManager.getRequestAttributes();
+        const attributes = handlerInput.attributesManager.getRequestAttributes();
        attributes.t = function(...args){
            return localizationClient.t(...args);
        }
     }
 };
 */
+const LocalizationRequestInterceptor = {
+  process(handlerInput) {
+    const localizationClient = i18n.use(sprintf).init({
+      lng: handlerInput.requestEnvelope.request.locale,
+      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+      resources: languageStrings,
+      returnObjects: true
+    });
+    const attributes = handlerInput.attributesManager.getRequestAttributes();
+    attributes.t = function (...args) {
+      return localizationClient.t(...args);
+    }
+  }
+};
+
 
 
 
@@ -330,7 +331,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler
     )
     .addRequestInterceptors(
-        LocalisationRequestInterceptor,
+        LocalizationRequestInterceptor,
         LoggingRequestInterceptor,
         LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
