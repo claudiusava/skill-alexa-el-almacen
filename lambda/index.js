@@ -257,7 +257,7 @@ const LocalisationRequestInterceptor = {
 };
 */
 
-/*
+
 const LocalizationRequestInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
@@ -266,13 +266,9 @@ const LocalizationRequestInterceptor = {
         resources: languageStrings,
         returnObjects: true
     });
-        const attributes = handlerInput.attributesManager.getRequestAttributes();
-        attributes.t = function (...args) {
-        return localizationClient.t(...args);
-    }
   }
 };
-*/
+
 
 
 
@@ -333,7 +329,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler
     )
     .addRequestInterceptors(
-        //LocalizationRequestInterceptor,
+        LocalizationRequestInterceptor,
         LoggingRequestInterceptor,
         LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
