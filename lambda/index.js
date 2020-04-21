@@ -7,8 +7,9 @@ const sprintf = require('i18next-sprintf-postprocessor');
 //STRING O MENSAJES 
 const languageStrings = require('./localisation');
 
-
 var persistenceAdapter = getPersistenceAdapter();
+
+
 
 //FUNCION DE PERSISTENCIA
 function getPersistenceAdapter(tableName) {
