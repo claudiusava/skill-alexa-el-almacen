@@ -73,8 +73,10 @@ const RegistrarProductoIntentHandler = {
         const {intent} = handlerInput.requestEnvelope.request;
         
         const producto = intent.slots.producto.value;
+        const cantidad = intent.slots.cantidad.value;
         
         sessionAttributes ['producto']= producto;
+        sessionAttributes ['cantidad']= cantidad;
         
         //const producto = sessionAttributes['producto'];
         
