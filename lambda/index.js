@@ -99,7 +99,8 @@ const RegistrarProductoIntentHandler = {
 //SOLICITUD DE LISTAR PRODUCTOS 
 const ListarProductosIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
     },
     handle(handlerInput) {
         
