@@ -110,7 +110,7 @@ const ListarProductosIntentHandler = {
         const cantidad = sessionAttributes['cantidad'];
        
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS'), cantidad, producto)
+            .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS', cantidad, producto))
             .reprompt(handlerInput.t('MSG_LISTAR_PRODUCTOS'))
             .getResponse();
     }
