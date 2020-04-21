@@ -242,7 +242,7 @@ const LoggingResponseInterceptor = {
 
 
 
-/*
+
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalizationRequestInterceptor = {
     process(handlerInput) {
@@ -254,8 +254,8 @@ const LocalizationRequestInterceptor = {
         });
     }
 };
-*/
 
+/*
 const LocalizationRequestInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
@@ -270,7 +270,7 @@ const LocalizationRequestInterceptor = {
     }
   }
 };
-
+*/
 
 
 
