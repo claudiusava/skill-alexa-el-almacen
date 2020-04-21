@@ -80,7 +80,7 @@ const RegistrarProductoIntentHandler = {
         
         //const producto = sessionAttributes['producto'];
         
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto) + handlerInput.t('MSG_ALGO_MAS');
+        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, producto) + handlerInput.t('MSG_ALGO_MAS');
         //let speechText = sessionAttributes.t('MSG_PRODUCTOS_REGISTRADOS', producto);
         
         return handlerInput.responseBuilder
