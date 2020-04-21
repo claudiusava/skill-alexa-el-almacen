@@ -259,14 +259,14 @@ const LocalizationRequestInterceptor = {
 const LocalizationRequestInterceptor = {
   process(handlerInput) {
     const localizationClient = i18n.use(sprintf).init({
-      lng: Alexa.getLocale(handlerInput.requestEnvelope),
+      lng: handlerInput.requestEnvelope.request.locale,
       overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
       resources: languageStrings,
       returnObjects: true
     });
-        const attributes = handlerInput.attributesManager.getRequestAttributes();
-        attributes.t = function (...args) {
-        return localizationClient.t(...args);
+    const attributes = handlerInput.attributesManager.getRequestAttributes();
+    attributes.t = function (...args) {
+      return localizationClient.t(...args);
     }
   }
 };
