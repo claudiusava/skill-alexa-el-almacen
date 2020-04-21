@@ -96,6 +96,27 @@ const RegistrarProductoIntentHandler = {
 
 
 
+//SOLICITUD DE LISTAR PRODUCTOS 
+const ListarProductosIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        
+        const producto = sessionAttributes['producto'];
+        const cantidad = sessionAttributes['cantidad'];
+       
+        return handlerInput.responseBuilder
+            .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS'), cantidad, producto)
+            .reprompt(handlerInput.t('MSG_LISTAR_PRODUCTOS'))
+            .getResponse();
+    }
+};
+
+
+
 
 
 //SOLICITUD DE AYUDA
