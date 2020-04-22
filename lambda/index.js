@@ -7,6 +7,9 @@ const sprintf = require('i18next-sprintf-postprocessor');
 //STRING O MENSAJES 
 const languageStrings = require('./localisation');
 
+//PERMISO PARA LEER EL NOMBE DE USUARIO
+const GIVEN_NAME_PERMISSIONS = ['alexa::profile.given_name:read'];
+
 var persistenceAdapter = getPersistenceAdapter();
 
 
@@ -55,8 +58,13 @@ const LaunchRequestHandler = {
                 throw {statusCode: 401, message: 'No permissions avilable'};
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
+                if(profileName){
+                    sessionAttributes['name'] = profileName;
+                }
             }catch(error){
-                
+                if(error.statusCode===401 || error.statusCode===403){
+                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSIONS);
+                }
             }
         }
        
