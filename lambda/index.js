@@ -231,7 +231,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addResponseInterceptors(
         interceptors.LoggingResponseInterceptor,
         interceptors.SaveAttributesResponseInterceptor)
-    .withPersistenceAdapter(persistence.getpersistenceAdapter)
+    .withPersistenceAdapter(persistence.getpersistenceAdapter())
     .lambda();
     
     
