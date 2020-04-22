@@ -1,7 +1,7 @@
 module.exports = {
     es:{
         translation: {
-      MSG_BIENVENIDA:  'Hola! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
+      MSG_BIENVENIDA:  'Hola s%! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
       MSG_PRODUCTO_REGISTRADO: 'Hecho! ¿Quiéres hacer algo más?',
       MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s %s.',
       MSG_LISTAR_PRODUCTOS: 'Tienes guardado %s %s',
