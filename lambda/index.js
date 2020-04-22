@@ -47,9 +47,15 @@ const LaunchRequestHandler = {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
         const producto = sessionAttributes['producto'];
+        
+        if(!sessionAttributes['name']){
+            
+        }
+       
+       const name = sessionAttributes['name'] ? sessionAttributes['name']: '';
        
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('MSG_BIENVENIDA'))
+            .speak(handlerInput.t('MSG_BIENVENIDA', name))
             .reprompt(handlerInput.t('MSG_BIENVENIDA'))
             .getResponse();
     }
