@@ -1,5 +1,4 @@
 const Alexa = require('ask-sdk-core');
-
 const languageStrings = require('./localisation');
 const persistence = require('./persistence');
 const interceptors = require('./interceptors');
