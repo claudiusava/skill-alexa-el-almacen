@@ -42,14 +42,22 @@ const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    handle(handlerInput) {
-        
+    async handle(handlerInput) {
+        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
         const producto = sessionAttributes['producto'];
         
         if(!sessionAttributes['name']){
-            
+            try{
+                const {permissions} = requestEnvelope.context.System.user;
+                if(!permissions)
+                throw {statusCode: 401, message: 'No permissions avilable'};
+                const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+                const profileName = await upsServiceClient.getProfileGivenName();
+            }catch(error){
+                
+            }
         }
        
        const name = sessionAttributes['name'] ? sessionAttributes['name']: '';
