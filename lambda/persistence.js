@@ -2,7 +2,7 @@ module.exports = {
     getPersistenceAdapter() {
     // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
     function isAlexaHosted() {
-        return process.env.S3_PERSISTENCE_BUCKET;
+        return process.env.S3_PERSISTENCE_BUCKET ? true : false;
     }
     const tableName = 'el_almacen';
     if (isAlexaHosted()) {
