@@ -77,11 +77,11 @@ const RegistrarProductoIntentHandler = {
         const producto = intent.slots.producto.value;
         const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['producto']= productos;
+        sessionAttributes ['producto']= producto;
         sessionAttributes ['cantidad']= cantidad;
         
         
-        var productos = [];
+        var productos = ["perros"];
         productos.push(producto);
         
         
