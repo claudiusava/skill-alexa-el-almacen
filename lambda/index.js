@@ -225,13 +225,13 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler
     )
     .addRequestInterceptors(
-        LocalizationRequestInterceptor,
-        LoggingRequestInterceptor,
-        LoadAttributesRequestInterceptor)
+        interceptors.LocalizationRequestInterceptor,
+        interceptors.LoggingRequestInterceptor,
+        interceptors.LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
-        LoggingResponseInterceptor,
-        SaveAttributesResponseInterceptor)
-    .withPersistenceAdapter(persistenceAdapter)
+        interceptors.LoggingResponseInterceptor,
+        interceptors.SaveAttributesResponseInterceptor)
+    .withPersistenceAdapter(persistence.persistenceAdapter)
     .lambda();
     
     
