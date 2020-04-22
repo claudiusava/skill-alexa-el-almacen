@@ -82,6 +82,8 @@ const RegistrarProductoIntentHandler = {
         
         
         var productos = [producto];
+        productos.push(producto);
+        
         
         
         //const producto = sessionAttributes['producto'];
