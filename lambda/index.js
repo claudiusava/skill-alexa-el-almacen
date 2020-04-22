@@ -77,18 +77,18 @@ const RegistrarProductoIntentHandler = {
         const producto = intent.slots.producto.value;
         const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['producto']= producto;
+        sessionAttributes ['producto']= productos;
         sessionAttributes ['cantidad']= cantidad;
         
         
-        var productos = [producto];
+        var productos = [];
         productos.push(producto);
         
         
         
         //const producto = sessionAttributes['producto'];
         
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, productos[productos.length-2]) + handlerInput.t('MSG_ALGO_MAS');
+        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, productos[productos.length-1]) + handlerInput.t('MSG_ALGO_MAS');
         //let speechText = sessionAttributes.t('MSG_PRODUCTOS_REGISTRADOS', producto);
         
         return handlerInput.responseBuilder
@@ -123,6 +123,10 @@ const ListarProductosIntentHandler = {
             .getResponse();
     }
 };
+
+
+
+
 
 
 
