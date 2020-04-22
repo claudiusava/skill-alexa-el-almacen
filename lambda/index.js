@@ -7,9 +7,6 @@ const sprintf = require('i18next-sprintf-postprocessor');
 //STRING O MENSAJES 
 const languageStrings = require('./localisation');
 
-//PERMISO PARA LEER EL NOMBE DE USUARIO
-const GIVEN_NAME_PERMISSIONS = ['alexa::profile.given_name:read'];
-
 var persistenceAdapter = getPersistenceAdapter();
 
 
@@ -45,33 +42,14 @@ const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    async handle(handlerInput) {
-        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
+    handle(handlerInput) {
+        
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
         const producto = sessionAttributes['producto'];
-        
-        if(!sessionAttributes['name']){
-            try{
-                const {permissions} = requestEnvelope.context.System.user;
-                if(!permissions)
-                throw {statusCode: 401, message: 'No permissions avilable'};
-                const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-                const profileName = await upsServiceClient.getProfileGivenName();
-                if(profileName){
-                    sessionAttributes['name'] = profileName;
-                }
-            }catch(error){
-                if(error.statusCode===401 || error.statusCode===403){
-                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSIONS);
-                }
-            }
-        }
-       
-       const name = sessionAttributes['name'] ? sessionAttributes['name']: '';
        
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('MSG_BIENVENIDA', name))
+            .speak(handlerInput.t('MSG_BIENVENIDA'))
             .reprompt(handlerInput.t('MSG_BIENVENIDA'))
             .getResponse();
     }
@@ -246,7 +224,7 @@ const ErrorHandler = {
     },
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.stack}`);
-        const speechText = handlerInput.t('MSG_ERROR');
+        const speechText = handlerInput.t('WELCOME_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
