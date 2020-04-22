@@ -246,7 +246,7 @@ const ErrorHandler = {
     },
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.stack}`);
-        const speechText = handlerInput.t('WELCOME_MSG');
+        const speechText = handlerInput.t('MSG_ERROR');
 
         return handlerInput.responseBuilder
             .speak(speechText)
