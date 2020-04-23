@@ -48,11 +48,11 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         let speechText;
         
         //const producto = sessionAttributes['producto'];
-        cajita = sessionAttributes['producto'];
+        //cajita = sessionAttributes['producto'];
         
         speechText = handlerInput.t('MSG_BIENVENIDA');
        
@@ -79,23 +79,23 @@ const RegistrarProductoIntentHandler = {
     },
     handle(handlerInput) {
         
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
+        //const {attributesManager} = handlerInput;
+        //const requestAttributes = attributesManager.getRequestAttributes();
+        //const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
         
         const producto = intent.slots.producto.value;
-        const cantidad = intent.slots.cantidad.value;
+        //const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['producto'] = producto;
-        sessionAttributes ['cantidad'] = cantidad;
+        //sessionAttributes ['producto'] = producto;
+        //sessionAttributes ['cantidad'] = cantidad;
         
-        sessionAttributes ['cajita'] = cajita;
+        //sessionAttributes ['cajita'] = producto;
         
         let speechText = '';
         
         function agregar(){
-            cajita.push(producto.value)
+            cajita.push(producto)
         }
 
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita) + handlerInput.t('MSG_ALGO_MAS');
