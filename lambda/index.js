@@ -121,8 +121,7 @@ const ListarProductosIntentHandler = {
         
         const producto = sessionAttributes['producto'];
         const cantidad = sessionAttributes['cantidad'];
-       
-       
+
        
        function agregar(){
                 if(cajita.length===0){
