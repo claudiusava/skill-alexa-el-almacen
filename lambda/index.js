@@ -80,19 +80,17 @@ const RegistrarProductoIntentHandler = {
     handle(handlerInput) {
         
         const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
         
         const producto = intent.slots.producto.value;
+        const cantidad = intent.slots.cantidad.value;
         
-        //const cantidad = intent.slots.cantidad.value;
-        
+        sessionAttributes ['producto']= producto;
+        sessionAttributes ['cantidad']= cantidad;
         
         let speechText = '';
-        
-        //sessionAttributes ['producto']= producto;
-        //sessionAttributes ['cantidad']= cantidad;
-
         
         function agregar(){
             cajita.push(producto.value)
@@ -120,11 +118,6 @@ const ListarProductosIntentHandler = {
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
     },
     handle(handlerInput) {
-        
-        //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        
-        //const producto = sessionAttributes['producto'];
-        //const cantidad = sessionAttributes['cantidad'];
         
         let speechText = '';
 
