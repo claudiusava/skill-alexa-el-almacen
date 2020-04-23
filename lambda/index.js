@@ -130,24 +130,16 @@ const ListarProductosIntentHandler = {
                 if(cajita.length===0){
                     const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
                 }else{
-                    const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
+                    const speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS');
                     for (var i=0; i<cajita.length; i++){
                         const speechText = handlerInput.t(cajita[i] + ' , ');
                     }
                 }
         }
-       
-       
-        
-        
-        
-        
-        
-       
-       
+
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS', cantidad, producto))
-            .reprompt(handlerInput.t('MSG_LISTAR_PRODUCTOS'))
+            .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS', producto))
+            .reprompt(handlerInput.t('MSG_LISTAR_PRODUCTOS' || 'MSG_NO_HAY_PRODUCTOS'))
             .getResponse();
     }
 };
