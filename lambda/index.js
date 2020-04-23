@@ -77,18 +77,22 @@ const RegistrarProductoIntentHandler = {
         const producto = intent.slots.producto.value;
         const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['producto']= producto;
-        sessionAttributes ['cantidad']= cantidad;
+        //sessionAttributes ['producto']= producto;
+        //sessionAttributes ['cantidad']= cantidad;
         
         
-        var productos = ["perros"];
-        productos.push(producto);
         
+        var cajita = [];
+        if(cajita.length===0){
+            const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
+        }
+        
+        sessionAttributes ['cajita']=cajita;
         
         
         //const producto = sessionAttributes['producto'];
         
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, productos[0]) + handlerInput.t('MSG_ALGO_MAS');
+        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
         //let speechText = sessionAttributes.t('MSG_PRODUCTOS_REGISTRADOS', producto);
         
         return handlerInput.responseBuilder
