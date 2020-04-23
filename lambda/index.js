@@ -10,8 +10,6 @@ const languageStrings = require('./localisation');
 //VARIABLE DE PERSISTENCIA
 var persistenceAdapter = getPersistenceAdapter();
 
-//VARIABLE DE SEEPCHTEXT
-let speechText;
 
 //ARRAYLIST
 var cajita = [];
@@ -51,6 +49,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        let speechText;
         
         //const producto = sessionAttributes['producto'];
         cajita = sessionAttributes['producto'];
@@ -86,6 +85,8 @@ const RegistrarProductoIntentHandler = {
         const producto = intent.slots.producto.value;
         const cantidad = intent.slots.cantidad.value;
         
+        let speechText;
+        
         sessionAttributes ['producto']= producto;
         sessionAttributes ['cantidad']= cantidad;
 
@@ -94,7 +95,7 @@ const RegistrarProductoIntentHandler = {
             cajita.push(producto.value)
         }
 
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -121,6 +122,8 @@ const ListarProductosIntentHandler = {
         
         const producto = sessionAttributes['producto'];
         const cantidad = sessionAttributes['cantidad'];
+        
+        let speechText;
 
        
        function agregar(){
