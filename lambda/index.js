@@ -256,7 +256,7 @@ const ErrorHandler = {
     },
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.stack}`);
-        const speechText = handlerInput.t('WELCOME_MSG');
+        const speechText = handlerInput.t('MSG_ERROR');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -264,12 +264,6 @@ const ErrorHandler = {
             .getResponse();
     }
 };
-
-
-
-
-
-
 
 
 
@@ -293,14 +287,6 @@ const LoggingResponseInterceptor = {
 
 
 
-
-
-
-
-
-
-
-
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalizationRequestInterceptor = {
     process(handlerInput) {
@@ -313,23 +299,6 @@ const LocalizationRequestInterceptor = {
         });
     }
 };
-
-/*
-const LocalizationRequestInterceptor = {
-  process(handlerInput) {
-    const localizationClient = i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageStrings,
-      returnObjects: true
-    });
-    const attributes = handlerInput.attributesManager.getRequestAttributes();
-    attributes.t = function (...args) {
-      return localizationClient.t(...args);
-    }
-  }
-};
-*/
 
 
 
