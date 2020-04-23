@@ -122,9 +122,9 @@ const ListarProductosIntentHandler = {
        function agregar(){
             cajita.push(producto.value)
                 if(cajita.length===0){
-                    const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
+                    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
                 }else{
-                    const speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS');
+                    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS');
                     for (var i=0; i<cajita.length; i++){
                         const speechText = handlerInput.t(cajita[i] + ' , ');
                     }
