@@ -81,7 +81,6 @@ const RegistrarProductoIntentHandler = {
         sessionAttributes ['cantidad']= cantidad;
         
         
-        
         var cajita = [];
         if(cajita.length===0){
             const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
