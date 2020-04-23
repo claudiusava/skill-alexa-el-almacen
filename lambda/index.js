@@ -48,11 +48,11 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         
-        //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         let speechText = '';
         
-        //const producto = sessionAttributes['producto'];
-        //cajita = sessionAttributes['producto'];
+        const producto = sessionAttributes['producto'];
+        cajita = sessionAttributes['producto'];
         
         speechText = handlerInput.t('MSG_BIENVENIDA');
        
