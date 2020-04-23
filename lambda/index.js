@@ -125,6 +125,8 @@ const ListarProductosIntentHandler = {
        
        var cajita = [];
        
+       let speechText = '';
+       
        function agregar(){
             cajita.push(producto.value)
                 if(cajita.length===0){
@@ -138,8 +140,8 @@ const ListarProductosIntentHandler = {
         }
 
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS', producto))
-            .reprompt(handlerInput.t('MSG_LISTAR_PRODUCTOS' || 'MSG_NO_HAY_PRODUCTOS'))
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
