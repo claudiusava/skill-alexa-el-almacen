@@ -126,7 +126,7 @@ const ListarProductosIntentHandler = {
         //const producto = sessionAttributes['producto'];
         //const cantidad = sessionAttributes['cantidad'];
         
-        let speechText;
+        let speechText = '';
 
        function listar(){
                 if(cajita.length===0){
