@@ -99,7 +99,7 @@ const RegistrarProductoIntentHandler = {
         
         var ultimo = cajita[cajita.length - 1];
 
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', ultimo) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
