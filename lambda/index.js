@@ -15,6 +15,7 @@ var persistenceAdapter = getPersistenceAdapter();
 var cajita = [];
 
 
+
 //FUNCION DE PERSISTENCIA
 function getPersistenceAdapter(tableName) {
     // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
@@ -48,11 +49,10 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         let speechText = '';
         
-        const producto = sessionAttributes['producto'];
-        cajita = sessionAttributes['producto'];
+        //const producto = sessionAttributes['producto'];
         
         speechText = handlerInput.t('MSG_BIENVENIDA');
        
@@ -98,7 +98,7 @@ const RegistrarProductoIntentHandler = {
             cajita.push(producto)
         }
 
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
