@@ -7,9 +7,13 @@ const sprintf = require('i18next-sprintf-postprocessor');
 //STRING O MENSAJES 
 const languageStrings = require('./localisation');
 
+//VARIABLE DE PERSISTENCIA
 var persistenceAdapter = getPersistenceAdapter();
 
+//VARIABLE DE SEEPCHTEXT
 let speechText;
+
+//ARRAYLIST
 var cajita = [];
 
 //FUNCION DE PERSISTENCIA
@@ -47,7 +51,8 @@ const LaunchRequestHandler = {
         
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
-        const producto = sessionAttributes['producto'];
+        //const producto = sessionAttributes['producto'];
+        cajita = sessionAttributes['producto'];
         
         speechText = handlerInput.t('MSG_BIENVENIDA');
        
@@ -55,11 +60,6 @@ const LaunchRequestHandler = {
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
-        /*
-            .speak(handlerInput.t('MSG_BIENVENIDA'))
-            .reprompt(handlerInput.t('MSG_BIENVENIDA'))
-            .getResponse();
-            */
     }
 };
 
