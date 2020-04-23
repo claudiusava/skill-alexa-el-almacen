@@ -96,8 +96,10 @@ const RegistrarProductoIntentHandler = {
         function agregar(){
             cajita.push(producto)
         }
+        
+        var primerElemento = cajita.shift();
 
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita.shift) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', primerElemento) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
