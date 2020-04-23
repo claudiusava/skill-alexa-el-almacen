@@ -8,13 +8,13 @@ const sprintf = require('i18next-sprintf-postprocessor');
 const languageStrings = require('./localisation');
 
 //VARIABLE DE PERSISTENCIA
-//var persistenceAdapter = getPersistenceAdapter();
+var persistenceAdapter = getPersistenceAdapter();
 
 
 //ARRAYLIST
 var cajita = [];
 
-/*
+
 //FUNCION DE PERSISTENCIA
 function getPersistenceAdapter(tableName) {
     // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
@@ -35,7 +35,7 @@ function getPersistenceAdapter(tableName) {
         });
     }
 }
-*/
+
 
 
 
@@ -49,7 +49,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         
         //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        let speechText;
+        let speechText = '';
         
         //const producto = sessionAttributes['producto'];
         //cajita = sessionAttributes['producto'];
@@ -355,7 +355,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addResponseInterceptors(
         LoggingResponseInterceptor,
         SaveAttributesResponseInterceptor)
-    //.withPersistenceAdapter(persistenceAdapter)
+    .withPersistenceAdapter(persistenceAdapter)
     .lambda();
     
     
