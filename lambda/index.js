@@ -9,7 +9,8 @@ const languageStrings = require('./localisation');
 
 var persistenceAdapter = getPersistenceAdapter();
 
-
+let speechText;
+var cajita = [];
 
 //FUNCION DE PERSISTENCIA
 function getPersistenceAdapter(tableName) {
@@ -47,11 +48,18 @@ const LaunchRequestHandler = {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
         const producto = sessionAttributes['producto'];
+        
+        speechText = handlerInput.t('MSG_BIENVENIDA');
        
         return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+        /*
             .speak(handlerInput.t('MSG_BIENVENIDA'))
             .reprompt(handlerInput.t('MSG_BIENVENIDA'))
             .getResponse();
+            */
     }
 };
 
@@ -61,7 +69,7 @@ const LaunchRequestHandler = {
 
 
 
-var cajita = [];
+
 
 //SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
@@ -85,7 +93,7 @@ const RegistrarProductoIntentHandler = {
             cajita.push(producto.value)
         }
 
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -113,7 +121,7 @@ const ListarProductosIntentHandler = {
         const producto = sessionAttributes['producto'];
         const cantidad = sessionAttributes['cantidad'];
        
-       let speechText;
+       
        
        function agregar(){
                 if(cajita.length===0){
