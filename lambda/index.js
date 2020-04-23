@@ -79,15 +79,15 @@ const RegistrarProductoIntentHandler = {
     },
     handle(handlerInput) {
         
-        //const {attributesManager} = handlerInput;
-        //const requestAttributes = attributesManager.getRequestAttributes();
-        //const sessionAttributes = attributesManager.getSessionAttributes();
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         
         const producto = intent.slots.producto.value;
         //const cantidad = intent.slots.cantidad.value;
         
-        //sessionAttributes ['producto'] = producto;
+        sessionAttributes ['producto'] = producto;
         //sessionAttributes ['cantidad'] = cantidad;
         
         //sessionAttributes ['cajita'] = producto;
@@ -98,7 +98,7 @@ const RegistrarProductoIntentHandler = {
             cajita.push(producto)
         }
 
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[cajita.length]) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
