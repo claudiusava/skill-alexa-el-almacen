@@ -77,8 +77,8 @@ const RegistrarProductoIntentHandler = {
         const producto = intent.slots.producto.value;
         const cantidad = intent.slots.cantidad.value;
         
-        //sessionAttributes ['producto']= producto;
-        //sessionAttributes ['cantidad']= cantidad;
+        sessionAttributes ['producto']= producto;
+        sessionAttributes ['cantidad']= cantidad;
         
         
         
@@ -87,13 +87,14 @@ const RegistrarProductoIntentHandler = {
             const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
         }
         
-        sessionAttributes ['cajita']=cajita;
-        
-        
-        //const producto = sessionAttributes['producto'];
+        function agregar(){
+            cajita.push(producto.value)
+        }
+
         
         const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
-        //let speechText = sessionAttributes.t('MSG_PRODUCTOS_REGISTRADOS', producto);
+        
+        
         
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -120,6 +121,29 @@ const ListarProductosIntentHandler = {
         
         const producto = sessionAttributes['producto'];
         const cantidad = sessionAttributes['cantidad'];
+       
+       
+       var cajita = [];
+       
+       function agregar(){
+            cajita.push(producto.value)
+                if(cajita.length===0){
+                    const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
+                }else{
+                    const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
+                    for (var i=0; i<cajita.length; i++){
+                        const speechText = handlerInput.t(cajita[i] + ' , ');
+                    }
+                }
+        }
+       
+       
+        
+        
+        
+        
+        
+       
        
         return handlerInput.responseBuilder
             .speak(handlerInput.t('MSG_LISTAR_PRODUCTOS', cantidad, producto))
