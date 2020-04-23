@@ -89,7 +89,7 @@ const RegistrarProductoIntentHandler = {
         //const cantidad = intent.slots.cantidad.value;
         
         sessionAttributes ['producto'] = producto;
-        
+        sessionAttributes ['cajita'] = cajita;
         
         let speechText = '';
         
