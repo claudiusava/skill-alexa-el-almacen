@@ -118,21 +118,20 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
         
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        //const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
-        const producto = sessionAttributes['producto'];
-        const cantidad = sessionAttributes['cantidad'];
+        //const producto = sessionAttributes['producto'];
+        //const cantidad = sessionAttributes['cantidad'];
         
         let speechText;
 
-       
-       function agregar(){
+       function listar(){
                 if(cajita.length===0){
                     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
                 }else{
                     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS');
                     for (var i=0; i<cajita.length; i++){
-                        const speechText = handlerInput.t(cajita[i] + ' , ');
+                        speechText = handlerInput.t(cajita[i] + ' , ');
                     }
                 }
         }
