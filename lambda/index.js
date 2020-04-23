@@ -79,18 +79,14 @@ const RegistrarProductoIntentHandler = {
         
         sessionAttributes ['producto']= producto;
         sessionAttributes ['cantidad']= cantidad;
-        
 
         
         function agregar(){
             cajita.push(producto.value)
         }
 
-        
         const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita.length-1) + handlerInput.t('MSG_ALGO_MAS');
-        
-        
-        
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
