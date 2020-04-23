@@ -61,7 +61,7 @@ const LaunchRequestHandler = {
 
 
 
-
+var cajita = [];
 
 //SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
@@ -80,18 +80,14 @@ const RegistrarProductoIntentHandler = {
         sessionAttributes ['producto']= producto;
         sessionAttributes ['cantidad']= cantidad;
         
-        
-        var cajita = [];
-        if(cajita.length===0){
-            const speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
-        }
+
         
         function agregar(){
             cajita.push(producto.value)
         }
 
         
-        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, cajita[0]) + handlerInput.t('MSG_ALGO_MAS');
+        const speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cajita[cajita.length-1]) + handlerInput.t('MSG_ALGO_MAS');
         
         
         
@@ -120,9 +116,6 @@ const ListarProductosIntentHandler = {
         
         const producto = sessionAttributes['producto'];
         const cantidad = sessionAttributes['cantidad'];
-       
-       
-       var cajita = [];
        
        let speechText = '';
        
