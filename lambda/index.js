@@ -78,11 +78,11 @@ const RegistrarProductoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        /*
+        
         const {attributesManager} = handlerInput;
         const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = handlerInput.requestEnvelope.request;
-        */
+        
         const producto = intent.slots.producto.value;
         
         //const cantidad = intent.slots.cantidad.value;
