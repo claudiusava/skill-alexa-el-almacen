@@ -117,10 +117,9 @@ const ListarProductosIntentHandler = {
         const producto = sessionAttributes['producto'];
         const cantidad = sessionAttributes['cantidad'];
        
-       let speechText = 'tu puta madre';
+       let speechText;
        
        function agregar(){
-            cajita.push(producto.value)
                 if(cajita.length===0){
                     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
                 }else{
