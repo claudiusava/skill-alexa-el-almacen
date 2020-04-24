@@ -128,7 +128,7 @@ const ListarProductosIntentHandler = {
 
 
     for (var i=0; i<cajita.length; i++){
-        mensaje = handlerInput.t(cajita[i])
+        mensaje = handlerInput.t("Tienes guardado: "+cajita[i])
     }
         
     let speechText = mensaje;
