@@ -121,17 +121,14 @@ const ListarProductosIntentHandler = {
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
     },
     handle(handlerInput) {
-        
-    
     
     let mensaje = '';
 
-
     for (var i=0; i<cajita.length; i++){
-        mensaje = handlerInput.t("Tienes guardado: "+cajita[i])
+        mensaje = handlerInput.t(cajita[i])
     }
         
-    let speechText = mensaje;
+    let speechText = handlerInput.t('Tienes guardardo: ') + handlerInput.t(mensaje);
 
         return handlerInput.responseBuilder
             .speak(speechText)
