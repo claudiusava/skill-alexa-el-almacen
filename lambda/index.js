@@ -85,7 +85,7 @@ const RegistrarProductoIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
         
         const producto = intent.slots.producto.value;
-        const cajita = intent.slots.producto.value;
+        //const cajita = intent.slots.producto.value;
         
         //const cantidad = intent.slots.cantidad.value;
         
@@ -123,11 +123,14 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
         
     let speechText = '';
+    
+    var mensaje = '';
 
         for (var i=0 ; i<cajita.length; i++){
-            speechText = cajita[i];
+            mensaje = cajita[i];
         }
         
+        speechText = mensaje;
 
         return handlerInput.responseBuilder
             .speak(speechText)
