@@ -128,7 +128,7 @@ const ListarProductosIntentHandler = {
         mensaje = handlerInput.t(cajita[i])
     }
         
-    let speechText = handlerInput.t('MSG_TIENES_GUARDADO', mensaje);
+    let speechText = handlerInput.t('MSG_TIENES_GUARDADO', cajita);
 
         return handlerInput.responseBuilder
             .speak(speechText)
