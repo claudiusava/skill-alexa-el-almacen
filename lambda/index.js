@@ -124,7 +124,7 @@ const ListarProductosIntentHandler = {
         
     let speechText = '';
     
-    var mensaje = '';
+    let mensaje = '';
 
         for (var i=0 ; i<cajita.length; i++){
             mensaje = cajita[i];
