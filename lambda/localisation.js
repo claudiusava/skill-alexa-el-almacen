@@ -6,6 +6,7 @@ module.exports = {
       MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s.',
       MSG_LISTAR_PRODUCTOS: 'Tienes guardado %s',
       MSG_NO_HAY_PRODUCTOS: 'Todavia no tienes guardado ningun producto',
+      MSG_TIENES_GUARDADO: 'Tienes guardado: %s',
       MSG_ALGO_MAS: '¿Quiéres hacer algo más?',
       MSG_AYUDA: 'Esta es una skill que puede memorizar los productos de tu almacen. Puedes probar a guardar un producto, listar todos los que tienes, buscar por nombre para recordarte los que quedan o eliminarlos. Prueba a decirme lo que deseas.',
       MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
