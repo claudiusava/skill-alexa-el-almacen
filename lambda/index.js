@@ -129,6 +129,8 @@ const ListarProductosIntentHandler = {
     for (var i= 0; i<cajita.length; i++){
         document.write(cajita[i], ' ')
     }
+    
+    speechText=document;
 
         return handlerInput.responseBuilder
             .speak(speechText)
