@@ -130,6 +130,12 @@ const ListarProductosIntentHandler = {
             mensaje = cajita[i];
         }
         
+        cajita.forEach(miFuncion);
+ 
+    function miFuncion(elemento, indice) {
+    speechText( "Indice: " + indice + " Valor: " + elemento + "<br>");
+        }
+        
         speechText = mensaje;
 
         return handlerInput.responseBuilder
