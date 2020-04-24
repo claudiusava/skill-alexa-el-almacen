@@ -114,7 +114,7 @@ const RegistrarProductoIntentHandler = {
 
 
 
-//SOLICITUD DE LISTAR PRODUCTOS 
+//SOLICITUD DE LISTAR PRODUCTOS
 const ListarProductosIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -123,12 +123,12 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = '';
-
-    cajita.forEach(function(nombre){
-      speechText = handlerInput.t(nombre + ' ');
-    })
-        
     
+    var document;
+
+    for (var i= 0; i<cajita.length; i++){
+        document.write(cajita[i], ' ')
+    }
 
         return handlerInput.responseBuilder
             .speak(speechText)
