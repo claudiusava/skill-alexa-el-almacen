@@ -123,20 +123,14 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
         
     let speechText = '';
-    
-    let mensaje = '';
 
-        for (var i=0 ; i<cajita.length; i++){
-            mensaje = cajita[i];
-        }
-        
-        cajita.forEach(miFuncion);
+
+    cajita.forEach(miFuncion);
  
     function miFuncion(elemento, indice) {
     speechText( "Indice: " + indice + " Valor: " + elemento + "<br>");
         }
-        
-        speechText = mensaje;
+
 
         return handlerInput.responseBuilder
             .speak(speechText)
