@@ -122,13 +122,13 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
     
-    let mensaje = '';
+    let speechText = '';
 
-    for (var i=0; i<cajita.length; i++){
-        mensaje = handlerInput.t(cajita[i])
-    }
+    cajita.forEach(function(nombre){
+      speechText = handlerInput.t(nombre + ' ');
+    })
         
-    let speechText = handlerInput.t('MSG_TIENES_GUARDADO', cajita[i]);
+    
 
         return handlerInput.responseBuilder
             .speak(speechText)
