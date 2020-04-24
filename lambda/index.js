@@ -85,6 +85,7 @@ const RegistrarProductoIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
         
         const producto = intent.slots.producto.value;
+        const cajita = intent.slots.producto.value;
         
         //const cantidad = intent.slots.cantidad.value;
         
@@ -93,16 +94,10 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
-        /*
-        function agregar(){
-            cajita.push(producto)
-        }
-        */
-        
         var nuevoElemento = cajita.push(producto);
         
         var ultimoElemento = cajita[cajita.length-1];
-        
+    
 
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', ultimoElemento) + handlerInput.t('MSG_ALGO_MAS');
 
