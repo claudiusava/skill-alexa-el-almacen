@@ -124,6 +124,10 @@ const ListarProductosIntentHandler = {
     
     let speechText = ' ';
     
+    if(cajita===0){
+        speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
+    }
+    
     var mensaje = console.log(cajita)
     
     speechText = handlerInput.t(mensaje);
