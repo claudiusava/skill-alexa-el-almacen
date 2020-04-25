@@ -126,7 +126,7 @@ const ListarProductosIntentHandler = {
     
 
         for(var i=0; i<cajita.length; i++){
-            speechText = handlerInput.t(cajita)
+            speechText = handlerInput.t(cajita[i])
         }
     
 
