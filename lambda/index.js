@@ -123,10 +123,11 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = ' ';
+    let mensaje = ' ';
     
 
         for(var i=0; i<cajita.length; i++){
-            speechText = handlerInput.t(cajita[i])
+            handlerInput.t(cajita[i])
         }
     
 
