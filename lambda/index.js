@@ -122,11 +122,12 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
     
-    let speechText = '';
+    let speechText = ' ';
     
 
-        speechText =  handlerInput.t(cajita[0] + ' ' + cajita[1] + ' ' + cajita[2]);
-    
+        for(var i=0; i<cajita.length; i++){
+            speechText = handlerInput.t(cajita)
+        }
     
 
         return handlerInput.responseBuilder
