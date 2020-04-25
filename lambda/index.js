@@ -123,7 +123,7 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = ' ';
-    var repeticiones = cajita.length;
+    const repeticiones = cajita.length;
     
     
     speechText = handlerInput.t(cajita);
