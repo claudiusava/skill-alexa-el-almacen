@@ -123,12 +123,13 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = ' ';
+    var repeticiones = cajita.length;
     
     
     speechText = handlerInput.t(cajita);
 
         return handlerInput.responseBuilder
-            .speak(speechText)
+            .speak(repeticiones)
             .reprompt(speechText)
             .getResponse();
     }
