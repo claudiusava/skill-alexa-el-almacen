@@ -74,34 +74,36 @@ const LaunchRequestHandler = {
 //SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'RegistrarProductoIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        const {intent} = handlerInput.requestEnvelope.request;
         
-        let speakOutput = handlerInput.t('MSG_ERROR');
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
         
-        if(intent.slots.dynamicEntity.confirmationStatus !== 'CONFIRMED') {
-            return handlerInput.responseBuilder
-                .speak(speakOutput)
-                .reprompt(speakOutput)
-                .getResponse();
-        }
+        const producto = intent.slots.producto.value;
+        //const cajita = intent.slots.producto.value;
         
-        if(!sessionAttributes['entities'])
-            sessionAttributes['entities'] = [];
+        //const cantidad = intent.slots.cantidad.value;
         
-        const dynamicEntity = intent.slots.dynamicEntity.value;
-        sessionAttributes['entities'].push(dynamicEntity);
-        addDynamicEntities(handlerInput.responseBuilder, 'MyEntities', sessionAttributes['entities']);
+        sessionAttributes ['producto'] = producto;
+        sessionAttributes ['cajita'] = cajita;
         
-        speakOutput = handlerInput.t('MSG_PRODUCTO_REGISTRADO') + handlerInput.t('MSG_AYUDA');
+        let speechText = '';
+        
+        var nuevoElemento = cajita.push(producto);
+        
+        var ultimoElemento = cajita[cajita.length-1];
+    
+
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', ultimoElemento) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(handlerInput.t('MSG_AYUDA'))
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -115,30 +117,22 @@ const RegistrarProductoIntentHandler = {
 //SOLICITUD DE LISTAR PRODUCTOS
 const ListarProductosIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'ListarProductosIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
     },
     handle(handlerInput) {
-        const {intent} = handlerInput.requestEnvelope.request;
-        
-        const entity = intent.slots.entity.value;
-        const slotValues = getStaticAndDynamicSlotValuesFromSlot(intent.slots.entity);
-        
-        let speakOutput ;
-        
-        if (slotValues.static.statusCode === 'ER_SUCCESS_MATCH') {
-            speakOutput = entity + handlerInput.t('IS_STATIC_MSG');
-        } else
-        if (slotValues.dynamic.statusCode === 'ER_SUCCESS_MATCH') {
-            speakOutput = entity + handlerInput.t('IS_DYNAMIC_MSG');
-        } else {
-            speakOutput = entity + handlerInput.t('NOT_MATCHED_MSG');
-        }
-        
-        
+    
+    let speechText = '';
+    
+
+    for (let slot in cajita) {
+        speechText =  handlerInput.t(cajita[slot]);
+    }
+    
+
         return handlerInput.responseBuilder
-            .speak(speakOutput + handlerInput.t('HELP2_MSG'))
-            .reprompt(handlerInput.t('HELP2_MSG'))
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -284,101 +278,6 @@ const LoggingResponseInterceptor = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-function addDynamicEntities(responseBuilder, slotType, entities) {
-    let updateEntitiesDirective = {
-      type: 'Dialog.UpdateDynamicEntities',
-      updateBehavior: 'REPLACE',
-      types: [
-        {
-          name: slotType,
-          values: [] // we fill this array with the entities below
-        }
-      ]
-    };
-    entities.map((entity) => updateEntitiesDirective.types[0].values.push(
-        {
-            id: entity.replace(/\s/gi, "_"),
-            name: {
-                value: entity
-            }
-        }
-    ));
-    console.log(JSON.stringify(updateEntitiesDirective));
-    responseBuilder.addDirective(updateEntitiesDirective);
-}
-
-const getStaticAndDynamicSlotValues = function(slots) {
-    const slotValues = {}
-    for (let slot in slots) {
-        slotValues[slot] = getStaticAndDynamicSlotValuesFromSlot(slots[slot]);
-    }
-    return slotValues;
-}
-
-const getStaticAndDynamicSlotValuesFromSlot = function(slot) {
-
-    const result = {
-        name: slot.name,
-        value: slot.value
-    };
-
-    if (((slot.resolutions || {}).resolutionsPerAuthority || [])[0] || {}) {
-        slot.resolutions.resolutionsPerAuthority.forEach((authority) => {
-            const slotValue = {
-                authority: authority.authority,
-                statusCode: authority.status.code,
-                synonym: slot.value || undefined,
-                resolvedValues: slot.value
-            };
-            if (authority.values && authority.values.length > 0) {
-                slotValue.resolvedValues = [];
-
-                authority.values.forEach((value) => {
-                    slotValue.resolvedValues.push(value);
-                });
-
-            }
-
-            if (authority.authority.includes('amzn1.er-authority.echo-sdk.dynamic')) {
-                result.dynamic = slotValue;
-            } else {
-                result.static = slotValue;
-            }
-        });
-    }
-    return result;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //ESTE INTERCEPTOR DE SOLICITUD ENLAZARÁ UNA FUNCIÓN DE TRADCCIÓN 't' AL CONTROLADOR
 const LocalizationRequestInterceptor = {
     process(handlerInput) {
@@ -453,7 +352,4 @@ exports.handler = Alexa.SkillBuilders.custom()
         LoggingResponseInterceptor,
         SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
-    .withCustomUserAgent('cookbook/dynamic-entities/v1')
     .lambda();
-    
-    
