@@ -124,13 +124,9 @@ const ListarProductosIntentHandler = {
     
     let speechText = ' ';
     
+    var mensaje = console.log(cajita)
     
-/*
-        for(var i=0; i<cajita.length; i++){
-            speechText = console.log(cajita[i])
-        }
-*/
-    speechText = handlerInput.t(console.log(cajita));
+    speechText = handlerInput.t(mensaje);
 
         return handlerInput.responseBuilder
             .speak(speechText)
