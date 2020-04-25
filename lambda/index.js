@@ -116,7 +116,7 @@ const RegistrarProductoIntentHandler = {
 const ListarProductosIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'CheckEntitiesIntent';
+            && handlerInput.requestEnvelope.request.intent.name === 'ListarProductosIntent';
     },
     handle(handlerInput) {
         const {intent} = handlerInput.requestEnvelope.request;
