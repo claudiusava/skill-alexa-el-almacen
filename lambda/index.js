@@ -75,7 +75,7 @@ const LaunchRequestHandler = {
 const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'RegistrarProductoIntent1';
+            && handlerInput.requestEnvelope.request.intent.name === 'RegistrarProductoIntentL';
     },
     handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
