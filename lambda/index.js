@@ -95,9 +95,6 @@ const RegistrarProductoIntentHandler = {
         let speechText = '';
         
         var nuevoElemento = cajita.push(producto);
-        
-        //var ultimoElemento = cajita[cajita.length-1];
-    
 
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto) + handlerInput.t('MSG_ALGO_MAS');
 
@@ -123,10 +120,10 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = ' ';
-    var repeticiones = cajita.length;
     
-    
-    speechText = handlerInput.t(repeticiones);
+    for(var i=0; i<cajita.length; i++){
+        speechText = handlerInput.t(cajita[i])
+    }
 
         return handlerInput.responseBuilder
             .speak(speechText)
