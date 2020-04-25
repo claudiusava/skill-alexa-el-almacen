@@ -94,7 +94,8 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
-        var nuevoElemento = cajita.push(producto);
+        var nuevoElemento = cajita.push(
+            );
 
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto) + handlerInput.t('MSG_ALGO_MAS');
 
@@ -119,11 +120,24 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
     
-    let speechText = ' ';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        
+        let lista = intent.slots.lista.value;
+        //const cajita = intent.slots.producto.value;
+        
+        //const cantidad = intent.slots.cantidad.value;
+        
+        sessionAttributes ['lista'] = lista;
     
-    for(var i=0; i<cajita.length; i++){
-        speechText = handlerInput.t(cajita[i])
-    }
+    lista = cajita;
+    
+    
+    let speechText = handlerInput.t(lista);
+    
+    
 
         return handlerInput.responseBuilder
             .speak(speechText)
