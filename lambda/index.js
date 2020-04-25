@@ -120,22 +120,9 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
     
-        const {attributesManager} = handlerInput;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        const intent = handlerInput.requestEnvelope.request.intent;
         
-        let lista = intent.slots.lista.value;
-        //const cajita = intent.slots.producto.value;
         
-        //const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['lista'] = lista;
-    
-    //lista = cajita;
-    
-    
-    let speechText = handlerInput.t(lista);
     
     
 
