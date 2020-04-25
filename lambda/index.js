@@ -121,18 +121,18 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
         const {intent} = handlerInput.requestEnvelope.request;
         
-        const producto = intent.slots.producto.value;
+        const entity = intent.slots.entity.value;
         const slotValues = getStaticAndDynamicSlotValuesFromSlot(intent.slots.entity);
         
         let speakOutput ;
         
         if (slotValues.static.statusCode === 'ER_SUCCESS_MATCH') {
-            speakOutput = producto + handlerInput.t('IS_STATIC_MSG');
+            speakOutput = entity + handlerInput.t('IS_STATIC_MSG');
         } else
         if (slotValues.dynamic.statusCode === 'ER_SUCCESS_MATCH') {
-            speakOutput = producto + handlerInput.t('IS_DYNAMIC_MSG');
+            speakOutput = entity + handlerInput.t('IS_DYNAMIC_MSG');
         } else {
-            speakOutput = producto + handlerInput.t('NOT_MATCHED_MSG');
+            speakOutput = entity + handlerInput.t('NOT_MATCHED_MSG');
         }
         
         
