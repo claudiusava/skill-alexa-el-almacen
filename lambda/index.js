@@ -132,7 +132,7 @@ const ListarProductosIntentHandler = {
         
         sessionAttributes ['lista'] = lista;
     
-    lista = cajita;
+    //lista = cajita;
     
     
     let speechText = handlerInput.t(lista);
