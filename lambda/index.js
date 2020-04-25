@@ -126,7 +126,7 @@ const ListarProductosIntentHandler = {
     
 
     for (let indice in cajita) {
-        speechText =  handlerInput.t(cajita[indice]);
+        speechText =  handlerInput.t(cajita[0] + ' ' + cajita[1] + '' + cajita[2]);
     }
     
 
