@@ -124,10 +124,10 @@ const ListarProductosIntentHandler = {
     var objCadena = new String();
     
     for (var i=0; i<cajita.length; i++){
-        var objCadena1 = (cajita[i] + ', ');
+        var objCadena1 = new String(cajita[i] + ', ');
     }
 
-    objCadena = new String (objCadena1);
+    objCadena = objCadena1;
     
     //var objCadena = ;
     
