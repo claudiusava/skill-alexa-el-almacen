@@ -85,7 +85,7 @@ const RegistrarProductoIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
         
         const producto = intent.slots.producto.value;
-        //const cajita = intent.slots.producto.value;
+        const cajita = intent.slots.producto.value;
         
         //const cantidad = intent.slots.cantidad.value;
         
