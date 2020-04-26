@@ -120,7 +120,7 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
     
-        
+        let speechText = ' ';
         
         
     
