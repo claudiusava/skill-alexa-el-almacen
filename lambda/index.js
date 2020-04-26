@@ -85,7 +85,7 @@ const RegistrarProductoIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
         
         const producto = intent.slots.producto.value;
-        const cajita = intent.slots.producto.value;
+        //const cajita = intent.slots.producto.value;
         
         //const cantidad = intent.slots.cantidad.value;
         
@@ -98,7 +98,7 @@ const RegistrarProductoIntentHandler = {
         
         var ultimoElemento = cajita[cajita.length-1];
     
-    
+
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', ultimoElemento) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
@@ -122,11 +122,15 @@ const ListarProductosIntentHandler = {
     },
     handle(handlerInput) {
     
-        let speechText = ' ';
-        
-        var objCadena = new String(cajita);
-      
-        speechText = handlerInput.t(objCadena);
+    let speechText = '';
+    
+    var document;
+
+    for (var i= 0; i<cajita.length; i++){
+        document.write(cajita[i], ' ')
+    }
+    
+    speechText=document;
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -351,3 +355,4 @@ exports.handler = Alexa.SkillBuilders.custom()
         SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
     .lambda();
+    
