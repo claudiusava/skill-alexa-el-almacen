@@ -4,7 +4,7 @@ module.exports = {
       MSG_BIENVENIDA:  'Hola! Puedes guardar, listar, buscar o eliminar. ¿Qué deseas hacer?',
       MSG_PRODUCTO_REGISTRADO: 'Hecho!',
       MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s.',
-      MSG_LISTAR_PRODUCTOS: 'Tienes guardado ',
+      MSG_LISTAR_PRODUCTOS: 'Tienes guardado',
       MSG_NO_HAY_PRODUCTOS: 'Todavia no tienes guardado ningun producto',
       MSG_ALGO_MAS: '¿Quiéres hacer algo más?',
       MSG_AYUDA: 'Puedes volver a guardar un producto o listar todos los que tienes',
