@@ -122,9 +122,9 @@ const ListarProductosIntentHandler = {
     
         let speechText = ' ';
         
-        
-    
-    
+        var objCadena = new String(cajita);
+      
+        speechText = handlerInput.t(objCadena);
 
         return handlerInput.responseBuilder
             .speak(speechText)
