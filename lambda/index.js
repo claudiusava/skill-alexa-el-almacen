@@ -88,7 +88,7 @@ const RegistrarProductoIntentHandler = {
         const cantidad = intent.slots.cantidad.value;
         
         sessionAttributes ['producto'] = producto;
-        sessionAttributes ['cantidad'] = cantidad;
+        //sessionAttributes ['cantidad'] = cantidad;
         sessionAttributes ['cajita'] = cajita;
         
         let speechText = '';
@@ -98,7 +98,7 @@ const RegistrarProductoIntentHandler = {
         var nuevoElemento = cajita.push(producto + ' ' + /*cantidad*/ + ' ');
         
     
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto, cantidad) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto, /*cantidad*/) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
