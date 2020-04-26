@@ -121,9 +121,13 @@ const ListarProductosIntentHandler = {
     
     let speechText = '';
     
+    var objCadena1 = new String;
+    
     for (var i=0; i<cajita.length; i++){
-        var objCadena1 = new String(cajita[i]+', ')
+        objCadena1 = cajita[i] + ', '
     }
+
+    
     
     //var objCadena = ;
     
