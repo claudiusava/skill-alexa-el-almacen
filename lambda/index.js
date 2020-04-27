@@ -12,7 +12,7 @@ var persistenceAdapter = getPersistenceAdapter();
 
 
 //ARRAYLIST
-let cajita = {"empleados" :[]};
+let cajita = [];
 
 
 
@@ -129,10 +129,8 @@ const ListarProductosIntentHandler = {
     let speechText = '';
     
     var obj = JSON.parse(cajita);
-    
-    var textoFinal = new String (obj.empleados[1].cantidad + obj.empleados[1].producto); 
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(textoFinal);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(obj);
     
 
         return handlerInput.responseBuilder
