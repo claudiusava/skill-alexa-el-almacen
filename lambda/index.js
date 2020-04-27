@@ -130,7 +130,7 @@ const ListarProductosIntentHandler = {
     
     var texto = cajita.from();
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t();
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(texto);
     
 
         return handlerInput.responseBuilder
