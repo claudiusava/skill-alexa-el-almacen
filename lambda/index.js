@@ -120,8 +120,9 @@ const RegistrarProductoIntentHandler = {
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar, productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
         }else{
 	    var base = parseInt(cajita[encontrado].cantidad);
-	    base += sumador;
-        cajita[encontrado].cantidad = base;
+	    parseInt(cantidadCapturar);
+	    var suma = cantidadCapturar + base;
+        cajita[encontrado].cantidad = suma;
         speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
         }
 
