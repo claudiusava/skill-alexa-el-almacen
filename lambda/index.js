@@ -13,7 +13,7 @@ var persistenceAdapter = getPersistenceAdapter();
 
 //ARRAYLIST
 let cajita = [];
-let nuevoElemento; 
+
 
 
 
@@ -85,19 +85,25 @@ const RegistrarProductoIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         
-        const producto = intent.slots.producto.value;
-        const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['producto'] = producto;
-        sessionAttributes ['cantidad'] = cantidad;
+        sessionAttributes ['cantidadCapturar'] = cantidadCapturar;
+        sessionAttributes ['productoCapturar'] = productoCapturar;
         sessionAttributes ['cajita'] = cajita;
         
         let speechText = '';
         
-        nuevoElemento = cajita.push(' ' + cantidad + ' ' +producto);
+        function Producto(cantidad, producto){
+            this.cantidad = cantidad;
+            this.producto = producto;
+        }
+        var cantidadCapturar = intent.slots.cantidad.value;
+        var productoCapturar = intent.slots.producto.value;
         
+        var nuevoProducto = new Producto(cantidadCapturar, productoCapturar);
+        
+        cajita.push(nuevoProducto)
     
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidad + producto) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar + productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
