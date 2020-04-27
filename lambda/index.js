@@ -134,8 +134,6 @@ const ListarProductosIntentHandler = {
         x += cajita[i].producto + ", ";
     }
     
-    var texto = new String(x);
-    
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x);
     
 
