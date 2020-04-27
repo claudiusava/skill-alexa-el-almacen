@@ -127,11 +127,18 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = '';
-    
+    var array = [];
+ 
  
     for (let i of cajita.cantidad + cajita.producto) {
     var objCadena = new String(i);
+    array.push(objCadena);
     }
+    
+    var arrayStr = new String(array);
+    
+    
+    
 
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(objCadena);
     
