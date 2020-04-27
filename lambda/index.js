@@ -136,7 +136,7 @@ const ListarProductosIntentHandler = {
     
     var texto = new String(x);
     
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(texto);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x);
     
 
         return handlerInput.responseBuilder
