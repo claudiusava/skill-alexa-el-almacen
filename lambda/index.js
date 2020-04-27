@@ -131,14 +131,11 @@ const ListarProductosIntentHandler = {
  
  
     for (var i=0; i<cajita.lenght; i++) {
-    var objCadena = new String(i);
+    var objCadena = new String(cajita[i]);
     array.push(objCadena);
     }
     
     var arrayStr = new String(array);
-    
-    
-    
 
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(arrayStr);
     
