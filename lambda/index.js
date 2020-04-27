@@ -132,7 +132,7 @@ const ListarProductosIntentHandler = {
  
     var i = 0;
     while(i!==cajita.length){
-       var arrayStr = new String(cajita[i]);
+       var arrayStr = new String(cajita[i].cantidad);
        i++
     }
     
