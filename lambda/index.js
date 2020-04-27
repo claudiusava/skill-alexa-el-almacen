@@ -129,11 +129,13 @@ const ListarProductosIntentHandler = {
     let speechText = '';
     var array = [];
  
+    
  
     var i = 0;
     while(i!==cajita.length){
        var arrayStr = new String(cajita[i].cantidad);
        i++
+       var texto = new String(arrayStr);
     }
     
     
