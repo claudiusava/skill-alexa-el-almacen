@@ -131,7 +131,7 @@ const ListarProductosIntentHandler = {
  
  
     for(var i=0; i<cajita.length; i++){
-        var tuPutaMadre = cajita[i];
+        var tuPutaMadre = cajita[i].producto;
     }
     
     var arrayStr = new String(tuPutaMadre);
