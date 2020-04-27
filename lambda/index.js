@@ -130,7 +130,7 @@ const ListarProductosIntentHandler = {
     var array = [];
  
  
-    for (let i of cajita.cantidad + cajita.producto) {
+    for (var i=0; i<cajita.lenght; i++) {
     var objCadena = new String(i);
     array.push(objCadena);
     }
