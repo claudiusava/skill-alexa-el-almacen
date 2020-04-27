@@ -134,10 +134,11 @@ const ListarProductosIntentHandler = {
         numero++;
     }
     
-    
+    if (numero===cajita.length){
     var objCadena = new String(bucle);
 
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(objCadena);
+    }
     
         return handlerInput.responseBuilder
             .speak(speechText)
