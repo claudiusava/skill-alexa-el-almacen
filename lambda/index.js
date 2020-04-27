@@ -128,9 +128,9 @@ const ListarProductosIntentHandler = {
     
     let speechText = '';
     
-    var obj = JSON.parse(cajita);
+    var texto = cajita.from();
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(obj.cantidad + ' ' + obj.producto);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t();
     
 
         return handlerInput.responseBuilder
