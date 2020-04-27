@@ -84,23 +84,26 @@ const RegistrarProductoIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         
-        const producto = intent.slots.producto.value;
-        const cantidad = intent.slots.cantidad.value;
+        const cantidadCapturar = intent.slots.cantidad.value;
+        const productoCapturar = intent.slots.producto.value;
         
-        sessionAttributes ['producto'] = producto;
-        sessionAttributes ['cantidad'] = cantidad;
+        sessionAttributes ['cantidadCapturar'] = cantidadCapturar;
+        sessionAttributes ['productoCapturar'] = productoCapturar;
+        
         sessionAttributes ['cajita'] = cajita;
         
         let speechText = '';
         
-        var a = {cantidad,producto};
-        
-        //var nuevoElemento = cajita.push(' ' + cantidad + ' ' + producto);
-        
-        var nuevoElemento = cajita.push(a);
+        function Producto(cantidad, producto){
+            this.cantidad=cantidad;
+            this.producto=producto;
+        }
     
+        let nuevoProducto = new Producto(cantidadCapturar, productoCapturar)
+        
+        cajita.push(nuevoProducto);
     
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, producto ) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidadCapturar, productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
