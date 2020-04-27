@@ -127,11 +127,8 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = '';
-    var template = cajita.get('cantidadCapturar');
     
-    var clon = template.content.cloneNode(true);
-    
-    var objCadena = new String(clon);
+    var objCadena = new String(cajita);
 
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(objCadena);
     
