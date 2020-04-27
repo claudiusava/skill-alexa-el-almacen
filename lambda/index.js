@@ -12,7 +12,8 @@ var persistenceAdapter = getPersistenceAdapter();
 
 
 //ARRAYLIST
-var cajita = [];
+let cajita = [];
+let nuevoElemento; 
 
 
 
@@ -93,7 +94,7 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
-        var nuevoElemento = cajita.push(' ' + cantidad + ' ' +producto);
+        nuevoElemento = cajita.push(' ' + cantidad + ' ' +producto);
         
     
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidad + producto) + handlerInput.t('MSG_ALGO_MAS');
@@ -120,6 +121,8 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = '';
+    
+    nuevoElemento = cajita[0]+2;
     
     var objCadena = new String(cajita);
 
