@@ -126,7 +126,6 @@ const RegistrarProductoIntentHandler = {
         speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
         }
 
-        
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
