@@ -84,8 +84,8 @@ const RegistrarProductoIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         
-        const cantidadCapturar = intent.slots.cantidad.value;
-        const productoCapturar = intent.slots.producto.value;
+        let cantidadCapturar = intent.slots.cantidad.value;
+        let productoCapturar = intent.slots.producto.value;
         
         sessionAttributes ['cantidadCapturar'] = cantidadCapturar;
         sessionAttributes ['productoCapturar'] = productoCapturar;
@@ -132,7 +132,7 @@ const ListarProductosIntentHandler = {
     
     //var cajitaStr = JSON.stringify(cajita)
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(cajita.cantidad + ' ' + cajita.producto);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(cajita.cantidadCapturar + ' ' + cajita.productoCapturar);
     
         return handlerInput.responseBuilder
             .speak(speechText)
