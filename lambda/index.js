@@ -122,7 +122,7 @@ const ListarProductosIntentHandler = {
     
     let speechText = '';
     
-    nuevoElemento = cajita[0]+2;
+    nuevoElemento = cajita[0].cantidad+2 ;
     
     var objCadena = new String(cajita);
 
