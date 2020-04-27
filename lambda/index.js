@@ -130,11 +130,13 @@ const ListarProductosIntentHandler = {
     var array = [];
  
  
-    for(var i=0; i<cajita.length; i++){
-        var tuPutaMadre = cajita[i].cantidad;
+    var i = 0;
+    while(i===cajita.length){
+       var arrayStr = new String(cajita[i]);
+       i++
     }
     
-    var arrayStr = new String(tuPutaMadre);
+    
 
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(arrayStr);
     
