@@ -128,7 +128,7 @@ const ListarProductosIntentHandler = {
     
     let speechText = '';
     
-    for (var i=0; i<5; i++){
+    for (var i=0; i<2; i++){
         var bucle = new String (' ' + cajita[i].cantidad + ' ' + cajita[i].producto);
     }
     
