@@ -140,7 +140,7 @@ const ListarProductosIntentHandler = {
     
     
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(objCadena);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(arrayStr);
     
     
         return handlerInput.responseBuilder
