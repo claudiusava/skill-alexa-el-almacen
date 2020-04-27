@@ -12,7 +12,7 @@ var persistenceAdapter = getPersistenceAdapter();
 
 
 //ARRAYLIST
-let cajita = [];
+let cajita = {};
 
 
 
