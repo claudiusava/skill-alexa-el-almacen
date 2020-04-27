@@ -84,26 +84,19 @@ const RegistrarProductoIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         
-        let cantidadCapturar = intent.slots.cantidad.value;
-        let productoCapturar = intent.slots.producto.value;
+        const producto = intent.slots.producto.value;
+        const cantidad = intent.slots.cantidad.value;
         
-        sessionAttributes ['cantidadCapturar'] = cantidadCapturar;
-        sessionAttributes ['productoCapturar'] = productoCapturar;
-        
+        sessionAttributes ['producto'] = producto;
+        sessionAttributes ['cantidad'] = cantidad;
         sessionAttributes ['cajita'] = cajita;
         
         let speechText = '';
         
-        function Producto(cantidad, producto){
-            this.cantidad=cantidad;
-            this.producto=producto;
-        }
-    
-        let nuevoProducto = new Producto(cantidadCapturar, productoCapturar)
+        var nuevoElemento = cajita.push(producto);
         
-        cajita.push(nuevoProducto);
     
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidadCapturar, productoCapturar + '. ') + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', producto) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -127,22 +120,12 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = '';
-    var array = [];
- 
     
- 
-    var i = 0;
-    while(i!==cajita.length){
-       var arrayStr = new String(cajita[i].cantidad);
-       i++
-       var texto = new String(arrayStr);
-    }
-    
+    var objCadena = new String(cajita);
+
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(objCadena);
     
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(arrayStr);
-    
-    
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -366,4 +349,3 @@ exports.handler = Alexa.SkillBuilders.custom()
         SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
     .lambda();
-    
