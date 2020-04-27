@@ -103,7 +103,7 @@ const RegistrarProductoIntentHandler = {
         
         cajita.push(nuevoProducto);
     
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar + productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar, productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
 
         return handlerInput.responseBuilder
             .speak(speechText)
