@@ -132,7 +132,7 @@ const ListarProductosIntentHandler = {
     
     //var cajitaStr = JSON.stringify(cajita)
 
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(cajita.cantidadCapturar + ' ' + cajita.productoCapturar);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(cajita);
     
         return handlerInput.responseBuilder
             .speak(speechText)
