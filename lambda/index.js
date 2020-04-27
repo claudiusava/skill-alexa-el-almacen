@@ -93,7 +93,7 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
-        var a = {producto:cantidad};
+        var a = {producto,cantidad};
         
         //var nuevoElemento = cajita.push(' ' + cantidad + ' ' + producto);
         
