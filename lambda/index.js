@@ -93,10 +93,24 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
-        var nuevoElemento = cajita.push(' ' + cantidad + ' ' + producto);
         
+        var contador;
+        var encontrado = -1;
+        
+        for( contador=0; contador < cajita.length; contador++ )
+        {
+        if( cajita[contador] === producto) {
+         encontrado = contador;
+         break;
+        }
+        }
+        if( encontrado === -1 ){
+        var nuevoElemento = cajita.push(' ' + cantidad + ' ' + producto);
     
         speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidad, producto ) + handlerInput.t('MSG_ALGO_MAS');
+        
+        }
+        
 
         return handlerInput.responseBuilder
             .speak(speechText)
