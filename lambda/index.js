@@ -92,6 +92,7 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
+
         function Producto(cantidad, producto){
             this.cantidad = cantidad;
             this.producto = producto;
@@ -101,10 +102,30 @@ const RegistrarProductoIntentHandler = {
         
         var nuevoProducto = new Producto(cantidadCapturar, productoCapturar);
         
-        cajita.push(nuevoProducto);
-    
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar, productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
+        
+        var busqueda = productoCapturar;
+        var sumador = cantidadCapturar;
+        var encontrado = -1;
 
+        for(var i =0; i< cajita.length; i++ )
+        {
+        if(cajita[i].producto === busqueda) {
+         encontrado = i;
+         break;
+        }
+        }
+
+        if( encontrado === -1 ){
+        cajita.push(nuevoProducto);
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar, productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
+        }else{
+	    var base = parseInt(cajita[encontrado].cantidad);
+	    base += sumador;
+        cajita[encontrado].cantidad = base;
+        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
+        }
+
+        
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
