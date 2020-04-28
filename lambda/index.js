@@ -178,16 +178,37 @@ const BuscarProductosIntentHandler = {
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
     },
     handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const intent = handlerInput.requestEnvelope.request.intent;
     
     let speechText = '';
    
-    var i, j, x = "";
-    for (i in cajita) {
-        x += cajita[i].cantidad + " ";
-        x += cajita[i].producto + ", ";
-    }
+    var productoBuscar = intent.slots.productoBuscar.value;
     
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x);
+    var busqueda = productoBuscar;
+    var encontrado = -1;
+    
+    for(var i =0; i< cajita.length; i++ )
+        {
+        if(cajita[i].producto === busqueda) {
+         encontrado = i;
+         break;
+        }
+        }
+
+        if( encontrado === -1 ){
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
+        }else{
+	    var base = parseInt(cajita[encontrado].cantidad);
+	    var sumando =  parseInt(sumador);
+	    var suma = sumando + base;
+        cajita[encontrado].cantidad = suma;
+        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
+        }
+    
+    
+    
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t();
     
 
         return handlerInput.responseBuilder
