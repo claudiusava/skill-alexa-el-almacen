@@ -7,7 +7,7 @@ module.exports = {
       MSG_NO_HAY_PRODUCTOS: 'Todavía no tienes guardado ningun producto',
       MSG_CANTIDAD_SUMADA: 'He añadido %s a %s, ahora tienes %s',
       MSG_ALGO_MAS: '¿Quiéres hacer algo más?',
-      MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardardo. Prueba con otro producto u otra operación.',
+      MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado. Prueba con otro producto u otra operación.',
       MSG_PRODUCTO_ENCONTRADO: 'Hay %s %s. ¿Quiéres hacer algo más?',
         MSG_AYUDA: 'Puedes volver a guardar un producto o listar todos los que tienes',
         MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
