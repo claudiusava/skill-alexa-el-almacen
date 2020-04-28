@@ -148,15 +148,18 @@ const ListarProductosIntentHandler = {
     handle(handlerInput) {
     
     let speechText = '';
-   
+    
+    if(cajita === 0){
+           
+    }else{
+    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS');
     var i, j, x = "";
     for (i in cajita) {
         x += cajita[i].cantidad + " ";
         x += cajita[i].producto + ", ";
     }
-    
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x);
-    
+    }
 
         return handlerInput.responseBuilder
             .speak(speechText)
