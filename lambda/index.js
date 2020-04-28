@@ -197,7 +197,7 @@ const BuscarProductoIntentHandler = {
         }
 
     if(encontrado === -1){
-    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', productoBuscar);
     }else{
     speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
     }
