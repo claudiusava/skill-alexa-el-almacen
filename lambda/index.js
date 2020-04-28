@@ -171,6 +171,38 @@ const ListarProductosIntentHandler = {
 
 
 
+//SOLICITUD DE BUSCAR PRODUCTO
+const BuscarProductosIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
+    },
+    handle(handlerInput) {
+    
+    let speechText = '';
+   
+    var i, j, x = "";
+    for (i in cajita) {
+        x += cajita[i].cantidad + " ";
+        x += cajita[i].producto + ", ";
+    }
+    
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x);
+    
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+
+
+
+
+
+
+
 
 
 //SOLICITUD DE AYUDA
