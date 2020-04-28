@@ -201,11 +201,6 @@ const BuscarProductosIntentHandler = {
         }else{
         speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
         }
-    
-    
-    
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t();
-    
 
         return handlerInput.responseBuilder
             .speak(speechText)
