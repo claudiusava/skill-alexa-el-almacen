@@ -40,7 +40,7 @@ function getPersistenceAdapter(tableName) {
 
 
 
-//
+
 
 
 //MENSAJE DE BINVENIDA
