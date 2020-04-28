@@ -195,14 +195,12 @@ const BuscarProductoIntentHandler = {
          break;
         }
         }
-        
-    var cantidadEncontrada = cajita[encontrado].cantidad;
 
-        if(encontrado === -1){
-        speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
-        }else{
-        speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cantidadEncontrada, busqueda);
-        }
+    if(encontrado === -1){
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
+    }else{
+    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
+    }
 
         return handlerInput.responseBuilder
             .speak(speechText)
