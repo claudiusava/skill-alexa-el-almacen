@@ -197,12 +197,8 @@ const BuscarProductosIntentHandler = {
         }
 
         if( encontrado === -1 ){
-        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS');
+        speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', productoBuscar);
         }else{
-	    var base = parseInt(cajita[encontrado].cantidad);
-	    var sumando =  parseInt(sumador);
-	    var suma = sumando + base;
-        cajita[encontrado].cantidad = suma;
         speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
         }
     
