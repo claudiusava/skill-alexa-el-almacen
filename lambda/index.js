@@ -175,7 +175,7 @@ const ListarProductosIntentHandler = {
 const BuscarProductosIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuscarProductosIntent';
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
@@ -410,6 +410,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         RegistrarProductoIntentHandler,
         ListarProductosIntentHandler,
+        BuscarProductosIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
