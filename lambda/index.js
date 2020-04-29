@@ -242,8 +242,6 @@ const BorrarProductoIntentHandler = {
     if(encontrado === -1){
     speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
     }else{
-            
-        
     speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
     }
 
