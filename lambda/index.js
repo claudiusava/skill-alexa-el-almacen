@@ -185,9 +185,8 @@ const BuscarProductoIntentHandler = {
     
     let speechText = '';
    
-    var productoBuscar = intent.slots.productoBuscar.value;
+    var busqueda = intent.slots.productoBuscar.value;
     
-    var busqueda = productoBuscar;
     var encontrado = -1;
     
     for(var i =0; i< cajita.length; i++ )
@@ -199,7 +198,7 @@ const BuscarProductoIntentHandler = {
         }
 
     if(encontrado === -1){
-    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', productoBuscar);
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
     }else{
     speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
     }
@@ -229,9 +228,8 @@ const BorrarProductoIntentHandler = {
     
     let speechText = '';
    
-    var productoBuscar = intent.slots.productoBorrar.value;
+    var busqueda = intent.slots.productoBorrar.value;
     
-    var busqueda = productoBuscar;
     var encontrado = -1;
     
     for(var i =0; i< cajita.length; i++ )
@@ -243,7 +241,7 @@ const BorrarProductoIntentHandler = {
         }
 
     if(encontrado === -1){
-    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', productoBuscar);
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
     }else{
     speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
     }
