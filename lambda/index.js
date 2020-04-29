@@ -71,7 +71,6 @@ const LaunchRequestHandler = {
 
 
 
-
 //SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
