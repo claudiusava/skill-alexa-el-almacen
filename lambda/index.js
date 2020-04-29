@@ -228,6 +228,7 @@ const BorrarProductoIntentHandler = {
     let speechText = '';
    
     var busqueda = intent.slots.productoBorrar.value;
+    var restador = intent.slots.cantidadBorrar.value;
     
     var encontrado = -1;
     
@@ -242,8 +243,18 @@ const BorrarProductoIntentHandler = {
     if(encontrado === -1){
     speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
     }else{
-    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
-    }
+        var base = parseInt(cajita[encontrado].cantidad);
+	    var restando =  parseInt(restador);
+	    var resta = base - restando;
+	    
+	    if (resta<=0){
+	        delete cajita[encontrado];
+	    }else{
+            speechText = handlerInput.t('', cajita[encontrado].cantidad, busqueda);
+	    }
+	        
+	    }
+    
 
         return handlerInput.responseBuilder
             .speak(speechText)
