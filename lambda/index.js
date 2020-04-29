@@ -217,6 +217,49 @@ const BuscarProductoIntentHandler = {
 
 
 
+//SOLICITUD DE BORRAR PRODUCTO
+const BorrarProductoIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BorrarProductoIntent';
+    },
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const intent = handlerInput.requestEnvelope.request.intent;
+    
+    let speechText = '';
+   
+    var productoBuscar = intent.slots.productoBorrar.value;
+    
+    var busqueda = productoBuscar;
+    var encontrado = -1;
+    
+    for(var i =0; i< cajita.length; i++ )
+        {
+        if(cajita[i].producto === busqueda) {
+         encontrado = i;
+         break;
+        }
+        }
+
+    if(encontrado === -1){
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', productoBuscar);
+    }else{
+    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda);
+    }
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+
+
+
+
+
+
 
 
 //SOLICITUD DE AYUDA
