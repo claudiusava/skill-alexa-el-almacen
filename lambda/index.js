@@ -177,7 +177,7 @@ const ListarProductosIntentHandler = {
         x += cajita[i].cantidad + " ";
         x += cajita[i].producto + ", ";
     }
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x);
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS' + x + 'MSG_ALGO_MAS');
     }
 
         return handlerInput.responseBuilder
