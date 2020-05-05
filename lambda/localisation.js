@@ -12,6 +12,7 @@ module.exports = {
         MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado. Prueba con otro producto u otra operación.',
         MSG_PRODUCTO_ENCONTRADO: 'Hay %s %s. ¿Quiéres hacer algo más?',
         MSG_PRODUCTO_BORRADO: 'El producto %s ha sido borrado.',
+        MSG_ALMACEN_RESTAURADO: 'El almacén ha sido vaciado.',
             MSG_AYUDA: 'Esta es una Skill en la que puedes guardar, borrar, listar o eliminar productos, también tienes la opción de restaurar el almacén. Prueba a decirme lo que quieres hacer.',
             MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
