@@ -55,7 +55,7 @@ const LaunchRequestHandler = {
         
         const producto = sessionAttributes['producto'];
         
-        speechText = handlerInput.t('MSG_BIENVENIDA');
+        speechText = handlerInput.t('MSG_HOLA','MSG_BIENVENIDA');
        
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -122,7 +122,7 @@ const RegistrarProductoIntentHandler = {
 	    var sumando =  parseInt(sumador);
 	    var suma = sumando + base;
         cajita[encontrado].cantidad = suma;
-        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad)
+        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad, 'MSG_ALGO_MAS');
         }
 
         return handlerInput.responseBuilder
