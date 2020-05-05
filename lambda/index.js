@@ -272,11 +272,9 @@ const BorrarProductoIntentHandler = {
 	        cajita.splice(1,1);
 	        speechText = handlerInput.t('MSG_PRODUCTO_BORRADO' + 'MSG_ALGO_MAS')
 	    }else{
-            speechText = handlerInput.t('', cajita[encontrado].cantidad, busqueda);
+            speechText = handlerInput.t('MSG_CANTIDAD_RESTADA',restador, busqueda, cajita[encontrado].cantidad, 'MSG_ALGO_MAS');
 	    }
-	        
 	    }
-    
 
         return handlerInput.responseBuilder
             .speak(speechText)
