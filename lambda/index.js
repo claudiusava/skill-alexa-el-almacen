@@ -248,7 +248,8 @@ const BorrarProductoIntentHandler = {
 	    var resta = base - restando;
 	    
 	    if (resta<=0){
-	        delete cajita[encontrado];
+	        cajita.splice(1,1);
+	        speechText = handlerInput.t()
 	    }else{
             speechText = handlerInput.t('', cajita[encontrado].cantidad, busqueda);
 	    }
