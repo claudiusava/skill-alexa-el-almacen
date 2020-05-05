@@ -481,6 +481,7 @@ const SaveAttributesResponseInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
+        OpcionesIntentHandler,
         RegistrarProductoIntentHandler,
         ListarProductosIntentHandler,
         BuscarProductoIntentHandler,
