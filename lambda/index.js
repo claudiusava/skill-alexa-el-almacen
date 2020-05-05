@@ -70,7 +70,7 @@ const LaunchRequestHandler = {
 
 
 
-//MENSAJE DE BINVENIDA
+//SOLICITUD DE OPCIONES
 const OpcionesIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'OpcionesIntent';
@@ -290,6 +290,33 @@ const BorrarProductoIntentHandler = {
 
 
 
+//SOLICITUD DE RESTAURAR ALMACEN
+const RestaurarAlmacenIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'RestaurarAlmacenIntent';
+    },
+    handle(handlerInput) {
+        
+        cajita = [];
+        
+        let speechText = handlerInput.t('MSG_OPCIONES');
+       
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+
+
+
+
+
+
+
+
+
+
 //SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
@@ -484,6 +511,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         ListarProductosIntentHandler,
         BuscarProductoIntentHandler,
         BorrarProductoIntentHandler,
+        RestaurarAlmacenIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
