@@ -55,7 +55,7 @@ const LaunchRequestHandler = {
         
         const producto = sessionAttributes['producto'];
         
-        speechText = handlerInput.t('MSG_HOLA','MSG_BIENVENIDA');
+        speechText = handlerInput.t('MSG_HOLA','MSG_OPCIONES');
        
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -64,6 +64,27 @@ const LaunchRequestHandler = {
     }
 };
 
+
+
+
+
+
+
+//MENSAJE DE BINVENIDA
+const OpcionesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'OpcionesIntent';
+    },
+    handle(handlerInput) {
+        
+        let speechText = handlerInput.t('MSG_OPCIONES');
+       
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
 
 
 
