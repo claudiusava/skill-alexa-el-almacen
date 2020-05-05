@@ -299,7 +299,7 @@ const RestaurarAlmacenIntentHandler = {
         
         cajita = [];
         
-        let speechText = handlerInput.t('MSG_OPCIONES');
+        let speechText = handlerInput.t('MSG_ALMACEN_RESTAURADO', 'MSG_ALGO_MAS');
        
         return handlerInput.responseBuilder
             .speak(speechText)
