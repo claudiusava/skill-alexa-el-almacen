@@ -143,7 +143,7 @@ const RegistrarProductoIntentHandler = {
 	    var sumando =  parseInt(sumador);
 	    var suma = sumando + base;
         cajita[encontrado].cantidad = suma;
-        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad, 'MSG_ALGO_MAS');
+        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad) + handlerInput.t('MSG_ALGO_MAS');
         }
 
         return handlerInput.responseBuilder
@@ -170,14 +170,14 @@ const ListarProductosIntentHandler = {
     let speechText = '';
     
     if(cajita.length === 0){
-    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS', 'MSG_ALGO_MAS');       
+    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS') + handlerInput.t('MSG_ALGO_MAS');       
     }else{
     var i, j, x = "";
     for (i in cajita) {
         x += cajita[i].cantidad + " ";
         x += cajita[i].producto + ", ";
     }
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS' + x + 'MSG_ALGO_MAS');
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x) + handlerInput.t('MSG_ALGO_MAS');
     }
 
         return handlerInput.responseBuilder
@@ -220,7 +220,7 @@ const BuscarProductoIntentHandler = {
     if(encontrado === -1){
     speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
     }else{
-    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda + 'MSG_ALGO_MAS');
+    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda) + handlerInput.t('MSG_ALGO_MAS');
     }
 
         return handlerInput.responseBuilder
@@ -270,9 +270,9 @@ const BorrarProductoIntentHandler = {
 	    
 	    if (resta<=0){
 	        cajita.splice(1,1);
-	        speechText = handlerInput.t('MSG_PRODUCTO_BORRADO' + 'MSG_ALGO_MAS')
+	        speechText = handlerInput.t('MSG_PRODUCTO_BORRADO') + handlerInput.t('MSG_ALGO_MAS');
 	    }else{
-            speechText = handlerInput.t('MSG_CANTIDAD_RESTADA',restador, busqueda, cajita[encontrado].cantidad, 'MSG_ALGO_MAS');
+            speechText = handlerInput.t('MSG_CANTIDAD_RESTADA',restador, busqueda, cajita[encontrado].cantidad) + handlerInput.t('MSG_ALGO_MAS');
 	    }
 	    }
 
