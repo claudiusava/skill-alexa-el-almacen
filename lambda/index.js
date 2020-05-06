@@ -170,7 +170,6 @@ const ListarProductosIntentHandler = {
 
 
 
-
 //SOLICITUD DE BUSCAR PRODUCTO
 const BuscarProductoIntentHandler = {
     canHandle(handlerInput) {
@@ -207,6 +206,8 @@ const BuscarProductoIntentHandler = {
             .getResponse();
     }
 };
+
+
 
 
 
@@ -395,7 +396,7 @@ const IntentReflectorHandler = {
 
 
 
-// MENSAJE DE ERROR SINO SE ENCUENTRA LA SOLICITUD, NO SE HA IMPLEMENTADO UN CONTROLADOR O NO ESTÁ INSTANCIADA
+// MENSAJE DE ERROR SI NO SE ENCUENTRA LA SOLICITUD, NO SE HA IMPLEMENTADO UN CONTROLADOR O NO ESTÁ INSTANCIADA
 const ErrorHandler = {
     canHandle() {
         return true;
