@@ -325,14 +325,14 @@ const HelpIntentHandler = {
 
 
 
-
+//MENSAJE DE FALLBACK POR SI NO HA ENTENDIDO LO QUE HAS DICHO
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('FALLBACK_MSG');
+        const speechText = handlerInput.t('MSG_FALLBACK');
 
         return handlerInput.responseBuilder
             .speak(speechText)
