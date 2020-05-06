@@ -247,7 +247,7 @@ const BorrarProductoIntentHandler = {
 	    var resta = base - restando;
 	    
 	    if (resta<=0){
-	        cajita.splice(1,1);
+	        cajita.splice(1,2);
 	        speechText = handlerInput.t('MSG_PRODUCTO_BORRADO') + handlerInput.t('MSG_ALGO_MAS');
 	    }else{
 	        cajita[encontrado].cantidad = resta;
@@ -269,25 +269,25 @@ const BorrarProductoIntentHandler = {
 
 
 
+
 //SOLICITUD DE RESTAURAR ALMACEN
 const RestaurarAlmacenIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'RestaurarAlmacenIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RestaurarAlmacenIntent';
     },
     handle(handlerInput) {
-        
+    
         cajita = [];
         
         let speechText = handlerInput.t('MSG_ALMACEN_RESTAURADO') + handlerInput.t('MSG_ALGO_MAS');
-       
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
     }
 };
-
-
 
 
 
