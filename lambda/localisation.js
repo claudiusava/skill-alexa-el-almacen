@@ -8,7 +8,7 @@ module.exports = {
         MSG_CANTIDAD_SUMADA: 'He añadido %s a %s, ahora tienes %s.',
         MSG_CANTIDAD_RESTADA: 'He restado %s a %s, ahora tienes %s.',
         MSG_ALGO_MAS: '¿Qué más quieres hacer?',
-        MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado. Prueba con otro producto u otra operación.',
+        MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado.',
         MSG_PRODUCTO_ENCONTRADO: 'Hay %s %s. ¿Quiéres hacer algo más?',
         MSG_PRODUCTO_BORRADO: 'El producto %s ha sido borrado.',
         MSG_ALMACEN_RESTAURADO: 'El almacén ha sido vaciado.',
