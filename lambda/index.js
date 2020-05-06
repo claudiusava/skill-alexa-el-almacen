@@ -336,7 +336,7 @@ const FallbackIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
