@@ -301,6 +301,9 @@ const RestaurarAlmacenIntentHandler = {
 
 
 
+
+
+
 //SOLICITUD DE AYUDA
 const HelpIntentHandler = {
     canHandle(handlerInput) {
@@ -317,6 +320,26 @@ const HelpIntentHandler = {
     }
 };
 
+
+
+
+
+
+
+const FallbackIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
+    },
+    handle(handlerInput) {
+        const speechText = handlerInput.t('FALLBACK_MSG');
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .getResponse();
+    }
+};
 
 
 
@@ -497,6 +520,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         RestaurarAlmacenIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
+        FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler, // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
