@@ -227,7 +227,7 @@ const BorrarProductoIntentHandler = {
     let speechText = '';
    
     var busqueda = intent.slots.productoBorrar.value;
-    var restador = intent.slots.cantidadBorrar.value;
+    var restador = intent.slots.cantidadProductoBorrar.value;
     
     var encontrado = -1;
     
