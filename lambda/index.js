@@ -59,7 +59,7 @@ const LaunchRequestHandler = {
        
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -126,7 +126,7 @@ const RegistrarProductoIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -160,7 +160,7 @@ const ListarProductosIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -202,7 +202,7 @@ const BuscarProductoIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -262,7 +262,7 @@ const BorrarProductoIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -289,7 +289,7 @@ const RestaurarAlmacenIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -315,7 +315,7 @@ const HelpIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
@@ -430,7 +430,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
