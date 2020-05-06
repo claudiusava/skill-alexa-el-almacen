@@ -14,6 +14,7 @@ module.exports = {
         MSG_ALMACEN_RESTAURADO: 'El almacén ha sido vaciado.',
             MSG_AYUDA: 'Esta es una Skill en la que puedes guardar, borrar, listar o eliminar productos, también tienes la opción de restaurar el almacén. Prueba a decirme lo que quieres hacer.',
             MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+            MSG_REPROMPT: 'Si no sabes como continuar intenta pedir ayuda. Si quieres salir solo dí para. ¿Qué quieres hacer? ',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
         MSG_DESPEDIDA: 'Hasta luego!',
     }
