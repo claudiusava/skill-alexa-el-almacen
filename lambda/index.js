@@ -291,9 +291,9 @@ const BorrarProductoIntentHandler = {
 
 
 //SOLICITUD DE RESTAURAR ALMACEN
-const RestaurarAlmacenIntentHandler = {
+const VaciarAlmacenIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'RestaurarAlmacenIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'VaciarAlmacenIntent';
     },
     handle(handlerInput) {
         
@@ -511,7 +511,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         ListarProductosIntentHandler,
         BuscarProductoIntentHandler,
         BorrarProductoIntentHandler,
-        RestaurarAlmacenIntentHandler,
+        VaciarAlmacenIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
