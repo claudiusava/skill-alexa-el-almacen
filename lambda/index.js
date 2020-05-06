@@ -70,28 +70,6 @@ const LaunchRequestHandler = {
 
 
 
-//SOLICITUD DE OPCIONES
-const OpcionesIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'OpcionesIntent';
-    },
-    handle(handlerInput) {
-        
-        let speechText = handlerInput.t('MSG_OPCIONES');
-       
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
-            .getResponse();
-    }
-};
-
-
-
-
-
-
-
 //SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
@@ -506,7 +484,6 @@ const SaveAttributesResponseInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        OpcionesIntentHandler,
         RegistrarProductoIntentHandler,
         ListarProductosIntentHandler,
         BuscarProductoIntentHandler,
