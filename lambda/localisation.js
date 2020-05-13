@@ -2,8 +2,8 @@ module.exports = {
     es:{
         translation: {
             SONIDO_ABRIR: '<audio src="soundbank://soundlibrary/scifi/amzn_sfx_scifi_door_open_05"/>',
-
-        MSG_BIENVENIDA: '$t(SONIDO_ABRIR) Hola! Puedes guardar, listar, buscar o borrar. ¿Qué deseas hacer?.',
+            MSG_BUENAS: '<say-as interpret-as="interjection"> buenas </say-as>',
+        MSG_BIENVENIDA: '$t(SONIDO_ABRIR) $t(MSG_BUENAS) Puedes guardar, listar, buscar o borrar. ¿Qué deseas hacer?.',
         MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s %s.',
         MSG_LISTAR_PRODUCTOS: 'Tienes guardado: ',
         MSG_NO_HAY_PRODUCTOS: 'Todavía no tienes guardado ningún producto.',
@@ -18,7 +18,7 @@ module.exports = {
             MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             MSG_REPROMPT: 'Si no sabes como continuar intenta pedir ayuda. Si quieres salir solo dí para. ¿Qué quieres hacer? ',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
-        MSG_DESPEDIDA: '<say-as interpret-as="interjection"> au revoir!</say-as>',
+        MSG_DESPEDIDA: '<say-as interpret-as="interjection"> au revoir! </say-as>',
     }
   }
 }
