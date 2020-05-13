@@ -18,7 +18,7 @@ module.exports = {
             MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             MSG_REPROMPT: 'Si no sabes como continuar intenta pedir ayuda. Si quieres salir solo dí para. ¿Qué quieres hacer? ',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
-        MSG_DESPEDIDA: '<say-as interpret-as="interjection"> arrivederci!</say-as>',
+        MSG_DESPEDIDA: '<say-as interpret-as="interjection"> au revoir!</say-as>',
     }
   }
 }
