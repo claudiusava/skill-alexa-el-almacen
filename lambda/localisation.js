@@ -2,8 +2,8 @@ module.exports = {
     es:{
         translation: {
             SONIDO_ABRIR: '<audio src="soundbank://soundlibrary/scifi/amzn_sfx_scifi_door_open_05"/>',
-            MSG_BUENAS: '<say-as interpret-as="interjection"> buenas </say-as>',
-        MSG_BIENVENIDA: '$t(SONIDO_ABRIR) $t(MSG_BUENAS) Puedes guardar, listar, buscar o borrar. ¿Qué deseas hacer?.',
+            MSG_BUENAS: '<say-as interpret-as="interjection"> buenas! </say-as>',
+        MSG_BIENVENIDA: '$t(SONIDO_ABRIR) $t(MSG_BUENAS)  Puedes guardar, listar, buscar o borrar. ¿Qué deseas hacer?.',
         MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s %s.',
         MSG_LISTAR_PRODUCTOS: 'Tienes guardado: ',
         MSG_NO_HAY_PRODUCTOS: 'Todavía no tienes guardado ningún producto.',
