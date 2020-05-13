@@ -11,7 +11,7 @@ module.exports = {
         MSG_ALGO_MAS: '¿Qué más quieres hacer?',
         MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado.',
         MSG_PRODUCTO_ENCONTRADO: 'Hay %s %s.',
-            SONIDO_PRODUCTO_BORRADO : '<audio src="soundbank://soundlibrary/cartoon/amzn_sfx_boing_med_1x_02"/>',
+            SONIDO_PRODUCTO_BORRADO : '<audio src="soundbank://soundlibrary/cartoon/amzn_sfx_boing_short_1x_01"/>',
         MSG_PRODUCTO_BORRADO: '$t(SONIDO_PRODUCTO_BORRADO) El producto %s ha sido borrado.',
         MSG_ALMACEN_RESTAURADO: 'El almacén ha sido vaciado.',
             MSG_AYUDA: 'Esta es una Skill en la que puedes guardar, borrar, listar o eliminar productos, también tienes la opción de restaurar el almacén. Prueba a decirme lo que quieres hacer.',
