@@ -9,8 +9,8 @@ const interceptors = require ('./interceptors');
 //ARRAYLIST DE TODOS LOS PRODUCTOS
 let cajita = [];
 
-
-
+//SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
+const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
 
 
 //MENSAJE DE BINVENIDA
@@ -33,8 +33,14 @@ const LaunchRequestHandler = {
                         throw{statusCode: 401, message: 'No permissions available'};
                         const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                         const profileName = await upsServiceClient.getProfileGivenName();
+                        if(profileName){
+                            sessionAttributes['name'] = profileName;
+                        }
             }catch(error){
-                
+                console.log(JSON.stringify(error));
+                if(error.statusCode === 401 || error.statusCode === 403){
+                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
+                }
             }
         }
         
