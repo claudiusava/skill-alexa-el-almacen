@@ -356,9 +356,9 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Hasta luego!';
+        const speechText = handlerInput.t('MSG_DESPEDIDA');
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(speechText)
             .getResponse();
     }
 };
