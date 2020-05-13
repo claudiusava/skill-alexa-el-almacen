@@ -25,7 +25,13 @@ const LaunchRequestHandler = {
         
         const producto = sessionAttributes['producto'];
         
-        speechText = handlerInput.t('MSG_BIENVENIDA');
+        if(!sessionAttributes['name']){
+            
+        }
+        
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+         
+        speechText = handlerInput.t('MSG_BIENVENIDA', name);
        
         return handlerInput.responseBuilder
             .speak(speechText)
