@@ -11,7 +11,6 @@ const persistence = require('./persistence');
 const interceptors = require ('./interceptors');
 
 
-
 //ARRAYLIST
 let cajita = [];
 
@@ -435,9 +434,6 @@ const ErrorHandler = {
             .getResponse();
     }
 };
-
-
-
 
 
 
