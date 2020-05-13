@@ -1,14 +1,12 @@
 const Alexa = require('ask-sdk-core');
 
-
-//VARIABLE DE PERSISTENCIA
+//PERSISTENCIAS
 const persistence = require('./persistence');
-
 //INTERCEPTORES
 const interceptors = require ('./interceptors');
 
 
-//ARRAYLIST
+//ARRAYLIST DE TODOS LOS PRODUCTOS
 let cajita = [];
 
 
