@@ -10,7 +10,7 @@ module.exports = {
         MSG_CANTIDAD_RESTADA: 'He restado %s a %s, ahora tienes %s.',
         MSG_ALGO_MAS: '¿Qué más quieres hacer?',
         MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado.',
-        MSG_PRODUCTO_ENCONTRADO: 'Hay %s %s. ¿Quiéres hacer algo más?',
+        MSG_PRODUCTO_ENCONTRADO: 'Hay %s %s.',
         MSG_PRODUCTO_BORRADO: 'El producto %s ha sido borrado.',
         MSG_ALMACEN_RESTAURADO: 'El almacén ha sido vaciado.',
             MSG_AYUDA: 'Esta es una Skill en la que puedes guardar, borrar, listar o eliminar productos, también tienes la opción de restaurar el almacén. Prueba a decirme lo que quieres hacer.',
