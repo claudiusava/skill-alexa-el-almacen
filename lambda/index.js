@@ -1,12 +1,15 @@
 const Alexa = require('ask-sdk-core');
 
 
-
 //STRING O MENSAJES 
 const languageStrings = require('./localisation');
 
 //VARIABLE DE PERSISTENCIA
-var persistenceAdapter = getPersistenceAdapter();
+const persistence = require('./persistence');
+
+//INTERCEPTORES
+const interceptors = require ('./interceptors');
+
 
 
 //ARRAYLIST
