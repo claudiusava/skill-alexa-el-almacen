@@ -459,4 +459,5 @@ exports.handler = Alexa.SkillBuilders.custom()
         interceptors.LoggingResponseInterceptor,
         interceptors.SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(persistence.getPersistenceAdapter())
+    .withApiClient(new Alexa.DefaultApiClient())
     .lambda();
