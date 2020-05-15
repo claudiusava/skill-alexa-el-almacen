@@ -8,6 +8,7 @@ const interceptors = require ('./interceptors');
 
 //ARRAYLIST DE TODOS LOS PRODUCTOS
 let cajita = [];
+let cajitaPocaCantidad = []; 
 
 //SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
 const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
@@ -276,10 +277,12 @@ const ProductosPocoStockIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        
+        sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
     let speechText = '';
-   
-    var cajitaPocaCantidad = []; 
     
     var encontrado = -1;
     
