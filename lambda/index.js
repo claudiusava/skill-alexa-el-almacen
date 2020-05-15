@@ -280,8 +280,6 @@ const ProductosPocoStockIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
 
-
-/*
         sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
     let speechText = '';
@@ -303,8 +301,7 @@ const ProductosPocoStockIntentHandler = {
     }
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
     }
-*/
-    var speechText = handlerInput.t('No me jodáás!!')
+
 
         return handlerInput.responseBuilder
             .speak(speechText)
