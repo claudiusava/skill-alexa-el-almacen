@@ -278,6 +278,14 @@ const ProductosPocoStockIntentHandler = {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
     
+        var cantidadCapturar = intent.slots.cantidad.value;
+        var productoCapturar = intent.slots.producto.value;
+        
+        function Producto(cantidad, producto){
+            this.cantidad = cantidad;
+            this.producto = producto;
+        }
+    
     let speechText = '';
     
     var encontrado = -1;
@@ -285,8 +293,8 @@ const ProductosPocoStockIntentHandler = {
     for(var i =0; i< cajita.length; i++ )
         {
         if(cajita[i].cantidad < 10) {
-            cajitaPocaCantidad.push(cajita[i].producto)
-            cajitaPocaCantidad.push(cajita[i].cantidad)
+            var nuevoProducto = new Producto(cantidadCapturar, productoCapturar);
+            cajita.push(nuevoProducto);
          break;
         }
         }
