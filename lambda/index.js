@@ -287,7 +287,7 @@ const ProductosPocoStockIntentHandler = {
         {
         if(cajita[i].cantidad < 10) {
             var nuevoProducto = cajita[i].cantidad + cajita[i].producto;
-            cajita.push(nuevoProducto);
+            cajitaPocaCantidad.push(nuevoProducto);
          break;
         }
         }
