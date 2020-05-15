@@ -266,6 +266,54 @@ const BorrarProductoIntentHandler = {
 
 
 
+
+//SOLICITUD DE LISTAR PRODUCTOS CON POCO STOCK
+const BuscarProductoIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuscarProductoIntent';
+    },
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const intent = handlerInput.requestEnvelope.request.intent;
+    
+    let speechText = '';
+   
+    var busqueda = intent.slots.productoBuscar.value;
+    
+    var encontrado = -1;
+    
+    for(var i =0; i< cajita.length; i++ )
+        {
+        if(cajita[i].producto === busqueda) {
+         encontrado = i;
+         break;
+        }
+        }
+
+    if(encontrado === -1){
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
+    }else{
+    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda) + handlerInput.t('MSG_ALGO_MAS');
+    }
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
+            .getResponse();
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
 //SOLICITUD DE RESTAURAR ALMACEN
 const RestaurarAlmacenIntentHandler = {
     canHandle(handlerInput) {
