@@ -41,7 +41,7 @@ const LaunchRequestHandler = {
             }catch(error){
                 console.log(JSON.stringify(error));
                 if(error.statusCode === 401 || error.statusCode === 403){
-                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
+                    //handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
                 }
             }
         }
