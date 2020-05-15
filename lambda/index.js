@@ -11,7 +11,7 @@ let cajita = [];
 let cajitaPocaCantidad = []; 
 
 //SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
-//const GIVEN_NAME_PERMISSION = ['alexa::person_id:read'];
+const GIVEN_NAME_PERMISSION = ['alexa::person_id:read'];
 
 //alexa::profile:given_name:read
 
@@ -36,19 +36,19 @@ const LaunchRequestHandler = {
                         const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                         const profileName = await upsServiceClient.getProfileGivenName();
                         if(profileName){
-                            //sessionAttributes['name'] = profileName;
+                            sessionAttributes['name'] = profileName;
                         }
             }catch(error){
                 console.log(JSON.stringify(error));
                 if(error.statusCode === 401 || error.statusCode === 403){
-                    //handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
+                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
                 }
             }
         }
         
-        //const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
          
-        speechText = handlerInput.t('MSG_BIENVENIDA', /*name*/);
+        speechText = handlerInput.t('MSG_BIENVENIDA', name);
        
         return handlerInput.responseBuilder
             .speak(speechText)
