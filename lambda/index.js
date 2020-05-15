@@ -142,7 +142,7 @@ const ListarProductosIntentHandler = {
     if(cajita.length === 0){
     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS') + handlerInput.t('MSG_ALGO_MAS');       
     }else{
-    var i, j, x = "";
+    var i, x = "";
     for (i in cajita) {
         x += cajita[i].cantidad + " ";
         x += cajita[i].producto + ", ";
