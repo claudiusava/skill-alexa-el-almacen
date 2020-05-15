@@ -282,10 +282,7 @@ const ProductosPocoStockIntentHandler = {
 
         sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
-    
     let speechText = '';
-    
-    var encontrado = -1;
     
     for(var i =0; i<= cajita.length; i++ )
         {
