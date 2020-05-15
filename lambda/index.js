@@ -278,7 +278,6 @@ const ProductosPocoStockIntentHandler = {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
     
-        
         function Producto(cantidad, producto){
             this.cantidad = cantidad;
             this.producto = producto;
