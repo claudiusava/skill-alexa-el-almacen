@@ -285,21 +285,21 @@ const ProductosPocoStockIntentHandler = {
     
     for(var i =0; i< cajita.length; i++ )
         {
-        if(cajita[i].cantidad < 5) {
+        if(cajita[i].cantidad < 10) {
             cajitaPocaCantidad.push(cajita[i].producto)
          break;
         }
         }
         
     if(cajita.length === 0){
-    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS') + handlerInput.t('MSG_ALGO_MAS');       
+    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t('MSG_ALGO_MAS');       
     }else{
     var a, j, x = "";
     for (a in cajita) {
         x += cajita[a].cantidad + " ";
         x += cajita[a].producto + ", ";
     }
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
     }
 
     
