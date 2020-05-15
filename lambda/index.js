@@ -293,6 +293,7 @@ const ProductosPocoStockIntentHandler = {
             var nuevoProducto = cajita[i].producto;
             cajitaPocaCantidad.push(nuevoProducto);
         }
+        break;
         }
     
     
