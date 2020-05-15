@@ -8,7 +8,7 @@ const interceptors = require ('./interceptors');
 
 //ARRAYLIST DE TODOS LOS PRODUCTOS
 let cajita = [];
-let cajitaPocaCantidad = ['poyyas', 'chichis', 'tettas']; 
+let cajitaPocaCantidad = []; 
 
 //SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
 const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
