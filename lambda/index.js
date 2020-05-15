@@ -278,8 +278,6 @@ const ProductosPocoStockIntentHandler = {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
     
-        var cantidadCapturar = intent.slots.cantidad.value;
-        var productoCapturar = intent.slots.producto.value;
         
         function Producto(cantidad, producto){
             this.cantidad = cantidad;
@@ -293,7 +291,7 @@ const ProductosPocoStockIntentHandler = {
     for(var i =0; i< cajita.length; i++ )
         {
         if(cajita[i].cantidad < 10) {
-            var nuevoProducto = new Producto(cantidadCapturar, productoCapturar);
+            var nuevoProducto = new Producto(cajita[i].cantidad, cajita[i].producto);
             cajita.push(nuevoProducto);
          break;
         }
