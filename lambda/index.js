@@ -277,6 +277,10 @@ const ProductosPocoStockIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+
+        sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
     
     let speechText = '';
