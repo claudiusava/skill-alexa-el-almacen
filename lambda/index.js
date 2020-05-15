@@ -8,7 +8,7 @@ const interceptors = require ('./interceptors');
 
 //ARRAYLIST DE TODOS LOS PRODUCTOS
 let cajita = [];
-let cajitaPocaCantidad = []; 
+let cajitaPocaCantidad = ['poyyas', 'chichis', 'tettas']; 
 
 //SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
 const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
@@ -284,6 +284,7 @@ const ProductosPocoStockIntentHandler = {
     
     let speechText = '';
     
+    /*
     for(var i =0; i<= cajita.length; i++ )
         {
         if(cajita[i].cantidad <= 10) {
@@ -292,7 +293,7 @@ const ProductosPocoStockIntentHandler = {
             break;
         }
         }
-    
+    */
     
     if(cajitaPocaCantidad.length === 0){
     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t('MSG_ALGO_MAS');       
