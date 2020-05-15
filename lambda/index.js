@@ -36,7 +36,7 @@ const LaunchRequestHandler = {
                         const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                         const profileName = await upsServiceClient.getProfileGivenName();
                         if(profileName){
-                            sessionAttributes['name'] = profileName;
+                            //sessionAttributes['name'] = profileName;
                         }
             }catch(error){
                 console.log(JSON.stringify(error));
