@@ -277,10 +277,6 @@ const ProductosPocoStockIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const sessionAttributes = attributesManager.getSessionAttributes();
-
-        sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
     
     let speechText = '';
@@ -295,11 +291,15 @@ const ProductosPocoStockIntentHandler = {
          break;
         }
         }
-        
+    
     if(cajitaPocaCantidad.length === 0){
     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t('MSG_ALGO_MAS');       
     }else{
-    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK') + cajitaPocaCantidad + handlerInput.t('MSG_ALGO_MAS');
+    var a, x = "";
+    for (i in cajita) {
+        x += cajita[a] + ", ";
+    }
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
     }
 
 
