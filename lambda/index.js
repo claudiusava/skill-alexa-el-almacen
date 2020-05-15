@@ -11,8 +11,9 @@ let cajita = [];
 let cajitaPocaCantidad = []; 
 
 //SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
-const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
+const GIVEN_NAME_PERMISSION = ['alexa::person_id:read'];
 
+//alexa::profile:given_name:read
 
 //MENSAJE DE BINVENIDA
 const LaunchRequestHandler = {
