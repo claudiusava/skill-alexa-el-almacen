@@ -277,6 +277,10 @@ const ProductosPocoStockIntentHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+
+        sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
     
     let speechText = '';
@@ -328,6 +332,7 @@ const RestaurarAlmacenIntentHandler = {
     handle(handlerInput) {
     
         cajita = [];
+        cajitaPocaCantidad = [];
         
         let speechText = handlerInput.t('MSG_ALMACEN_RESTAURADO') + handlerInput.t('MSG_ALGO_MAS');
 
