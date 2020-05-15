@@ -268,10 +268,10 @@ const BorrarProductoIntentHandler = {
 
 
 //SOLICITUD DE LISTAR PRODUCTOS CON POCO STOCK
-const BuscarProductoIntentHandler = {
+const ProductosPocoStockIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuscarProductoIntent';
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ProductosPocoStockIntent';
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
