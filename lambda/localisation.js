@@ -18,7 +18,7 @@ module.exports = {
         MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK:'De momento no tienes productos con poco stock en el almacén.',
         MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK: 'Los productos que quedan en el almacén con una cantidad menor a 10 son: ',
         MSG_ALMACEN_RESTAURADO: '$t(SONIDO_ALMACEN_RESTAURADO) El almacén ha sido vaciado.',
-            MSG_AYUDA: 'Esta es una Skill en la que puedes guardar, borrar, listar o eliminar productos. También tienes la opción de restaurar el almacén. Prueba a decirme lo que quieres hacer.',
+            MSG_AYUDA: 'Esta es una Skill en la que puedes guardar, buscar, listar, listar solo los que tengan poco stock o borrar productos de un almacén. También tienes la opción de restaurar el almacén por completo. Prueba a decirme lo que quieres hacer.',
             MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             MSG_REPROMPT: 'Si no sabes como continuar intenta pedir ayuda. Si quieres salir solo dí para. ¿Qué quieres hacer? ',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
