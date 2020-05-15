@@ -279,23 +279,30 @@ const ProductosPocoStockIntentHandler = {
     
     let speechText = '';
    
-    var busqueda = intent.slots.productoBuscar.value;
+    var cajitaPocaCantidad = []; 
     
     var encontrado = -1;
     
     for(var i =0; i< cajita.length; i++ )
         {
-        if(cajita[i].producto === busqueda) {
-         encontrado = i;
+        if(cajita[i].cantidad < 5) {
+            cajitaPocaCantidad.push(cajita[i].producto)
          break;
         }
         }
-
-    if(encontrado === -1){
-    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda);
+        
+    if(cajita.length === 0){
+    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS') + handlerInput.t('MSG_ALGO_MAS');       
     }else{
-    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda) + handlerInput.t('MSG_ALGO_MAS');
+    var a, j, x = "";
+    for (a in cajita) {
+        x += cajita[a].cantidad + " ";
+        x += cajita[a].producto + ", ";
     }
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
+    }
+
+    
 
         return handlerInput.responseBuilder
             .speak(speechText)
