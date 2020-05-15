@@ -46,9 +46,9 @@ const LaunchRequestHandler = {
             }
         }
         
-        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+        //const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
          
-        speechText = handlerInput.t('MSG_BIENVENIDA', name);
+        speechText = handlerInput.t('MSG_BIENVENIDA', /*name*/);
        
         return handlerInput.responseBuilder
             .speak(speechText)
