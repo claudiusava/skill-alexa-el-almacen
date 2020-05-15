@@ -290,11 +290,12 @@ const ProductosPocoStockIntentHandler = {
         {
         if(cajita[i].cantidad < 10) {
             cajitaPocaCantidad.push(cajita[i].producto)
+            cajitaPocaCantidad.push(cajita[i].cantidad)
          break;
         }
         }
         
-    if(cajita.length === 0){
+    if(cajitaPocaCantidad.length === 0){
     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t('MSG_ALGO_MAS');       
     }else{
     var a, j, x = "";
