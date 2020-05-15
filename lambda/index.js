@@ -283,15 +283,16 @@ const ProductosPocoStockIntentHandler = {
         sessionAttributes ['cajitaPocaCantidad'] = cajitaPocaCantidad;
     
     let speechText = '';
-    /*
+    
     for(var i =0; i<= cajita.length; i++ )
         {
         if(cajita[i].cantidad < 10) {
             var nuevoProducto = cajita[i].cantidad + ' ' + cajita[i].producto;
             cajitaPocaCantidad.push(nuevoProducto);
+            break;
         }
         }
-    */
+    
     
     if(cajitaPocaCantidad.length === 0){
     speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t('MSG_ALGO_MAS');       
