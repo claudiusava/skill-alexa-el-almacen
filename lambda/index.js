@@ -291,6 +291,7 @@ const ProductosPocoStockIntentHandler = {
         while (cajita[i].cantidad < 10) {
         cajitaPocaCantidad.push(cajita[i].cantidad + ' ' + cajita[i].producto);
         i++;
+        break;
         }
     }
     
