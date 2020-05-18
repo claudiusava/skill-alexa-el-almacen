@@ -90,7 +90,6 @@ const RegistrarProductoIntentHandler = {
         
         let speechText = '';
         
-
         function Producto(cantidad, producto){
             this.cantidad = cantidad;
             this.producto = producto;
