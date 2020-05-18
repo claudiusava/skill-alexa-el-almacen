@@ -57,7 +57,7 @@ const LaunchRequestHandler = {
                     if(!permissions)
                         throw{statusCode: 401, message: 'No permissions available'};
                         const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-                        const profileEmail = await upsServiceClient.ProfileEmail();
+                        const profileEmail = await upsServiceClient.getProfileEmail();
                         if(profileEmail){
                             sessionAttributes['email'] = profileEmail;
                         }
