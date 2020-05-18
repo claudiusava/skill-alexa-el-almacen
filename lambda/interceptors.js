@@ -55,6 +55,8 @@ module.exports = {
     }
 },
 
+
+
 //INTERCEPTOR QUE OBTIENE LOS ATRIBUTOS DE SESIÓN Y SI LA SESIÓN VA A TERMINAR, GUARDA LOS ATRIBUTOS DE SESIÓN EN ATRIBUTOS PERSISTENTES
  SaveAttributesResponseInterceptor : {
     async process(handlerInput, response) {
