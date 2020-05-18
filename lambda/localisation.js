@@ -2,7 +2,8 @@ module.exports = {
     es:{
         translation: {
             SONIDO_ABRIR: '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/intro_02"/>',
-        MSG_BIENVENIDA: '$t(SONIDO_ABRIR) ¡Hola %s! Puedes guardar, listar, buscar o borrar. ¿Qué deseas hacer?.',
+        MSG_BIENVENIDA_CORTO: '$t(SONIDO_ABRIR) ¡Hola %s! ¿Qué deseas hacer?',
+        MSG_BIENVENIDA: '$t(SONIDO_ABRIR) ¡Hola %s! Puedes guardar, listar, buscar, borrar y mucho más. ¿Qué deseas hacer?.',
         MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s %s.',
         MSG_LISTAR_PRODUCTOS: 'Tienes guardado: ',
         MSG_NO_HAY_PRODUCTOS: 'Todavía no tienes guardado ningún producto.',
