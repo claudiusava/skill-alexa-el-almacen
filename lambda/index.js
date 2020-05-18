@@ -30,6 +30,7 @@ const LaunchRequestHandler = {
         const contadorSesion = sessionAttributes['sessionCounter']
         
         
+        
         if(!sessionAttributes['name']){
             try{
                 const {permissions} = requestEnvelope.context.System.user;
@@ -56,7 +57,6 @@ const LaunchRequestHandler = {
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
         
-       
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('MSG_REPROMPT'))
