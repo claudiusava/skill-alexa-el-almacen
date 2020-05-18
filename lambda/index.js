@@ -12,6 +12,7 @@ let cajitaPocaCantidad = [];
 
 //SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
 const GIVEN_NAME_PERMISSION = ['alexa::person_id:read'];
+const EMAIL_PERMISSION = ['alexa::profile:email:read']
 
 //alexa::profile:given_name:read
 
@@ -54,7 +55,8 @@ const LaunchRequestHandler = {
         if(contadorSesion <= 3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
-            speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
+            //speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
+            speechText = handlerInput.t(EMAIL_PERMISSION)
         }
         
         return handlerInput.responseBuilder
