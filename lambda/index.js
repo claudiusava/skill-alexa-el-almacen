@@ -52,10 +52,10 @@ const LaunchRequestHandler = {
          
          
         if(contadorSesion <= 3){
-            speechText = handlerInput.t()
-        }
+            speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name)
+        }else{
         speechText = handlerInput.t('MSG_BIENVENIDA', name);
-       
+        }
         
        
         return handlerInput.responseBuilder
