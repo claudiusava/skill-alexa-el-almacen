@@ -29,9 +29,7 @@ const LaunchRequestHandler = {
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
         
-        if(contadorSesion >= 0){
-            speechText = handlerInput.t('Caradepolla')
-        }else{
+        
         if(!sessionAttributes['name']){
             try{
                 const {permissions} = requestEnvelope.context.System.user;
@@ -52,9 +50,13 @@ const LaunchRequestHandler = {
         
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
          
+         
+        if(contadorSesion <= 3){
+            speechText = handlerInput.t()
+        }
         speechText = handlerInput.t('MSG_BIENVENIDA', name);
        
-        }
+        
        
         return handlerInput.responseBuilder
             .speak(speechText)
