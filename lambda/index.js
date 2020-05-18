@@ -50,13 +50,34 @@ const LaunchRequestHandler = {
             }
         }
         
+        
+        if(!sessionAttributes['email']){
+            try{
+                const {permissions} = requestEnvelope.context.System.user;
+                    if(!permissions)
+                        throw{statusCode: 401, message: 'No permissions available'};
+                        const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+                        const profileEmail = await upsServiceClient.ProfileEmail();
+                        if(profileEmail){
+                            sessionAttributes['email'] = profileEmail;
+                        }
+            }catch(error){
+                console.log(JSON.stringify(error));
+                if(error.statusCode === 401 || error.statusCode === 403){
+                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(EMAIL_PERMISSION);
+                }
+            }
+        }
+        
+        const email = sessionAttributes['email'];
+        
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
          
         if(contadorSesion <= 3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
             //speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
-            speechText = handlerInput.t(EMAIL_PERMISSION)
+            speechText = handlerInput.t(email);
         }
         
         return handlerInput.responseBuilder
