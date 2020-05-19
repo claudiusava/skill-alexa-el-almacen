@@ -388,8 +388,6 @@ const EnviarEmailIntentHandler = {
         return "success";
     }
     
-            
-    
     //var speechText = handlerInput.t('Email enviado. ') + handlerInput.t('MSG_ALGO_MAS');
     
         return handlerInput.responseBuilder
