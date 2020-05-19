@@ -360,7 +360,7 @@ const EnviarEmailIntentHandler = {
     handle(handlerInput) {
     
     var nodemailer = require('nodemailer');
-
+    let speechText;
     function emailsender(){
         var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -379,15 +379,15 @@ const EnviarEmailIntentHandler = {
 
         transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-            console.log(error);
+            speechText = handlerInput.t('MSG_ERROR');
         } else {
-            console.log('Email sent: ' + info.response);
+            speechText = handlerInput.t('MSG_ERROR');
         }
         });
         return "success";
     }
     
-    var speechText = handlerInput.t('Email enviado. ') + handlerInput.t('MSG_ALGO_MAS');
+    //var speechText = handlerInput.t('Email enviado. ') + handlerInput.t('MSG_ALGO_MAS');
     
         return handlerInput.responseBuilder
             .speak(speechText)
