@@ -387,7 +387,7 @@ const EnviarEmailIntentHandler = {
         return "success";
     }
     
-    var speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS');
+    var speechText = handlerInput.t('Email enviado.' + 'MSG_ALGO_MAS');
     
         return handlerInput.responseBuilder
             .speak(speechText)
