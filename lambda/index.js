@@ -343,35 +343,7 @@ const EnviarEmailIntentHandler = {
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     
-    var nodemailer = require('nodemailer');
-    let speechText;
-    function emailsender(){
-        var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: '4c.claudiusava@gmail.com',
-            pass: 'Filosofer_5'
-        }
-        });
-
-        var mailOptions = {
-        from: '4c.claudiusava@gmail.com',
-        to: '4c.claudiusava@gmail.com',
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            speechText = handlerInput.t('MSG_ERROR');
-        } else {
-            speechText = handlerInput.t('MSG_ERROR');
-        }
-        });
-        return "success";
-    }
-    
-            if(!sessionAttributes['email']){
+    if(!sessionAttributes['email']){
             try{
                 const {permissions} = requestEnvelope.context.System.user;
                     if(!permissions)
@@ -390,6 +362,37 @@ const EnviarEmailIntentHandler = {
         }
         
         const email = sessionAttributes['email'];
+    
+    
+    var nodemailer = require('nodemailer');
+    let speechText;
+    function emailsender(){
+        var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: '4c.claudiusava@gmail.com',
+            pass: 'Filosofer_5'
+        }
+        });
+
+        var mailOptions = {
+        from: '4c.claudiusava@gmail.com',
+        to: email,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            speechText = handlerInput.t('MSG_ERROR');
+        } else {
+            speechText = handlerInput.t('MSG_ERROR');
+        }
+        });
+        return "success";
+    }
+    
+            
     
     //var speechText = handlerInput.t('Email enviado. ') + handlerInput.t('MSG_ALGO_MAS');
     
