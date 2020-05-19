@@ -351,6 +351,60 @@ const ProductosPocoStockIntentHandler = {
 
 
 
+//SOLICITUD PARA ENVIAR EMAIL
+const EnviarEmailIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'EnviarEmailIntent';
+    },
+    handle(handlerInput) {
+    
+    var nodemailer = require('nodemailer');
+
+    function emailsender(){
+        var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: '4c.claudiusava@gmail.com',
+            pass: 'Filosofer_5'
+        }
+        });
+
+        var mailOptions = {
+        from: '4c.claudiusava@gmail.com',
+        to: '4c.claudiusava@gmail.com',
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+        });
+        return "success";
+    }
+    
+    var speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS');
+    
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('MSG_REPROMPT'))
+            .getResponse();
+    }
+};
+
+
+
+
+
+
+
+
+
+
 //SOLICITUD DE RESTAURAR ALMACEN
 const RestaurarAlmacenIntentHandler = {
     canHandle(handlerInput) {
@@ -528,6 +582,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         BuscarProductoIntentHandler,
         BorrarProductoIntentHandler,
         ProductosPocoStockIntentHandler,
+        EnviarEmailIntentHandler,
         RestaurarAlmacenIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
