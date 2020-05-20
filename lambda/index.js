@@ -354,7 +354,7 @@ const EnviarEmailIntentHandler = {
         .getResponse();
     } else {
       return handlerInput.responseBuilder
-        .speak("Hi Stranger!")
+        .speak("Hola extraño!")
         .getResponse();
     }
   }
