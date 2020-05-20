@@ -1,7 +1,7 @@
 module.exports = {
     es:{
         translation: {
-            SONIDO_ABRIR: '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/intro_02"/>',
+                SONIDO_ABRIR: '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/intro_02"/>',
         MSG_BIENVENIDA_CORTO: '$t(SONIDO_ABRIR) ¡Hola %s! ¿Qué deseas hacer?',
         MSG_BIENVENIDA: '$t(SONIDO_ABRIR) ¡Hola %s! Puedes guardar, listar, buscar, borrar y mucho más. ¿Qué deseas hacer?.',
         MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s %s.',
@@ -11,11 +11,11 @@ module.exports = {
         MSG_CANTIDAD_RESTADA: 'He restado %s a %s, ahora tienes %s.',
         MSG_ALGO_MAS: '¿Qué más quieres hacer?',
         MSG_PRODUCTO_NO_ENCONTRADO: 'No tienes %s guardado.',
-            SONIDO_BUSCAR_PRODUCTO: '<audio src="soundbank://soundlibrary/cloth_leather_paper/books/books_01"/>',
+                SONIDO_BUSCAR_PRODUCTO: '<audio src="soundbank://soundlibrary/cloth_leather_paper/books/books_01"/>',
         MSG_PRODUCTO_ENCONTRADO: '$t(SONIDO_BUSCAR_PRODUCTO) Hay %s %s.',
-            SONIDO_PRODUCTO_BORRADO : '<audio src="soundbank://soundlibrary/cartoon/amzn_sfx_boing_short_1x_01"/>',
+                SONIDO_PRODUCTO_BORRADO : '<audio src="soundbank://soundlibrary/cartoon/amzn_sfx_boing_short_1x_01"/>',
         MSG_PRODUCTO_BORRADO: '$t(SONIDO_PRODUCTO_BORRADO) El producto %s ha sido borrado.',
-            SONIDO_ALMACEN_RESTAURADO: '<audio src="soundbank://soundlibrary/cartoon/amzn_sfx_boing_long_1x_01"/>',
+                SONIDO_ALMACEN_RESTAURADO: '<audio src="soundbank://soundlibrary/cartoon/amzn_sfx_boing_long_1x_01"/>',
         MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK:'De momento no tienes productos con poco stock en el almacén.',
         MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK: 'Los productos que quedan en el almacén con una cantidad menor a 10 son: ',
         MSG_ALMACEN_RESTAURADO: '$t(SONIDO_ALMACEN_RESTAURADO) El almacén ha sido vaciado.',
@@ -23,8 +23,8 @@ module.exports = {
             MSG_FALLBACK: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             MSG_REPROMPT: 'Si no sabes como continuar intenta pedir ayuda. Si quieres salir solo dí para. ¿Qué quieres hacer? ',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
-            SONIDO_DESPEDIDA: '<audio src="soundbank://soundlibrary/doors/doors_cellar/cellar_03/>',
-        MSG_DESPEDIDA: '¡Hasta luego! $t(SONIDO_DESPEDIDA)'
+                SONIDO_DESPEDIDA: '<audio src="soundbank://soundlibrary/doors/doors_cellar/cellar_03/>',
+        MSG_DESPEDIDA: '$t(SONIDO_DESPEDIDA) ¡Hasta luego! '
     }
   }
 }
