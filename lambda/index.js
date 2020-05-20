@@ -324,6 +324,45 @@ const ProductosPocoStockIntentHandler = {
 
 
 
+const EnviarEmailIntentHandler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return ((request.type === 'LaunchRequest') ||
+      (request.type === 'IntentRequest' &&
+       request.intent.name === 'EnviarEmailIntent'));
+  },
+  handle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const person = handlerInput.requestEnvelope.context.System.person;
+
+    if (person) {
+      // The identifier of the recognized speaker.
+      const personId = person.personId;
+      console.log("Received personId: ", personId);
+      // The account linking accessToken from the 3P account linked.
+      // at person level
+      const accessToken = person.accessToken;
+      // This is for demo purpose only, you should never log accessToken.
+      console.log("Received accessToken for person: ", accessToken);
+      
+      // Build a greeting response with first name.
+      const personalizedGreeting = "Hola <alexa:name type=\"first\" personId=\""  
+            + personId + "\"/>";
+
+      return handlerInput.responseBuilder
+        .speak(personalizedGreeting)
+        .getResponse();
+    } else {
+      return handlerInput.responseBuilder
+        .speak("Hi Stranger!")
+        .getResponse();
+    }
+  }
+};
+
+
+
+
 
 
 
