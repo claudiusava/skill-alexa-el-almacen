@@ -335,60 +335,16 @@ const EnviarEmailIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'EnviarEmailIntent';
     },
-    async handle(handlerInput) {
-        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const intent = handlerInput.requestEnvelope.request.intent;
+        const event = handlerInput.requestEnvelope;
     
-    if(!sessionAttributes['email']){
-            try{
-                const {permissions} = requestEnvelope.context.System.user;
-                    if(!permissions)
-                        throw{statusCode: 401, message: 'No permissions available'};
-                        const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-                        const profileEmail = await upsServiceClient.getProfileEmail();
-                        if(profileEmail){
-                            sessionAttributes['email'] = profileEmail;
-                        }
-            }catch(error){
-                console.log(JSON.stringify(error));
-                if(error.statusCode === 401 || error.statusCode === 403){
-                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(EMAIL_PERMISSION);
-                }
-            }
-        }
-        
-        const email = sessionAttributes['email'];
+    let speechText = '';
     
-    
-    var nodemailer = require('nodemailer');
-    let speechText;
-    function emailsender(){
-        var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: '4c.claudiusava@gmail.com',
-            pass: 'Filosofer_5'
-        }
-        });
+    const speaker = event.context.System.person.personId;
 
-        var mailOptions = {
-        from: '4c.claudiusava@gmail.com',
-        to: email,
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            speechText = handlerInput.t('MSG_ERROR');
-        } else {
-            speechText = handlerInput.t('MSG_ERROR');
-        }
-        });
-        return "success";
-    }
-    
-    //var speechText = handlerInput.t('Email enviado. ') + handlerInput.t('MSG_ALGO_MAS');
+    speechText = handlerInput.t(speaker);
     
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -396,6 +352,7 @@ const EnviarEmailIntentHandler = {
             .getResponse();
     }
 };
+
 
 
 
