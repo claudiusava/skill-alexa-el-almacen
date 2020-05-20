@@ -24,7 +24,7 @@ module.exports = {
             MSG_REPROMPT: 'Si no sabes como continuar intenta pedir ayuda. Si quieres salir solo dí para. ¿Qué quieres hacer? ',
             MSG_ERROR: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.',
                 SONIDO_DESPEDIDA: '<audio src="soundbank://soundlibrary/doors/doors_cellar/cellar_03"/>',
-        MSG_DESPEDIDA: '$t(SONIDO_DESPEDIDA) ¡Hasta luego!'
+        MSG_DESPEDIDA: '¡Hasta luego! $t(SONIDO_DESPEDIDA)'
     }
   }
 }
