@@ -329,41 +329,6 @@ const ProductosPocoStockIntentHandler = {
 
 
 
-
-//SOLICITUD PARA ENVIAR EMAIL
-const EnviarEmailIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'EnviarEmailIntent';
-    },
-    handle(handlerInput) {
-        const {attributesManager} = handlerInput;
-        const intent = handlerInput.requestEnvelope.request.intent;
-        const event = handlerInput.requestEnvelope;
-        const personId = event.context.System.person.personId;
-        
-    let speechText = '';
-    
-    
-        
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(handlerInput.t('MSG_REPROMPT'))
-            .getResponse();
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
 //SOLICITUD DE RESTAURAR ALMACEN
 const RestaurarAlmacenIntentHandler = {
     canHandle(handlerInput) {
