@@ -26,6 +26,7 @@ const LaunchRequestHandler = {
         
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        
         let speechText = '';
         
         const producto = sessionAttributes['producto'];
@@ -339,13 +340,13 @@ const EnviarEmailIntentHandler = {
         const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
         const event = handlerInput.requestEnvelope;
-    
+        const personId = event.context.System.person.personId;
+        
     let speechText = '';
     
-    const speaker = event.context.System.person.personId;
-
-    speechText = handlerInput.t(speaker);
     
+        
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('MSG_REPROMPT'))
