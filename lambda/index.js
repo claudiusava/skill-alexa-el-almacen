@@ -324,37 +324,6 @@ const ProductosPocoStockIntentHandler = {
 
 
 
-const EnviarEmailIntentHandler = {
-  canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    return ((request.type === 'LaunchRequest') ||
-      (request.type === 'IntentRequest' &&
-       request.intent.name === 'EnviarEmailIntent'));
-  },
-  handle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    const person = handlerInput.requestEnvelope.context.System.person;
-
-    if (person) {
-      // The identifier of the recognized speaker.
-      const personId = person.personId;
-      
-      // Build a greeting response with first name.
-      const personalizedGreeting = "Hola <alexa:name type=\"first\" personId=\""  
-            + personId + "\"/>";
-
-      return handlerInput.responseBuilder
-        .speak(personalizedGreeting)
-        .getResponse();
-    } else {
-      return handlerInput.responseBuilder
-        .speak("Hola extraño!")
-        .getResponse();
-    }
-  }
-};
-
-
 
 
 
