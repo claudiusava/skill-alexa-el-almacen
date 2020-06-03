@@ -508,7 +508,6 @@ exports.handler = Alexa.SkillBuilders.custom()
         BuscarProductoIntentHandler,
         BorrarProductoIntentHandler,
         ProductosPocoStockIntentHandler,
-        EnviarEmailIntentHandler,
         RestaurarAlmacenIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
