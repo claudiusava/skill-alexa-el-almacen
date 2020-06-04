@@ -41,6 +41,7 @@ const LaunchRequestHandler = {
             }catch(error){
                 console.log(JSON.stringify(error));
                 if(error.statusCode === 401 || error.statusCode === 403){
+                    speechText = handlerInput.t("No he podido establecer tu nombre. Para hacer la skill más personalizada puedes ingresar en la app del móvil y conceder los permisos necesarios.");
                     handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
                 }
             }
