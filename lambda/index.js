@@ -53,7 +53,6 @@ const LaunchRequestHandler = {
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
-
         }
         
         return handlerInput.responseBuilder
