@@ -28,7 +28,9 @@ const LaunchRequestHandler = {
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
         
-        if(!sessionAttributes['name']){
+         
+        if(contadorSesion <= 3){
+            if(!sessionAttributes['name']){
             try{
                 const {permissions} = requestEnvelope.context.System.user;
                     if(!permissions)
@@ -48,10 +50,31 @@ const LaunchRequestHandler = {
         }
 
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
-         
-        if(contadorSesion <= 3){
+            
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
+            
+            if(!sessionAttributes['name']){
+            try{
+                const {permissions} = requestEnvelope.context.System.user;
+                    if(!permissions)
+                        throw{statusCode: 401, message: 'No permissions available'};
+                        const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+                        const profileName = await upsServiceClient.getProfileGivenName();
+                        if(profileName){
+                            sessionAttributes['name'] = profileName;
+                        }
+            }catch(error){
+                console.log(JSON.stringify(error));
+                if(error.statusCode === 401 || error.statusCode === 403){
+                    speechText = handlerInput.t("No he podido establecer tu nombre. Para hacer la skill más personalizada puedes ingresar en la app del móvil y conceder los permisos necesarios.");
+                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
+                }
+            }
+        }
+
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
+            
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
         
