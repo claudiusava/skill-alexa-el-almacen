@@ -30,6 +30,7 @@ const LaunchRequestHandler = {
         
         if(!sessionAttributes['name']){
             try {
+                speechText = handlerInput.t('¡Hola %s! Tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. ¿Qué deseas hacer?.')
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
                     throw { statusCode: 401, message: 'No permissions available' };
@@ -49,7 +50,7 @@ const LaunchRequestHandler = {
         
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
-        if(contadorSesion === 0 || contadorSesion <= 3){
+        if(contadorSesion <= 3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
