@@ -3,7 +3,7 @@ module.exports = {
         translation: {
                 SONIDO_ABRIR: '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/intro_02"/>',
         MSG_BIENVENIDA_CORTO: '$t(SONIDO_ABRIR) ¡Hola %s! ¿Qué deseas hacer?',
-        MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE:'$t(SONIDO_ABRIR) ¡Hola! Antes de nada, si quieres una experiencia más personalizada activa los permisos de nombre de usuario en la app de Alexa en tu móvil. En esta skill tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. ¿Qué deseas hacer?.',
+        MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE:'$t(SONIDO_ABRIR) ¡Hola! Antes de nada, si quieres una experiencia más personalizada, activa los permisos de nombre de usuario en la app de Alexa en tu móvil. En esta skill tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. ¿Qué deseas hacer?.',
         MSG_BIENVENIDA: '$t(SONIDO_ABRIR) ¡Hola %s! Tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. ¿Qué deseas hacer?.',
         MSG_PRODUCTOS_REGISTRADOS: 'Recordaré que has guardado %s %s.',
         MSG_LISTAR_PRODUCTOS: 'Tienes guardado: ',
