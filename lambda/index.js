@@ -51,6 +51,9 @@ const LaunchRequestHandler = {
         
         speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
         
+        if(!sessionAttributes['sessionCounter']){
+            speechText = handlerInput.t('tu putta madre');
+        }
         
         /*
         if(contadorSesion <3){
