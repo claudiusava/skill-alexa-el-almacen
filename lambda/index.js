@@ -30,7 +30,7 @@ const LaunchRequestHandler = {
         
         if(!sessionAttributes['name']){
             try {
-                speechText = handlerInput.t('¡Hola %s! Tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. ¿Qué deseas hacer?.')
+                speechText = handlerInput.t('¡Hola %s! Tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. Para una experiencia más personalizada concede en permiso de nombre de usuario en la app de Alexa de tu móvil. ¿Qué deseas hacer?.')
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
                     throw { statusCode: 401, message: 'No permissions available' };
