@@ -357,7 +357,8 @@ const RestaurarAlmacenIntentHandler = {
 //SOLICITUD DE REPETIR
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
-   return Alexa.getRequestType(handlerInput.requestEnvelope) ===   'IntentRequest' && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.RepeatIntent';
+   return Alexa.getRequestType(handlerInput.requestEnvelope) ===   'IntentRequest'
+   && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.RepeatIntent';
    },
 handle(handlerInput) {
    const speakOutput = "Tu putta madre";
