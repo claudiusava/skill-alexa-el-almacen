@@ -51,12 +51,14 @@ const LaunchRequestHandler = {
         
         speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
         
+        
+        /*
         if(contadorSesion <3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
-        
+        */
         
         return handlerInput.responseBuilder
             .speak(speechText)
