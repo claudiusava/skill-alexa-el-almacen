@@ -50,10 +50,10 @@ const LaunchRequestHandler = {
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
 
-        if(contadorSesion <=3 || !sessionAttributes['sessionCounter']){
+        if(contadorSesion <3 || !sessionAttributes['sessionCounter']){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }
-        if(contadorSesion > 3){
+        else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
         
