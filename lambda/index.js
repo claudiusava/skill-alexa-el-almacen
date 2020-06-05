@@ -42,7 +42,6 @@ const LaunchRequestHandler = {
             } catch (error) {
                 console.log(JSON.stringify(error));
                 if (error.statusCode === 401 || error.statusCode === 403) {
-                    speechText = handlerInput.t('¡Hola %s! Tienes las opciones de guardar, listar, listar solo productos con poco stock, buscar, borrar o restaurar el almacén. Para una experiencia más personalizada concede en permiso de nombre de usuario en la app de Alexa de tu móvil. ¿Qué deseas hacer?.')
                     handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
                 }
             }
@@ -50,11 +49,9 @@ const LaunchRequestHandler = {
         
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
-        if(contadorSesion <= 3){
+
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
-        }else{
-            speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
-        }
+        
         
         
         
