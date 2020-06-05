@@ -51,7 +51,7 @@ const LaunchRequestHandler = {
         
         if(!sessionAttributes['sessionCounter']){
             speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
-        }else if(contadorSesion === 1 || contadorSesion === 2 || contadorSesion === 3){
+        }else if(contadorSesion < 3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
