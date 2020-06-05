@@ -291,8 +291,6 @@ const ProductosPocoStockIntentHandler = {
     let speechText = '';
     
 
-        
-    cajitaPocaCantidad = [];
     for (var i=0; i<cajita.length; i++) {
         if(cajita[i].cantidad<10){
             cajitaPocaCantidad.push(cajita[i].cantidad + ' ' + cajita[i].producto);
