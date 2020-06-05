@@ -46,10 +46,16 @@ const LaunchRequestHandler = {
                 }
             }
         }
-
+        
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
-        speechText = handlerInput.t('MSG_BIENVENIDA', name);
+        if(contadorSesion === 0 || contadorSesion <= 3){
+            speechText = handlerInput.t('MSG_BIENVENIDA', name);
+        }else{
+            speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
+        }
+        
+        
         
         return handlerInput.responseBuilder
             .speak(speechText)
