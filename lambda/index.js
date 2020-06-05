@@ -30,8 +30,6 @@ const LaunchRequestHandler = {
         
         if(!sessionAttributes['name'] && !sessionAttributes['sessionCounter']){
             
-            speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
-            
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
