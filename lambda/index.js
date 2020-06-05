@@ -28,7 +28,10 @@ const LaunchRequestHandler = {
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
         
-        if(!sessionAttributes['name']){
+        if(!sessionAttributes['name'] && !sessionAttributes['sessionCounter']){
+            
+            speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
+            
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
@@ -49,6 +52,7 @@ const LaunchRequestHandler = {
 
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : ' ';
         
+        /*
         if(!sessionAttributes['sessionCounter']){
             speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
         }else if(contadorSesion < 3){
@@ -56,7 +60,7 @@ const LaunchRequestHandler = {
         }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
-        
+        */
         
         return handlerInput.responseBuilder
             .speak(speechText)
