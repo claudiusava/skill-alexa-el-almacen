@@ -49,19 +49,14 @@ const LaunchRequestHandler = {
 
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : ' ';
         
-        speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
-        
         if(!sessionAttributes['sessionCounter']){
-            speechText = handlerInput.t('tu putta madre');
-        }
-        
-        /*
-        if(contadorSesion <3){
+            speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
+        }else if(contadorSesion <3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
-        */
+        
         
         return handlerInput.responseBuilder
             .speak(speechText)
