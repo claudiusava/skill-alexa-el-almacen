@@ -47,18 +47,18 @@ const LaunchRequestHandler = {
             }
         }
 
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
         
-        
-        if(!sessionAttributes['name'] && !sessionAttributes['sessionCounter']){
+        if(sessionAttributes['name'] === '' && !sessionAttributes['sessionCounter']){
             speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
         }
+        
         if(contadorSesion <3 && sessionAttributes['sessionCounter']){
-            const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }
+        
         else{
-            const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
         
