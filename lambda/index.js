@@ -28,28 +28,7 @@ const LaunchRequestHandler = {
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
         
-        if(!sessionAttributes['name'] && !sessionAttributes['sessionCounter']){
-            speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
-            try {
-                const {permissions} = requestEnvelope.context.System.user;
-                if(!permissions)
-                    throw { statusCode: 401, message: 'No permissions available' };
-                const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-                const profileName = await upsServiceClient.getProfileGivenName();
-                if (profileName) {
-                  sessionAttributes['name'] = profileName;
-                }
-
-            } catch (error) {
-                console.log(JSON.stringify(error));
-                if (error.statusCode === 401 || error.statusCode === 403) {
-                    handlerInput.responseBuilder.withAskForPermissionsConsentCard(GIVEN_NAME_PERMISSION);
-                }
-            }
-        }
-        
         if(!sessionAttributes['name']){
-            speechText = handlerInput.t('MSG_BIENVENIDO_CON_INFO_PERMISO_NOMBRE');
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
@@ -67,9 +46,13 @@ const LaunchRequestHandler = {
                 }
             }
         }
+
         
         const name = sessionAttributes['name'] ? sessionAttributes['name'] : '';
         
+        if(!sessionAttributes['name'] && !sessionAttributes['sessionCounter']){
+            speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE' );
+        }
         if(contadorSesion <3 && sessionAttributes['sessionCounter']){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
         }
