@@ -292,7 +292,7 @@ const ProductosPocoStockIntentHandler = {
     
     if(cajita.length===0){
         speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t('MSG_ALGO_MAS');
-    }else if (cajita > 0){
+    }else{
         cajitaPocaCantidad = [];
         for (var i=0; i<cajita.length; i++) {
             if(cajita[i].cantidad<10){
@@ -314,13 +314,13 @@ const ProductosPocoStockIntentHandler = {
     speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS_CON_POCO_STOCK') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
     }
     
-    
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('MSG_REPROMPT'))
             .getResponse();
     }
 };
+
 
 
 
