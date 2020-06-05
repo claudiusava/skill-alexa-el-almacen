@@ -28,7 +28,7 @@ const LaunchRequestHandler = {
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
         
-        if(!sessionAttributes['name'] && !sessionAttributes['sessionCounter']){
+        if(!sessionAttributes['name']){
             
             try {
                 const {permissions} = requestEnvelope.context.System.user;
