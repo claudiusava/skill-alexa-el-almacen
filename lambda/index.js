@@ -78,8 +78,6 @@ const LaunchRequestHandler = {
         }
         
         
-        
-        
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('MSG_REPROMPT'))
