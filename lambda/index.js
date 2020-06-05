@@ -354,6 +354,26 @@ const RestaurarAlmacenIntentHandler = {
 
 
 
+//SOLICITUD DE REPETIR
+const RepeatIntentHandler = {
+  canHandle(handlerInput) {
+   return Alexa.getRequestType(handlerInput.requestEnvelope) ===  'IntentRequest' && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.RepeatIntent';
+   },
+handle(handlerInput) {
+    // Get the session attributes.
+    const sessionAttributes =   
+    handlerInput.attributesManager.getSessionAttributes(); 
+    const { lastResponse } = sessionAttributes;
+    const speakOutput = lastResponse;
+   return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+  }
+};
+
+
+
 
 
 
