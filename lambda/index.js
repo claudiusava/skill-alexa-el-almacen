@@ -369,6 +369,8 @@ handle(handlerInput) {
        speechText = "He dicho: " + attributes.lastResult;
    }
    
+   handlerInput.attributesManager.getSessionAttributes(attributes);
+   
    return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
