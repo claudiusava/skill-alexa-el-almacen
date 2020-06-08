@@ -361,10 +361,17 @@ const RepeatIntentHandler = {
    && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.RepeatIntent';
    },
 handle(handlerInput) {
-   const speakOutput = "Tu putta madre";
+   let speechText = "Si pudiera repetir lo que he dicho, lo repetiría. Dime otra opción o intenta pedir ayuda.";
+   
+   const attributes = handlerInput.attributesManager.getSessionAttributes();
+   
+   if(attributes.lastResult){
+       speechText = "He dicho: " + attributes.lastResult;
+   }
+   
    return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
   }
 };
