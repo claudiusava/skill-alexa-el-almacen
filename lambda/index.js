@@ -28,9 +28,7 @@ const LaunchRequestHandler = {
         
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
-        const attributes = handlerInput.attributesManager.getSessionAttributes();
-        attributes.lastResult = speechText;
-        handlerInput.attributesManager.setSessionAttributes(attributes);
+        
         
         if(!sessionAttributes['name']){
             try {
@@ -357,31 +355,6 @@ const RestaurarAlmacenIntentHandler = {
 
 
 
-//SOLICITUD DE REPETIR
-const RepeatIntentHandler = {
-  canHandle(handlerInput) {
-   return Alexa.getRequestType(handlerInput.requestEnvelope) ===   'IntentRequest'
-   && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.RepeatIntent';
-   },
-handle(handlerInput) {
-   let speechText = "Si pudiera recordar lo que he dicho, lo repetiría. Dime otra opción o intenta pedir ayuda.";
-   
-   const attributes = handlerInput.attributesManager.getSessionAttributes();
-   
-   if(attributes.lastResult){
-       speechText = "He dicho: " + attributes.lastResult;
-   }
-   
-   handlerInput.attributesManager.getSessionAttributes(attributes);
-   
-   return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
-            .getResponse();
-  }
-};
-
-
 
 
 
@@ -537,7 +510,6 @@ exports.handler = Alexa.SkillBuilders.custom()
         BorrarProductoIntentHandler,
         ProductosPocoStockIntentHandler,
         RestaurarAlmacenIntentHandler,
-        RepeatIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
