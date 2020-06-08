@@ -22,17 +22,17 @@ const LaunchRequestHandler = {
         
         const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        attributes.lastResult = speechText;
+        handlerInput.attributesManager.setSessionAttributes(attributes);
         
         let speechText = '';
         
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
-        const attributes = handlerInput.attributesManager.getSessionAttributes();
-        attributes.lastResult = speechText;
-        handlerInput.attributesManager.setSessionAttributes(attributes);
+        
         
         if(!sessionAttributes['name']){
-            
             try {
                 const {permissions} = requestEnvelope.context.System.user;
                 if(!permissions)
