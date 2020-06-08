@@ -361,7 +361,7 @@ const RepeatIntentHandler = {
    && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.RepeatIntent';
    },
 handle(handlerInput) {
-   let speechText = "Si pudiera repetir lo que he dicho, lo repetiría. Dime otra opción o intenta pedir ayuda.";
+   let speechText = "Si pudiera recordar lo que he dicho, lo repetiría. Dime otra opción o intenta pedir ayuda.";
    
    const attributes = handlerInput.attributesManager.getSessionAttributes();
    
