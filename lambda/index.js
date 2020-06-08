@@ -27,6 +27,9 @@ const LaunchRequestHandler = {
         
         const producto = sessionAttributes['producto'];
         const contadorSesion = sessionAttributes['sessionCounter']
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        attributes.lastResult = speechText;
+        handlerInput.attributesManager.setSessionAttributes(attributes);
         
         if(!sessionAttributes['name']){
             
