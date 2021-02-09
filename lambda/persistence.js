@@ -1,7 +1,7 @@
 module.exports = {
     //FUNCION DE PERSISTENCIA
     getPersistenceAdapter(tableName) {
-    // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
+    // Esta función es una forma indirecta de detectar si esto es parte de una habilidad alojada en Alexa.
     function isAlexaHosted() {
         return process.env.S3_PERSISTENCE_BUCKET;
     }
@@ -11,7 +11,7 @@ module.exports = {
             bucketName: process.env.S3_PERSISTENCE_BUCKET
         });
     } else {
-        // IMPORTANT: don't forget to give DynamoDB access to the role you're using to run this lambda (via IAM policy)
+        // IMPORTANTE: no olvide otorgar acceso a DynamoDB al rol que está utilizando para ejecutar esta lambda (a través de la política de IAM)
         const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
         return new DynamoDbPersistenceAdapter({
             tableName: tableName || 'el_almacen',
