@@ -1,30 +1,45 @@
 const Alexa = require('ask-sdk-core');
-const persistence = require('./persistence');
-const interceptors = require('./interceptors');
 
-// Constantes
+//PERSISTENCIAS
+const persistence = require('./persistence');
+//INTERCEPTORES
+const interceptors = require ('./interceptors');
+
+
+//ARRAYLIST DE TODOS LOS PRODUCTOS
+let cajita = [];
+let cajitaPocaCantidad = []; 
+
+//SOLICITAR PERMISO PARA GUARDAR EL NOMBRE DE USUARIO
 const GIVEN_NAME_PERMISSION = ['alexa::profile:given_name:read'];
 
-// Handler de bienvenida
+//MENSAJE DE BINVENIDA
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     async handle(handlerInput) {
-        const { attributesManager, serviceClientFactory, requestEnvelope } = handlerInput;
-        const sessionAttributes = attributesManager.getSessionAttributes();
-
+        
+        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        
+        
         let speechText = '';
-        const contadorSesion = sessionAttributes.sessionCounter || 0;
-
-        if (!sessionAttributes.name) {
+        
+        const producto = sessionAttributes['producto'];
+        const contadorSesion = sessionAttributes['sessionCounter']
+        
+        
+        if(!sessionAttributes['name']){
             try {
-                const { permissions } = requestEnvelope.context.System.user;
-                if (!permissions) throw { statusCode: 401, message: 'No permissions available' };
-
+                const {permissions} = requestEnvelope.context.System.user;
+                if(!permissions)
+                    throw { statusCode: 401, message: 'No permissions available' };
                 const upsServiceClient = serviceClientFactory.getUpsServiceClient();
                 const profileName = await upsServiceClient.getProfileGivenName();
-                if (profileName) sessionAttributes.name = profileName;
+                if (profileName) {
+                  sessionAttributes['name'] = profileName;
+                }
 
             } catch (error) {
                 console.log(JSON.stringify(error));
@@ -34,18 +49,18 @@ const LaunchRequestHandler = {
             }
         }
 
-        const name = sessionAttributes.name || 'usuario';
-        if (!contadorSesion) {
+        const name = sessionAttributes['name'] ? sessionAttributes['name'] : ' ';
+        
+        
+        if(!sessionAttributes['sessionCounter'] && !sessionAttributes['name']){
             speechText = handlerInput.t('MSG_BIENVENIDA_CON_INFO_PERMISO_NOMBRE');
-        } else if (contadorSesion < 3) {
+        }else if(contadorSesion < 3){
             speechText = handlerInput.t('MSG_BIENVENIDA', name);
-        } else {
+        }else{
             speechText = handlerInput.t('MSG_BIENVENIDA_CORTO', name);
         }
-
-        sessionAttributes.sessionCounter = contadorSesion + 1;
-        attributesManager.setSessionAttributes(sessionAttributes);
-
+    
+        
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('MSG_REPROMPT'))
@@ -53,42 +68,59 @@ const LaunchRequestHandler = {
     }
 };
 
-// Handler para registrar producto
+//SOLICITUD DE REGISTRAR PRODUCTO
 const RegistrarProductoIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-            Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarProductoIntent';
     },
     handle(handlerInput) {
-        const { attributesManager } = handlerInput;
+        
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
-
-        const cantidadCapturar = parseInt(intent.slots.cantidad.value);
-        const productoCapturar = intent.slots.producto.value;
-
-        if (!cantidadCapturar || !productoCapturar) {
-            return handlerInput.responseBuilder
-                .speak('Por favor, proporciona una cantidad y un producto válido.')
-                .reprompt('¿Qué producto y cantidad quieres registrar?')
-                .getResponse();
-        }
-
-        sessionAttributes.cajita = sessionAttributes.cajita || [];
-        const index = sessionAttributes.cajita.findIndex(item => item.producto === productoCapturar);
-
+        
+        
+        sessionAttributes ['cantidadCapturar'] = cantidadCapturar;
+        sessionAttributes ['productoCapturar'] = productoCapturar;
+        sessionAttributes ['cajita'] = cajita;
+        
         let speechText = '';
-        if (index === -1) {
-            sessionAttributes.cajita.push({ cantidad: cantidadCapturar, producto: productoCapturar });
-            speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS', cantidadCapturar, productoCapturar) +
-                handlerInput.t('MSG_ALGO_MAS');
-        } else {
-            sessionAttributes.cajita[index].cantidad += cantidadCapturar;
-            speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, sessionAttributes.cajita[index].cantidad) +
-                handlerInput.t('MSG_ALGO_MAS');
+        
+        function Producto(cantidad, producto){
+            this.cantidad = cantidad;
+            this.producto = producto;
+        }
+        var cantidadCapturar = intent.slots.cantidad.value;
+        var productoCapturar = intent.slots.producto.value;
+        
+        var nuevoProducto = new Producto(cantidadCapturar, productoCapturar);
+        
+        
+        var busqueda = productoCapturar;
+        var sumador = cantidadCapturar;
+        var encontrado = -1;
+
+        for(var i =0; i< cajita.length; i++ )
+        {
+        if(cajita[i].producto === busqueda) {
+         encontrado = i;
+         break;
+        }
         }
 
-        attributesManager.setSessionAttributes(sessionAttributes);
+        if( encontrado === -1 ){
+        cajita.push(nuevoProducto);
+        speechText = handlerInput.t('MSG_PRODUCTOS_REGISTRADOS',cantidadCapturar, productoCapturar) + handlerInput.t('MSG_ALGO_MAS');
+        }else{
+	    var base = parseInt(cajita[encontrado].cantidad);
+	    var sumando =  parseInt(sumador);
+	    var suma = sumando + base;
+        cajita[encontrado].cantidad = suma;
+        speechText = handlerInput.t('MSG_CANTIDAD_SUMADA', cantidadCapturar, productoCapturar, cajita[encontrado].cantidad) + handlerInput.t('MSG_ALGO_MAS');
+        }
+
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('MSG_REPROMPT'))
@@ -96,25 +128,26 @@ const RegistrarProductoIntentHandler = {
     }
 };
 
-// Handler para listar productos
+//SOLICITUD DE LISTAR PRODUCTOS
 const ListarProductosIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-            Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListarProductosIntent';
     },
     handle(handlerInput) {
-        const { attributesManager } = handlerInput;
-        const sessionAttributes = attributesManager.getSessionAttributes();
-
-        const cajita = sessionAttributes.cajita || [];
-        let speechText = '';
-
-        if (cajita.length === 0) {
-            speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS') + handlerInput.t('MSG_ALGO_MAS');
-        } else {
-            const listado = cajita.map(item => `${item.cantidad} ${item.producto}`).join(', ');
-            speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + listado + handlerInput.t('MSG_ALGO_MAS');
-        }
+    
+    let speechText = '';
+    
+    if(cajita.length === 0){
+    speechText = handlerInput.t('MSG_NO_HAY_PRODUCTOS') + handlerInput.t('MSG_ALGO_MAS');       
+    }else{
+    var i, x = "";
+    for (i in cajita) {
+        x += cajita[i].cantidad + " ";
+        x += cajita[i].producto + ", ";
+    }
+    speechText = handlerInput.t('MSG_LISTAR_PRODUCTOS') + handlerInput.t(x + '. ') + handlerInput.t('MSG_ALGO_MAS');
+    }
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -123,28 +156,35 @@ const ListarProductosIntentHandler = {
     }
 };
 
-// Handler para buscar producto
+//SOLICITUD DE BUSCAR PRODUCTO
 const BuscarProductoIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
-            Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuscarProductoIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuscarProductoIntent';
     },
     handle(handlerInput) {
-        const { attributesManager } = handlerInput;
-        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {attributesManager} = handlerInput;
         const intent = handlerInput.requestEnvelope.request.intent;
-
-        const busqueda = intent.slots.productoBuscar.value;
-        const cajita = sessionAttributes.cajita || [];
-
-        let speechText = '';
-        const producto = cajita.find(item => item.producto === busqueda);
-
-        if (!producto) {
-            speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda) + handlerInput.t('MSG_ALGO_MAS');
-        } else {
-            speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', producto.cantidad, busqueda) + handlerInput.t('MSG_ALGO_MAS');
+    
+    let speechText = '';
+   
+    var busqueda = intent.slots.productoBuscar.value;
+    
+    var encontrado = -1;
+    
+    for(var i =0; i< cajita.length; i++ )
+        {
+        if(cajita[i].producto === busqueda) {
+         encontrado = i;
+         break;
         }
+        }
+
+    if(encontrado === -1){
+    speechText = handlerInput.t('MSG_PRODUCTO_NO_ENCONTRADO', busqueda) + handlerInput.t('MSG_ALGO_MAS');
+    }else{
+    speechText = handlerInput.t('MSG_PRODUCTO_ENCONTRADO', cajita[encontrado].cantidad, busqueda) + handlerInput.t('MSG_ALGO_MAS');
+    }
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -358,36 +398,32 @@ const ErrorHandler = {
     }
 };
 
+//INSTANCIAS
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         RegistrarProductoIntentHandler,
         ListarProductosIntentHandler,
         BuscarProductoIntentHandler,
-        // ... Añadir otros handlers aquí
+        BorrarProductoIntentHandler,
+        ProductosPocoStockIntentHandler,
+        RestaurarAlmacenIntentHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        FallbackIntentHandler,
+        SessionEndedRequestHandler,
+        IntentReflectorHandler, // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
     .addErrorHandlers(
-        {
-            canHandle() {
-                return true;
-            },
-            handle(handlerInput, error) {
-                console.log(`Error handled: ${error.stack}`);
-                return handlerInput.responseBuilder
-                    .speak('Lo siento, ocurrió un error. Intenta de nuevo más tarde.')
-                    .getResponse();
-            }
-        }
+        ErrorHandler
     )
     .addRequestInterceptors(
         interceptors.LocalizationRequestInterceptor,
         interceptors.LoggingRequestInterceptor,
-        interceptors.LoadAttributesRequestInterceptor
-    )
+        interceptors.LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
         interceptors.LoggingResponseInterceptor,
-        interceptors.SaveAttributesResponseInterceptor
-    )
+        interceptors.SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(persistence.getPersistenceAdapter())
     .withApiClient(new Alexa.DefaultApiClient())
     .lambda();
