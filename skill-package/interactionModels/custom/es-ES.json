@@ -48,6 +48,15 @@
           "samples": []
         },
         {
+          "name": "AMAZON.RepeatIntent",
+          "samples": [
+            "repite",
+            "repítelo",
+            "qué has dicho",
+            "puedes repetir"
+          ]
+        },
+        {
           "name": "RegistrarProductoIntent",
           "slots": [
             {
@@ -69,6 +78,10 @@
               ]
             },
             {
+              "name": "uno",
+              "type": "UNO"
+            },
+            {
               "name": "unidad",
               "type": "UNIDAD"
             }
@@ -76,46 +89,77 @@
           "samples": [
             "guarda {cantidad} {producto}",
             "guarda {cantidad} {unidad} de {producto}",
+            "guarda {uno} {producto}",
+            "guarda {uno} {unidad} de {producto}",
             "guarda {producto}",
             "guárdame {cantidad} {producto}",
             "guárdame {cantidad} {unidad} de {producto}",
+            "guárdame {uno} {producto}",
+            "guárdame {uno} {unidad} de {producto}",
             "guárdame {producto}",
             "añade {cantidad} {producto}",
             "añade {cantidad} {unidad} de {producto}",
+            "añade {uno} {producto}",
+            "añade {uno} {unidad} de {producto}",
             "añade {producto}",
             "añádeme {cantidad} {producto}",
             "añádeme {cantidad} {unidad} de {producto}",
+            "añádeme {uno} {producto}",
+            "añádeme {uno} {unidad} de {producto}",
             "añádeme {producto}",
             "agrega {cantidad} {producto}",
             "agrega {cantidad} {unidad} de {producto}",
+            "agrega {uno} {producto}",
+            "agrega {uno} {unidad} de {producto}",
             "agrega {producto}",
             "suma {cantidad} {producto}",
             "suma {cantidad} {unidad} de {producto}",
+            "suma {uno} {producto}",
+            "suma {uno} {unidad} de {producto}",
             "suma {producto}",
             "súmame {cantidad} {producto}",
             "súmame {cantidad} {unidad} de {producto}",
+            "súmame {uno} {producto}",
+            "súmame {uno} {unidad} de {producto}",
             "súmame {producto}",
             "mete {cantidad} {producto}",
             "mete {cantidad} {unidad} de {producto}",
+            "mete {uno} {producto}",
+            "mete {uno} {unidad} de {producto}",
             "mete {producto}",
             "apunta {cantidad} {producto}",
             "apunta {cantidad} {unidad} de {producto}",
+            "apunta {uno} {producto}",
+            "apunta {uno} {unidad} de {producto}",
             "apunta {producto}",
             "registra {cantidad} {producto}",
             "registra {cantidad} {unidad} de {producto}",
+            "registra {uno} {producto}",
+            "registra {uno} {unidad} de {producto}",
             "registra {producto}",
             "he comprado {cantidad} {producto}",
             "he comprado {cantidad} {unidad} de {producto}",
+            "he comprado {uno} {producto}",
+            "he comprado {uno} {unidad} de {producto}",
             "me han llegado {cantidad} {producto}",
             "me han llegado {cantidad} {unidad} de {producto}",
+            "me han llegado {uno} {producto}",
+            "me han llegado {uno} {unidad} de {producto}",
             "nos han llegado {cantidad} {producto}",
             "nos han llegado {cantidad} {unidad} de {producto}",
+            "nos han llegado {uno} {producto}",
+            "nos han llegado {uno} {unidad} de {producto}",
             "han llegado {cantidad} {producto}",
             "han llegado {cantidad} {unidad} de {producto}",
+            "han llegado {uno} {producto}",
+            "han llegado {uno} {unidad} de {producto}",
             "he recibido {cantidad} {producto}",
             "he recibido {cantidad} {unidad} de {producto}",
+            "he recibido {uno} {producto}",
+            "he recibido {uno} {unidad} de {producto}",
             "ha llegado {cantidad} {producto}",
             "me ha llegado {cantidad} {producto}",
+            "me ha llegado {uno} {producto}",
             "guarda en el almacén {cantidad} {producto}",
             "añade al almacén {cantidad} {producto}",
             "guarda {cantidad} {producto} en el almacén",
@@ -152,6 +196,10 @@
               "type": "AMAZON.NUMBER"
             },
             {
+              "name": "uno",
+              "type": "UNO"
+            },
+            {
               "name": "unidad",
               "type": "UNIDAD"
             }
@@ -159,37 +207,63 @@
           "samples": [
             "quita {cantidad} {producto}",
             "quita {cantidad} {unidad} de {producto}",
+            "quita {uno} {producto}",
+            "quita {uno} {unidad} de {producto}",
             "quita {producto}",
             "quítame {cantidad} {producto}",
             "quítame {cantidad} {unidad} de {producto}",
+            "quítame {uno} {producto}",
+            "quítame {uno} {unidad} de {producto}",
             "quítame {producto}",
             "resta {cantidad} {producto}",
             "resta {cantidad} {unidad} de {producto}",
+            "resta {uno} {producto}",
+            "resta {uno} {unidad} de {producto}",
             "resta {producto}",
             "réstame {cantidad} {producto}",
             "réstame {cantidad} {unidad} de {producto}",
+            "réstame {uno} {producto}",
+            "réstame {uno} {unidad} de {producto}",
             "réstame {producto}",
             "saca {cantidad} {producto}",
             "saca {cantidad} {unidad} de {producto}",
+            "saca {uno} {producto}",
+            "saca {uno} {unidad} de {producto}",
             "saca {producto}",
             "elimina {cantidad} {producto}",
             "elimina {cantidad} {unidad} de {producto}",
+            "elimina {uno} {producto}",
+            "elimina {uno} {unidad} de {producto}",
             "elimina {producto}",
             "borra {cantidad} {producto}",
             "borra {cantidad} {unidad} de {producto}",
+            "borra {uno} {producto}",
+            "borra {uno} {unidad} de {producto}",
             "borra {producto}",
             "he gastado {cantidad} {producto}",
             "he gastado {cantidad} {unidad} de {producto}",
+            "he gastado {uno} {producto}",
+            "he gastado {uno} {unidad} de {producto}",
             "he usado {cantidad} {producto}",
             "he usado {cantidad} {unidad} de {producto}",
+            "he usado {uno} {producto}",
+            "he usado {uno} {unidad} de {producto}",
             "he vendido {cantidad} {producto}",
             "he vendido {cantidad} {unidad} de {producto}",
+            "he vendido {uno} {producto}",
+            "he vendido {uno} {unidad} de {producto}",
             "he sacado {cantidad} {producto}",
             "he sacado {cantidad} {unidad} de {producto}",
+            "he sacado {uno} {producto}",
+            "he sacado {uno} {unidad} de {producto}",
             "he consumido {cantidad} {producto}",
             "he consumido {cantidad} {unidad} de {producto}",
+            "he consumido {uno} {producto}",
+            "he consumido {uno} {unidad} de {producto}",
             "me he llevado {cantidad} {producto}",
             "me he llevado {cantidad} {unidad} de {producto}",
+            "me he llevado {uno} {producto}",
+            "me he llevado {uno} {unidad} de {producto}",
             "se ha acabado el {producto}",
             "se ha acabado la {producto}",
             "se han acabado los {producto}",
@@ -204,6 +278,52 @@
             "quiero borrar un producto",
             "quiero quitar un producto",
             "restar un producto"
+          ]
+        },
+        {
+          "name": "ConfigurarUmbralIntent",
+          "slots": [
+            {
+              "name": "umbral",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{umbral}",
+                "menos de {umbral}"
+              ]
+            }
+          ],
+          "samples": [
+            "avísame cuando queden menos de {umbral}",
+            "avísame cuando quede menos de {umbral}",
+            "cambia el límite de poco stock a {umbral}",
+            "pon el límite de poco stock en {umbral}",
+            "cambia el umbral de poco stock a {umbral}",
+            "cambia el aviso de poco stock a {umbral}",
+            "poco stock es menos de {umbral}",
+            "considera poco stock menos de {umbral}",
+            "quiero que el poco stock sea menos de {umbral}",
+            "cambia el límite de poco stock",
+            "cambiar el límite de poco stock",
+            "quiero cambiar el límite de poco stock",
+            "cambia el aviso de poco stock"
+          ]
+        },
+        {
+          "name": "DeshacerIntent",
+          "slots": [],
+          "samples": [
+            "deshaz",
+            "deshacer",
+            "deshaz lo último",
+            "deshacer lo último",
+            "deshaz eso",
+            "deshaz el último cambio",
+            "anula lo último",
+            "anula el último cambio",
+            "me he equivocado",
+            "me equivoqué",
+            "eso está mal",
+            "vuelve atrás"
           ]
         },
         {
@@ -347,7 +467,6 @@
             "quiero vaciar el almacén",
             "borra todo",
             "borra todo el almacén",
-            "borra el almacén",
             "borra todos los productos",
             "borrar todos los productos",
             "elimina todos los productos",
@@ -1142,6 +1261,25 @@
               }
             }
           ]
+        },
+        {
+          "name": "UNO",
+          "values": [
+            {
+              "name": {
+                "value": "un",
+                "synonyms": [
+                  "uno"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "una",
+                "synonyms": []
+              }
+            }
+          ]
         }
       ]
     },
@@ -1164,7 +1302,7 @@
             {
               "name": "cantidad",
               "type": "AMAZON.NUMBER",
-              "elicitationRequired": true,
+              "elicitationRequired": false,
               "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Registrar.cantidad"
@@ -1176,6 +1314,13 @@
                   "value": "1"
                 }
               ]
+            },
+            {
+              "name": "uno",
+              "type": "UNO",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
             },
             {
               "name": "unidad",
@@ -1215,11 +1360,41 @@
               ]
             },
             {
+              "name": "uno",
+              "type": "UNO",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            },
+            {
               "name": "unidad",
               "type": "UNIDAD",
               "elicitationRequired": false,
               "confirmationRequired": false,
               "prompts": {}
+            }
+          ]
+        },
+        {
+          "name": "ConfigurarUmbralIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "umbral",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Umbral.umbral"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Validar.Umbral.umbral",
+                  "value": "1"
+                }
+              ]
             }
           ]
         },
@@ -1310,6 +1485,24 @@
           {
             "type": "PlainText",
             "value": "¿Qué producto quieres buscar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Umbral.umbral",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Por debajo de cuántas unidades quieres que un producto cuente como poco stock?"
+          }
+        ]
+      },
+      {
+        "id": "Validar.Umbral.umbral",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Necesito un número mayor que cero. ¿Por debajo de cuántas unidades te aviso?"
           }
         ]
       },
