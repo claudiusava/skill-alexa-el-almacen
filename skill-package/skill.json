@@ -1,0 +1,75 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "es-ES": {
+          "summary": "Lleva por voz el inventario de tu almacén, tu despensa o tu negocio.",
+          "examplePhrases": [
+            "Alexa, abre guardar en almacén",
+            "Alexa, pide a guardar en almacén que guarde tres paquetes de arroz",
+            "Alexa, pregunta a guardar en almacén qué se está acabando"
+          ],
+          "keywords": [
+            "almacén",
+            "inventario",
+            "despensa",
+            "stock",
+            "productos",
+            "negocio",
+            "tienda",
+            "comercio",
+            "depósito",
+            "existencias",
+            "compra",
+            "guardar",
+            "cantidad",
+            "listar"
+          ],
+          "name": "Almacén",
+          "description": "Con \"Alexa, abre guardar en almacén\" llevas por voz el inventario de tu pequeño negocio, tu despensa o tu depósito.\n\nPuedes:\n- Guardar un producto con su cantidad, o sumar a uno que ya tienes: \"guarda tres paquetes de arroz\".\n- Quitar una cantidad o borrar un producto entero: \"he gastado dos latas de atún\", \"borra el arroz\".\n- Preguntar cuánto te queda: \"¿cuántos tomates tengo?\".\n- Escuchar todo el inventario: \"lista los productos\".\n- Saber qué se está acabando (menos de 10 unidades): \"¿qué se está acabando?\".\n- Vaciar el almacén por completo, con confirmación.\n\nEntiende el singular y el plural (\"tomate\" y \"tomates\" son el mismo producto) y unidades como kilos, paquetes, latas o docenas.\n\nSi das permiso para leer tu nombre en la app de Alexa, la skill te saludará por tu nombre. Es opcional y el nombre no se guarda.",
+          "smallIconUri": "file://assets/images/es-ES_smallIconUri.png",
+          "largeIconUri": "file://assets/images/es-ES_largeIconUri.png"
+        }
+      },
+      "automaticDistribution": {
+        "sourceLocaleForLanguages": [
+          {
+            "sourceLocale": "es-ES",
+            "language": "es"
+          }
+        ],
+        "isActive": true
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "No necesita cuenta vinculada. El permiso de nombre (given_name) es opcional y solo se usa para saludar; sin él la skill funciona igual. Prueba: \"guarda tres tomates\", \"cuántos tomates tengo\", \"quita dos tomates\", \"borra los tomates\" (pide confirmación), \"qué se está acabando\", \"vacía el almacén\" (pide confirmación).",
+      "category": "ORGANIZERS_AND_ASSISTANTS",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:433538623477:function:21982fd3-895a-4217-9dc0-b3d957a00dcd:Release_1"
+        },
+        "interfaces": []
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::profile:given_name:read"
+      }
+    ],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "locales": {
+        "es-ES": {
+          "privacyPolicyUrl": "https://claudiusava.github.io/skill-alexa-el-almacen/privacidad.html"
+        }
+      },
+      "containsAds": false,
+      "isExportCompliant": true,
+      "isChildDirected": false,
+      "usesPersonalInfo": true
+    }
+  }
+}

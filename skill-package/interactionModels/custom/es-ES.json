@@ -1,0 +1,1517 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "guardar en almacén",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "qué puedo hacer",
+            "qué puedo decir",
+            "cómo funciona",
+            "no sé qué hacer",
+            "necesito ayuda",
+            "ayúdame"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "nada",
+            "nada más",
+            "eso es todo",
+            "ya está",
+            "ya he terminado",
+            "cierra el almacén",
+            "salir",
+            "adiós"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.RepeatIntent",
+          "samples": [
+            "repite",
+            "repítelo",
+            "qué has dicho",
+            "puedes repetir"
+          ]
+        },
+        {
+          "name": "RegistrarProductoIntent",
+          "slots": [
+            {
+              "name": "producto",
+              "type": "PRODUCTO",
+              "samples": [
+                "{producto}",
+                "{cantidad} {producto}",
+                "{cantidad} {unidad} de {producto}"
+              ]
+            },
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{cantidad}",
+                "{cantidad} {unidad}",
+                "{cantidad} {producto}"
+              ]
+            },
+            {
+              "name": "uno",
+              "type": "UNO"
+            },
+            {
+              "name": "unidad",
+              "type": "UNIDAD"
+            }
+          ],
+          "samples": [
+            "guarda {cantidad} {producto}",
+            "guarda {cantidad} {unidad} de {producto}",
+            "guarda {uno} {producto}",
+            "guarda {uno} {unidad} de {producto}",
+            "guarda {producto}",
+            "guárdame {cantidad} {producto}",
+            "guárdame {cantidad} {unidad} de {producto}",
+            "guárdame {uno} {producto}",
+            "guárdame {uno} {unidad} de {producto}",
+            "guárdame {producto}",
+            "añade {cantidad} {producto}",
+            "añade {cantidad} {unidad} de {producto}",
+            "añade {uno} {producto}",
+            "añade {uno} {unidad} de {producto}",
+            "añade {producto}",
+            "añádeme {cantidad} {producto}",
+            "añádeme {cantidad} {unidad} de {producto}",
+            "añádeme {uno} {producto}",
+            "añádeme {uno} {unidad} de {producto}",
+            "añádeme {producto}",
+            "agrega {cantidad} {producto}",
+            "agrega {cantidad} {unidad} de {producto}",
+            "agrega {uno} {producto}",
+            "agrega {uno} {unidad} de {producto}",
+            "agrega {producto}",
+            "suma {cantidad} {producto}",
+            "suma {cantidad} {unidad} de {producto}",
+            "suma {uno} {producto}",
+            "suma {uno} {unidad} de {producto}",
+            "suma {producto}",
+            "súmame {cantidad} {producto}",
+            "súmame {cantidad} {unidad} de {producto}",
+            "súmame {uno} {producto}",
+            "súmame {uno} {unidad} de {producto}",
+            "súmame {producto}",
+            "mete {cantidad} {producto}",
+            "mete {cantidad} {unidad} de {producto}",
+            "mete {uno} {producto}",
+            "mete {uno} {unidad} de {producto}",
+            "mete {producto}",
+            "apunta {cantidad} {producto}",
+            "apunta {cantidad} {unidad} de {producto}",
+            "apunta {uno} {producto}",
+            "apunta {uno} {unidad} de {producto}",
+            "apunta {producto}",
+            "registra {cantidad} {producto}",
+            "registra {cantidad} {unidad} de {producto}",
+            "registra {uno} {producto}",
+            "registra {uno} {unidad} de {producto}",
+            "registra {producto}",
+            "he comprado {cantidad} {producto}",
+            "he comprado {cantidad} {unidad} de {producto}",
+            "he comprado {uno} {producto}",
+            "he comprado {uno} {unidad} de {producto}",
+            "me han llegado {cantidad} {producto}",
+            "me han llegado {cantidad} {unidad} de {producto}",
+            "me han llegado {uno} {producto}",
+            "me han llegado {uno} {unidad} de {producto}",
+            "nos han llegado {cantidad} {producto}",
+            "nos han llegado {cantidad} {unidad} de {producto}",
+            "nos han llegado {uno} {producto}",
+            "nos han llegado {uno} {unidad} de {producto}",
+            "han llegado {cantidad} {producto}",
+            "han llegado {cantidad} {unidad} de {producto}",
+            "han llegado {uno} {producto}",
+            "han llegado {uno} {unidad} de {producto}",
+            "he recibido {cantidad} {producto}",
+            "he recibido {cantidad} {unidad} de {producto}",
+            "he recibido {uno} {producto}",
+            "he recibido {uno} {unidad} de {producto}",
+            "ha llegado {cantidad} {producto}",
+            "me ha llegado {cantidad} {producto}",
+            "me ha llegado {uno} {producto}",
+            "guarda en el almacén {cantidad} {producto}",
+            "añade al almacén {cantidad} {producto}",
+            "guarda {cantidad} {producto} en el almacén",
+            "añade {cantidad} {producto} al almacén",
+            "quiero guardar {cantidad} {producto}",
+            "quiero guardar {cantidad} {unidad} de {producto}",
+            "quiero guardar {producto}",
+            "quiero añadir {cantidad} {producto}",
+            "quiero añadir {producto}",
+            "guardar un producto",
+            "guardar producto",
+            "añadir un producto",
+            "añadir producto",
+            "quiero guardar algo",
+            "quiero guardar un producto",
+            "quiero añadir un producto",
+            "registrar un producto"
+          ]
+        },
+        {
+          "name": "BorrarProductoIntent",
+          "slots": [
+            {
+              "name": "producto",
+              "type": "PRODUCTO",
+              "samples": [
+                "{producto}",
+                "{cantidad} {producto}",
+                "{cantidad} {unidad} de {producto}"
+              ]
+            },
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "uno",
+              "type": "UNO"
+            },
+            {
+              "name": "unidad",
+              "type": "UNIDAD"
+            }
+          ],
+          "samples": [
+            "quita {cantidad} {producto}",
+            "quita {cantidad} {unidad} de {producto}",
+            "quita {uno} {producto}",
+            "quita {uno} {unidad} de {producto}",
+            "quita {producto}",
+            "quítame {cantidad} {producto}",
+            "quítame {cantidad} {unidad} de {producto}",
+            "quítame {uno} {producto}",
+            "quítame {uno} {unidad} de {producto}",
+            "quítame {producto}",
+            "resta {cantidad} {producto}",
+            "resta {cantidad} {unidad} de {producto}",
+            "resta {uno} {producto}",
+            "resta {uno} {unidad} de {producto}",
+            "resta {producto}",
+            "réstame {cantidad} {producto}",
+            "réstame {cantidad} {unidad} de {producto}",
+            "réstame {uno} {producto}",
+            "réstame {uno} {unidad} de {producto}",
+            "réstame {producto}",
+            "saca {cantidad} {producto}",
+            "saca {cantidad} {unidad} de {producto}",
+            "saca {uno} {producto}",
+            "saca {uno} {unidad} de {producto}",
+            "saca {producto}",
+            "elimina {cantidad} {producto}",
+            "elimina {cantidad} {unidad} de {producto}",
+            "elimina {uno} {producto}",
+            "elimina {uno} {unidad} de {producto}",
+            "elimina {producto}",
+            "borra {cantidad} {producto}",
+            "borra {cantidad} {unidad} de {producto}",
+            "borra {uno} {producto}",
+            "borra {uno} {unidad} de {producto}",
+            "borra {producto}",
+            "he gastado {cantidad} {producto}",
+            "he gastado {cantidad} {unidad} de {producto}",
+            "he gastado {uno} {producto}",
+            "he gastado {uno} {unidad} de {producto}",
+            "he usado {cantidad} {producto}",
+            "he usado {cantidad} {unidad} de {producto}",
+            "he usado {uno} {producto}",
+            "he usado {uno} {unidad} de {producto}",
+            "he vendido {cantidad} {producto}",
+            "he vendido {cantidad} {unidad} de {producto}",
+            "he vendido {uno} {producto}",
+            "he vendido {uno} {unidad} de {producto}",
+            "he sacado {cantidad} {producto}",
+            "he sacado {cantidad} {unidad} de {producto}",
+            "he sacado {uno} {producto}",
+            "he sacado {uno} {unidad} de {producto}",
+            "he consumido {cantidad} {producto}",
+            "he consumido {cantidad} {unidad} de {producto}",
+            "he consumido {uno} {producto}",
+            "he consumido {uno} {unidad} de {producto}",
+            "me he llevado {cantidad} {producto}",
+            "me he llevado {cantidad} {unidad} de {producto}",
+            "me he llevado {uno} {producto}",
+            "me he llevado {uno} {unidad} de {producto}",
+            "se ha acabado el {producto}",
+            "se ha acabado la {producto}",
+            "se han acabado los {producto}",
+            "se han acabado las {producto}",
+            "ya no queda {producto}",
+            "ya no quedan {producto}",
+            "quiero quitar {cantidad} {producto}",
+            "quiero borrar {producto}",
+            "quiero quitar {producto}",
+            "borrar un producto",
+            "quitar un producto",
+            "quiero borrar un producto",
+            "quiero quitar un producto",
+            "restar un producto"
+          ]
+        },
+        {
+          "name": "ConfigurarUmbralIntent",
+          "slots": [
+            {
+              "name": "umbral",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{umbral}",
+                "menos de {umbral}"
+              ]
+            }
+          ],
+          "samples": [
+            "avísame cuando queden menos de {umbral}",
+            "avísame cuando quede menos de {umbral}",
+            "cambia el límite de poco stock a {umbral}",
+            "pon el límite de poco stock en {umbral}",
+            "cambia el umbral de poco stock a {umbral}",
+            "cambia el aviso de poco stock a {umbral}",
+            "poco stock es menos de {umbral}",
+            "considera poco stock menos de {umbral}",
+            "quiero que el poco stock sea menos de {umbral}",
+            "cambia el límite de poco stock",
+            "cambiar el límite de poco stock",
+            "quiero cambiar el límite de poco stock",
+            "cambia el aviso de poco stock"
+          ]
+        },
+        {
+          "name": "DeshacerIntent",
+          "slots": [],
+          "samples": [
+            "deshaz",
+            "deshacer",
+            "deshaz lo último",
+            "deshacer lo último",
+            "deshaz eso",
+            "deshaz el último cambio",
+            "anula lo último",
+            "anula el último cambio",
+            "me he equivocado",
+            "me equivoqué",
+            "eso está mal",
+            "vuelve atrás"
+          ]
+        },
+        {
+          "name": "BuscarProductoIntent",
+          "slots": [
+            {
+              "name": "producto",
+              "type": "PRODUCTO",
+              "samples": [
+                "{producto}"
+              ]
+            }
+          ],
+          "samples": [
+            "cuántos {producto} tengo",
+            "cuántos {producto} hay",
+            "cuántos {producto} quedan",
+            "cuántos {producto} queda",
+            "cuántos {producto} me quedan",
+            "cuántos {producto} me queda",
+            "cuántos {producto} hay en el almacén",
+            "dime cuántos {producto} tengo",
+            "dime cuántos {producto} hay",
+            "quiero saber cuántos {producto} tengo",
+            "cuántas {producto} tengo",
+            "cuántas {producto} hay",
+            "cuántas {producto} quedan",
+            "cuántas {producto} queda",
+            "cuántas {producto} me quedan",
+            "cuántas {producto} me queda",
+            "cuántas {producto} hay en el almacén",
+            "dime cuántas {producto} tengo",
+            "dime cuántas {producto} hay",
+            "quiero saber cuántas {producto} tengo",
+            "cuánto {producto} tengo",
+            "cuánto {producto} hay",
+            "cuánto {producto} quedan",
+            "cuánto {producto} queda",
+            "cuánto {producto} me quedan",
+            "cuánto {producto} me queda",
+            "cuánto {producto} hay en el almacén",
+            "dime cuánto {producto} tengo",
+            "dime cuánto {producto} hay",
+            "quiero saber cuánto {producto} tengo",
+            "cuánta {producto} tengo",
+            "cuánta {producto} hay",
+            "cuánta {producto} quedan",
+            "cuánta {producto} queda",
+            "cuánta {producto} me quedan",
+            "cuánta {producto} me queda",
+            "cuánta {producto} hay en el almacén",
+            "dime cuánta {producto} tengo",
+            "dime cuánta {producto} hay",
+            "quiero saber cuánta {producto} tengo",
+            "qué cantidad de {producto} tengo",
+            "qué cantidad de {producto} hay",
+            "qué cantidad de {producto} queda",
+            "busca {producto}",
+            "buscar {producto}",
+            "búscame {producto}",
+            "quiero buscar {producto}",
+            "tengo {producto}",
+            "me queda {producto}",
+            "me quedan {producto}",
+            "queda {producto}",
+            "quedan {producto}",
+            "hay {producto} en el almacén",
+            "buscar un producto",
+            "buscar producto",
+            "busca un producto",
+            "quiero buscar un producto"
+          ]
+        },
+        {
+          "name": "ListarProductosIntent",
+          "slots": [],
+          "samples": [
+            "lista los productos",
+            "lista todos los productos",
+            "lista lo que tengo",
+            "lista todo",
+            "listar productos",
+            "listar todos los productos",
+            "lístame los productos",
+            "dime los productos",
+            "dime todos los productos",
+            "dime qué productos tengo",
+            "dime qué tengo",
+            "dime qué hay en el almacén",
+            "dime lo que tengo guardado",
+            "dime todo lo que tengo",
+            "qué productos tengo",
+            "qué productos hay",
+            "qué hay en el almacén",
+            "qué tengo en el almacén",
+            "qué tengo guardado",
+            "qué hay guardado",
+            "qué tengo",
+            "léeme el inventario",
+            "dime el inventario",
+            "inventario",
+            "quiero saber qué tengo",
+            "quiero oír todos los productos",
+            "repasa el almacén"
+          ]
+        },
+        {
+          "name": "ProductosPocoStockIntent",
+          "slots": [],
+          "samples": [
+            "qué se está acabando",
+            "qué se me está acabando",
+            "qué productos se están acabando",
+            "qué se está agotando",
+            "qué productos se están agotando",
+            "qué me queda poco",
+            "de qué me queda poco",
+            "de qué queda poco",
+            "de qué productos queda poca cantidad",
+            "qué productos tienen poco stock",
+            "productos con poco stock",
+            "lista los productos con poco stock",
+            "dime los productos con poco stock",
+            "qué tengo que comprar",
+            "qué tengo que reponer",
+            "qué debería comprar",
+            "qué hay que comprar",
+            "qué hay que reponer",
+            "qué productos tengo menos de diez",
+            "qué me falta",
+            "qué falta"
+          ]
+        },
+        {
+          "name": "RestaurarAlmacenIntent",
+          "slots": [],
+          "samples": [
+            "vacía el almacén",
+            "vaciar el almacén",
+            "vaciar todo el almacén",
+            "quiero vaciar el almacén",
+            "borra todo",
+            "borra todo el almacén",
+            "borra todos los productos",
+            "borrar todos los productos",
+            "elimina todos los productos",
+            "quiero borrar todo",
+            "quiero borrar todos los productos",
+            "restaura el almacén",
+            "restaurar el almacén",
+            "reinicia el almacén",
+            "empieza de cero",
+            "empezar de cero"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "PRODUCTO",
+          "values": [
+            {
+              "name": {
+                "value": "arroz",
+                "synonyms": [
+                  "arroces"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pasta",
+                "synonyms": [
+                  "pastas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "macarrón",
+                "synonyms": [
+                  "macarrones"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "espagueti",
+                "synonyms": [
+                  "espaguetis"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "harina",
+                "synonyms": [
+                  "harinas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "azúcar",
+                "synonyms": [
+                  "azúcares"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sal",
+                "synonyms": [
+                  "sales"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "aceite",
+                "synonyms": [
+                  "aceites"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "aceite de oliva",
+                "synonyms": [
+                  "aceites de oliva"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "vinagre",
+                "synonyms": [
+                  "vinagres"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "leche",
+                "synonyms": [
+                  "leches"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "huevo",
+                "synonyms": [
+                  "huevos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pan",
+                "synonyms": [
+                  "panes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pan de molde",
+                "synonyms": [
+                  "panes de molde"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tomate",
+                "synonyms": [
+                  "tomates"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tomate frito",
+                "synonyms": [
+                  "tomates fritos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "patata",
+                "synonyms": [
+                  "patatas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cebolla",
+                "synonyms": [
+                  "cebollas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "ajo",
+                "synonyms": [
+                  "ajos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "zanahoria",
+                "synonyms": [
+                  "zanahorias"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "lechuga",
+                "synonyms": [
+                  "lechugas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pimiento",
+                "synonyms": [
+                  "pimientos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "manzana",
+                "synonyms": [
+                  "manzanas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "plátano",
+                "synonyms": [
+                  "plátanos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "naranja",
+                "synonyms": [
+                  "naranjas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "limón",
+                "synonyms": [
+                  "limones"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "fresa",
+                "synonyms": [
+                  "fresas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pera",
+                "synonyms": [
+                  "peras"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "uva",
+                "synonyms": [
+                  "uvas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "lenteja",
+                "synonyms": [
+                  "lentejas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "garbanzo",
+                "synonyms": [
+                  "garbanzos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "alubia",
+                "synonyms": [
+                  "alubias"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "atún",
+                "synonyms": [
+                  "atunes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sardina",
+                "synonyms": [
+                  "sardinas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "queso",
+                "synonyms": [
+                  "quesos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "jamón",
+                "synonyms": [
+                  "jamones"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "yogur",
+                "synonyms": [
+                  "yogures"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "mantequilla",
+                "synonyms": [
+                  "mantequillas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "café",
+                "synonyms": [
+                  "cafés"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "té",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "cacao",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "galleta",
+                "synonyms": [
+                  "galletas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cereal",
+                "synonyms": [
+                  "cereales"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "chocolate",
+                "synonyms": [
+                  "chocolates"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "agua",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "refresco",
+                "synonyms": [
+                  "refrescos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cerveza",
+                "synonyms": [
+                  "cervezas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "vino",
+                "synonyms": [
+                  "vinos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "zumo",
+                "synonyms": [
+                  "zumos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "papel higiénico",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "papel de cocina",
+                "synonyms": [
+                  "papeles de cocina"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "servilleta",
+                "synonyms": [
+                  "servilletas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "detergente",
+                "synonyms": [
+                  "detergentes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "suavizante",
+                "synonyms": [
+                  "suavizantes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "lavavajillas",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "lejía",
+                "synonyms": [
+                  "lejías"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "jabón",
+                "synonyms": [
+                  "jabones"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "champú",
+                "synonyms": [
+                  "champús"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "gel",
+                "synonyms": [
+                  "geles"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pasta de dientes",
+                "synonyms": [
+                  "pastas de dientes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cepillo de dientes",
+                "synonyms": [
+                  "cepillos de dientes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "bolsa de basura",
+                "synonyms": [
+                  "bolsas de basura"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pila",
+                "synonyms": [
+                  "pilas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "bombilla",
+                "synonyms": [
+                  "bombillas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tornillo",
+                "synonyms": [
+                  "tornillos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "clavo",
+                "synonyms": [
+                  "clavos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tuerca",
+                "synonyms": [
+                  "tuercas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cinta adhesiva",
+                "synonyms": [
+                  "cintas adhesivas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "folio",
+                "synonyms": [
+                  "folios"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "bolígrafo",
+                "synonyms": [
+                  "bolígrafos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "lápiz",
+                "synonyms": [
+                  "lápices"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "caja",
+                "synonyms": [
+                  "cajas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "sobre",
+                "synonyms": [
+                  "sobres"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pañal",
+                "synonyms": [
+                  "pañales"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "toallita",
+                "synonyms": [
+                  "toallitas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "mascarilla",
+                "synonyms": [
+                  "mascarillas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "guante",
+                "synonyms": [
+                  "guantes"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pienso",
+                "synonyms": [
+                  "piensos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "comida para perro",
+                "synonyms": [
+                  "comida de perro",
+                  "comida para perros"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "arena para gato",
+                "synonyms": [
+                  "arena de gato",
+                  "arena para gatos"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "UNIDAD",
+          "values": [
+            {
+              "name": {
+                "value": "kilo",
+                "synonyms": [
+                  "kilos",
+                  "kilogramo",
+                  "kilogramos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "gramo",
+                "synonyms": [
+                  "gramos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "litro",
+                "synonyms": [
+                  "litros"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "paquete",
+                "synonyms": [
+                  "paquetes",
+                  "pack",
+                  "packs"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "caja",
+                "synonyms": [
+                  "cajas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "bote",
+                "synonyms": [
+                  "botes",
+                  "tarro",
+                  "tarros"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "lata",
+                "synonyms": [
+                  "latas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "botella",
+                "synonyms": [
+                  "botellas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "bolsa",
+                "synonyms": [
+                  "bolsas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "saco",
+                "synonyms": [
+                  "sacos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "rollo",
+                "synonyms": [
+                  "rollos"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "bandeja",
+                "synonyms": [
+                  "bandejas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "brik",
+                "synonyms": [
+                  "briks",
+                  "brick",
+                  "bricks"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "garrafa",
+                "synonyms": [
+                  "garrafas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "docena",
+                "synonyms": [
+                  "docenas"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "unidad",
+                "synonyms": [
+                  "unidades"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "UNO",
+          "values": [
+            {
+              "name": {
+                "value": "un",
+                "synonyms": [
+                  "uno"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "una",
+                "synonyms": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "RegistrarProductoIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "producto",
+              "type": "PRODUCTO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Registrar.producto"
+              }
+            },
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Registrar.cantidad"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Validar.Registrar.cantidad",
+                  "value": "1"
+                }
+              ]
+            },
+            {
+              "name": "uno",
+              "type": "UNO",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "unidad",
+              "type": "UNIDAD",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            }
+          ]
+        },
+        {
+          "name": "BorrarProductoIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "producto",
+              "type": "PRODUCTO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Borrar.producto"
+              }
+            },
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {},
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Validar.Borrar.cantidad",
+                  "value": "1"
+                }
+              ]
+            },
+            {
+              "name": "uno",
+              "type": "UNO",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "unidad",
+              "type": "UNIDAD",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            }
+          ]
+        },
+        {
+          "name": "ConfigurarUmbralIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "umbral",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Umbral.umbral"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Validar.Umbral.umbral",
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BuscarProductoIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "producto",
+              "type": "PRODUCTO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Buscar.producto"
+              }
+            }
+          ]
+        },
+        {
+          "name": "RestaurarAlmacenIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirmar.Restaurar"
+          },
+          "slots": []
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Registrar.producto",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Qué producto quieres guardar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué quieres guardar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Registrar.cantidad",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Cuántos {producto} quieres guardar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué cantidad de {producto} guardo?"
+          }
+        ]
+      },
+      {
+        "id": "Validar.Registrar.cantidad",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Necesito un número mayor que cero. ¿Cuántos {producto} quieres guardar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Borrar.producto",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Qué producto quieres quitar?"
+          }
+        ]
+      },
+      {
+        "id": "Validar.Borrar.cantidad",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Necesito un número mayor que cero. ¿Cuántos {producto} quieres quitar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Buscar.producto",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Qué producto quieres buscar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Umbral.umbral",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Por debajo de cuántas unidades quieres que un producto cuente como poco stock?"
+          }
+        ]
+      },
+      {
+        "id": "Validar.Umbral.umbral",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Necesito un número mayor que cero. ¿Por debajo de cuántas unidades te aviso?"
+          }
+        ]
+      },
+      {
+        "id": "Confirmar.Restaurar",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Seguro que quieres vaciar el almacén? Se borrarán todos los productos."
+          }
+        ]
+      }
+    ]
+  }
+}

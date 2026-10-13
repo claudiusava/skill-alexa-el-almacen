@@ -1,0 +1,19 @@
+{
+  "name": "almacen-alexa-skill",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Skill de Alexa en español para llevar el inventario de un almacén, una despensa o un negocio por voz.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Claudiu Sava",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-core": "^2.14.0",
+    "ask-sdk-model": "^1.86.0"
+  }
+}
