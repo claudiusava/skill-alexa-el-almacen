@@ -164,7 +164,7 @@ ask smapi submit-skill-for-certification -s <SKILL_ID>
 - La skill guarda, por usuario, los productos y cantidades que este le dicta y el número de sesiones.
 - El nombre (si hay permiso) solo se usa para saludar.
 - No se escriben en los logs ni el contenido del almacén ni identificadores de usuario.
-- Política de privacidad: <https://cspp.zyrosite.com/>
+- Política de privacidad: <https://claudiusava.github.io/skill-alexa-el-almacen/privacidad.html> (fuente en `docs/privacidad.html`, publicada con GitHub Pages)
 
 ## Historia
 
