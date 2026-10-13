@@ -44,8 +44,13 @@ test('interpretarPedido separa la unidad cuando Alexa la mete dentro del product
         inv.interpretarPedido({ producto: 'paquetes de arroz', cantidad: '2' }),
         { nombre: 'arroz', nombreDicho: 'arroz', cantidad: 2, dicho: '2 paquetes de arroz' },
     );
-    // "lata de atún" no lleva unidad separada si no hay nada después de "de"
+    assert.strictEqual(inv.interpretarPedido({ producto: 'latas de atún', cantidad: '3' }).nombre, 'atún');
     assert.strictEqual(inv.interpretarPedido({ producto: 'lata', cantidad: '1' }).nombre, 'lata');
+    // Un producto del catálogo que empieza por una unidad no se separa.
+    assert.deepStrictEqual(
+        inv.interpretarPedido({ producto: 'bolsas de basura', productoResuelto: 'bolsa de basura', cantidad: '2' }),
+        { nombre: 'bolsa de basura', nombreDicho: 'bolsas de basura', cantidad: 2, dicho: '2 bolsas de basura' },
+    );
 });
 
 test('interpretarPedido usa el valor del catálogo si lo hay', () => {

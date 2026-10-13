@@ -88,7 +88,11 @@ function interpretarPedido({ producto, productoResuelto, cantidad, unidad, unida
     const texto = limpiarNombre(producto);
     if (!texto || !claveDe(texto)) return { error: 'producto' };
 
-    const separado = separarUnidad(texto);
+    // "bolsas de basura" es un producto del catálogo, no 'bolsa' + 'basura'.
+    const esProductoEntero = productoResuelto && claveDe(productoResuelto) === claveDe(texto);
+    const separado = esProductoEntero
+        ? { unidad: null, unidadDicha: null, resto: texto }
+        : separarUnidad(texto);
     const unidadDicha = unidad ? limpiarNombre(unidad) : separado.unidadDicha;
     const unidadCanonica = unidad
         ? (unidadResuelta || UNIDADES[normalizarTexto(unidadDicha)] || null)
