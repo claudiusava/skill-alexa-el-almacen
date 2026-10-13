@@ -1,7 +1,97 @@
 {
   "interactionModel": {
+    "dialog": {
+      "intents": [
+        {
+          "slots": [
+            {
+              "name": "producto",
+              "elicitationRequired": true,
+              "type": "AMAZON.CreativeWorkType",
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.61620212796.226470971274"
+              }
+            },
+            {
+              "name": "cantidad",
+              "elicitationRequired": true,
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.671485946150.1235468409411.162563387371",
+                  "value": "1"
+                }
+              ],
+              "type": "AMAZON.NUMBER",
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.535305288385.1206768460022"
+              }
+            }
+          ],
+          "name": "RegistrarProductoIntent",
+          "confirmationRequired": false,
+          "prompts": {}
+        },
+        {
+          "slots": [
+            {
+              "name": "productoBuscar",
+              "elicitationRequired": true,
+              "type": "AMAZON.CreativeWorkType",
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.32659188841.347098743658"
+              }
+            }
+          ],
+          "name": "BuscarProductoIntent",
+          "confirmationRequired": false,
+          "prompts": {}
+        },
+        {
+          "slots": [
+            {
+              "name": "productoBorrar",
+              "elicitationRequired": true,
+              "type": "AMAZON.CreativeWorkType",
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.266329214543.554394004814"
+              }
+            },
+            {
+              "name": "cantidadProductoBorrar",
+              "elicitationRequired": true,
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.1462546251383.1404728086044.1129145402902",
+                  "value": "1"
+                }
+              ],
+              "type": "AMAZON.NUMBER",
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.266329214543.1163467010375"
+              }
+            }
+          ],
+          "name": "BorrarProductoIntent",
+          "confirmationRequired": false,
+          "prompts": {}
+        },
+        {
+          "slots": [],
+          "name": "RestaurarAlmacenIntent",
+          "confirmationRequired": false,
+          "prompts": {}
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
     "languageModel": {
-      "invocationName": "guardar en almacén",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -35,7 +125,6 @@
           ]
         },
         {
-          "name": "RegistrarProductoIntent",
           "slots": [
             {
               "name": "producto",
@@ -77,6 +166,7 @@
               ]
             }
           ],
+          "name": "RegistrarProductoIntent",
           "samples": [
             "Guárdame en el almacén {cantidad} {producto}",
             "Guárdame en el almacén {producto}",
@@ -185,8 +275,8 @@
           "samples": []
         },
         {
-          "name": "ListarProductosIntent",
           "slots": [],
+          "name": "ListarProductosIntent",
           "samples": [
             "Listar todo",
             "Quiero saber todos los productos que tengo en el almacén",
@@ -258,7 +348,6 @@
           ]
         },
         {
-          "name": "BuscarProductoIntent",
           "slots": [
             {
               "name": "productoBuscar",
@@ -272,6 +361,7 @@
               ]
             }
           ],
+          "name": "BuscarProductoIntent",
           "samples": [
             "Busca {productoBuscar}",
             "Dime cuantas {productoBuscar} tengo en el almacén",
@@ -304,7 +394,6 @@
           ]
         },
         {
-          "name": "BorrarProductoIntent",
           "slots": [
             {
               "name": "productoBorrar",
@@ -327,6 +416,7 @@
               ]
             }
           ],
+          "name": "BorrarProductoIntent",
           "samples": [
             "Quitar {productoBorrar}",
             "Quitar {cantidadProductoBorrar} {productoBorrar}",
@@ -360,8 +450,8 @@
           ]
         },
         {
-          "name": "RestaurarAlmacenIntent",
           "slots": [],
+          "name": "RestaurarAlmacenIntent",
           "samples": [
             "Quiero vaciar el almacén entero",
             "Quiero restaurar el almacén entero",
@@ -399,8 +489,8 @@
           "samples": []
         },
         {
-          "name": "ProductosPocoStockIntent",
           "slots": [],
+          "name": "ProductosPocoStockIntent",
           "samples": [
             "Listar cosas que tengo menos",
             "Dime que cosas tengo menos de diez",
@@ -438,100 +528,8 @@
       ],
       "types": []
     },
-    "dialog": {
-      "intents": [
-        {
-          "name": "RegistrarProductoIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": [
-            {
-              "name": "producto",
-              "type": "AMAZON.CreativeWorkType",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.61620212796.226470971274"
-              }
-            },
-            {
-              "name": "cantidad",
-              "type": "AMAZON.NUMBER",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.535305288385.1206768460022"
-              },
-              "validations": [
-                {
-                  "type": "isGreaterThanOrEqualTo",
-                  "prompt": "Slot.Validation.671485946150.1235468409411.162563387371",
-                  "value": "1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "BuscarProductoIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": [
-            {
-              "name": "productoBuscar",
-              "type": "AMAZON.CreativeWorkType",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.32659188841.347098743658"
-              }
-            }
-          ]
-        },
-        {
-          "name": "BorrarProductoIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": [
-            {
-              "name": "productoBorrar",
-              "type": "AMAZON.CreativeWorkType",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.266329214543.554394004814"
-              }
-            },
-            {
-              "name": "cantidadProductoBorrar",
-              "type": "AMAZON.NUMBER",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.266329214543.1163467010375"
-              },
-              "validations": [
-                {
-                  "type": "isGreaterThanOrEqualTo",
-                  "prompt": "Slot.Validation.1462546251383.1404728086044.1129145402902",
-                  "value": "1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "RestaurarAlmacenIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": []
-        }
-      ],
-      "delegationStrategy": "ALWAYS"
-    },
     "prompts": [
       {
-        "id": "Elicit.Slot.61620212796.226470971274",
         "variations": [
           {
             "type": "PlainText",
@@ -545,19 +543,19 @@
             "type": "PlainText",
             "value": "¿Qué producto quieres guardar?"
           }
-        ]
+        ],
+        "id": "Elicit.Slot.61620212796.226470971274"
       },
       {
-        "id": "Elicit.Slot.535305288385.1206768460022",
         "variations": [
           {
             "type": "PlainText",
             "value": "¿Qué cantidad de {producto} quieres guardar?"
           }
-        ]
+        ],
+        "id": "Elicit.Slot.535305288385.1206768460022"
       },
       {
-        "id": "Slot.Validation.671485946150.1235468409411.162563387371",
         "variations": [
           {
             "type": "PlainText",
@@ -567,37 +565,37 @@
             "type": "PlainText",
             "value": "Lo siento. Para poder guardar {producto} deberías decirme un número mayor a cero. Prueba otra vez."
           }
-        ]
+        ],
+        "id": "Slot.Validation.671485946150.1235468409411.162563387371"
       },
       {
-        "id": "Elicit.Slot.32659188841.347098743658",
         "variations": [
           {
             "type": "PlainText",
             "value": "¿Qué producto quieres buscar?"
           }
-        ]
+        ],
+        "id": "Elicit.Slot.32659188841.347098743658"
       },
       {
-        "id": "Elicit.Slot.266329214543.554394004814",
         "variations": [
           {
             "type": "PlainText",
             "value": "¿Qué producto quieres borrar?"
           }
-        ]
+        ],
+        "id": "Elicit.Slot.266329214543.554394004814"
       },
       {
-        "id": "Elicit.Slot.266329214543.1163467010375",
         "variations": [
           {
             "type": "PlainText",
             "value": "¿Cuántos {productoBorrar} quieres borrar?"
           }
-        ]
+        ],
+        "id": "Elicit.Slot.266329214543.1163467010375"
       },
       {
-        "id": "Confirm.Intent.1110942074532",
         "variations": [
           {
             "type": "PlainText",
@@ -607,10 +605,10 @@
             "type": "PlainText",
             "value": "¿Seguro que quieres restaurar el almacén?"
           }
-        ]
+        ],
+        "id": "Confirm.Intent.1110942074532"
       },
       {
-        "id": "Slot.Validation.1462546251383.1404728086044.1129145402902",
         "variations": [
           {
             "type": "PlainText",
@@ -620,9 +618,9 @@
             "type": "PlainText",
             "value": "Lo siento. Para poder borrar {productoBorrar} deberías decirme un número mayor a cero. Prueba otra vez."
           }
-        ]
+        ],
+        "id": "Slot.Validation.1462546251383.1404728086044.1129145402902"
       }
     ]
-  },
-  "version": "88"
+  }
 }
