@@ -52,7 +52,8 @@ module.exports = {
     preguntarCantidad: (nombre) => `¿Qué cantidad de ${escapar(nombre)} quieres guardar?`,
     guardado: (dicho) => `He guardado ${escapar(dicho)}.`,
     sumado: (dicho, producto) => `He añadido ${escapar(dicho)}. Ahora tienes ${cantidadLeida(producto)} en total.`,
-    restado: (dicho, producto) => `He quitado ${escapar(dicho)}. Te quedan ${cantidadLeida(producto)}.`,
+    restado: (dicho, producto) => `He quitado ${escapar(dicho)}. `
+        + `Te ${producto.cantidad === 1 ? 'queda' : 'quedan'} ${cantidadLeida(producto)}.`,
     agotado: (dicho, nombre) => `${SONIDOS.borrar} He quitado ${escapar(dicho)}. Ya no queda nada de ${escapar(nombre)}, `
         + 'así que lo he borrado del almacén.',
     borrado: (nombre) => `${SONIDOS.borrar} He borrado ${escapar(nombre)} del almacén.`,

@@ -90,7 +90,9 @@ test('quitar una cantidad resta, y si no queda nada borra el producto', async ()
     await hablar(guardar('arroz', 2));
     assert.match((await hablar(intent('BorrarProductoIntent', { producto: 'tomates', cantidad: 2 }))).texto,
         /He quitado 2 tomates\. Te quedan 3\./);
-    assert.match((await hablar(intent('BorrarProductoIntent', { producto: 'tomates', cantidad: 3 }))).texto,
+    assert.match((await hablar(intent('BorrarProductoIntent', { producto: 'tomates', cantidad: 2 }))).texto,
+        /He quitado 2 tomates\. Te queda 1\./);
+    assert.match((await hablar(intent('BorrarProductoIntent', { producto: 'tomates', cantidad: 1 }))).texto,
         /Ya no queda nada de tomates/);
     assert.match((await hablar(intent('ListarProductosIntent'))).texto, /Tienes un producto: arroz: 2\./);
 });
