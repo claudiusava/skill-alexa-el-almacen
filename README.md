@@ -10,18 +10,23 @@ Está publicada en la tienda de skills de Alexa en la categoría *Organizadores 
 
 | Quieres… | Puedes decir | Intent |
 |---|---|---|
-| Guardar o sumar | «guarda tres paquetes de arroz», «he comprado dos docenas de huevos» | `RegistrarProductoIntent` |
+| Guardar o sumar | «guarda tres paquetes de arroz», «guarda una lata de atún», «he comprado dos docenas de huevos» | `RegistrarProductoIntent` |
 | Restar | «he gastado dos latas de atún», «quita un tomate» | `BorrarProductoIntent` |
 | Borrar un producto entero | «borra el arroz», «se han acabado los tomates» (pide confirmación) | `BorrarProductoIntent` |
 | Consultar | «¿cuántos tomates tengo?», «¿me queda leche?» | `BuscarProductoIntent` |
 | Listar todo | «lista los productos», «¿qué hay en el almacén?» | `ListarProductosIntent` |
-| Ver qué se acaba | «¿qué se está acabando?» (menos de 10 unidades) | `ProductosPocoStockIntent` |
+| Ver qué se acaba | «¿qué se está acabando?» (menos de 10 unidades, o el límite elegido) | `ProductosPocoStockIntent` |
+| Cambiar el límite de poco stock | «avísame cuando queden menos de cinco» | `ConfigurarUmbralIntent` |
+| Deshacer | «deshaz lo último», «me he equivocado» | `DeshacerIntent` |
+| Repetir | «repite» | `AMAZON.RepeatIntent` |
 | Vaciar el almacén | «vacía el almacén» (pide confirmación) | `RestaurarAlmacenIntent` |
 
 Detalles:
 
 - **Singular y plural**: «tomate», «tomates» y «los tomates» son el mismo producto. No importan las mayúsculas ni los acentos.
-- **Unidades**: entiende «tres kilos de arroz» o «dos paquetes de arroz» y guarda la cantidad de *arroz*. Las docenas se multiplican por 12. La unidad no se guarda.
+- **Unidades**: entiende «tres kilos de arroz» o «dos paquetes de arroz». Guarda la cantidad de *arroz* y la unidad con que se creó el producto («De arroz tienes 3 kilos»). Las docenas se multiplican por 12.
+- **Listas por partes**: los listados van en orden alfabético y de diez en diez. Tras cada parte pregunta «¿Quieres oírlos?».
+- **Deshacer**: «deshaz lo último» revierte la última operación de la conversación (guardar, quitar, borrar o vaciar).
 - **Saludo por el nombre**: si el usuario da el permiso `alexa::profile:given_name:read` en la app de Alexa, la skill le saluda por su nombre. Es opcional y el nombre no se guarda.
 - Cada usuario (cada cuenta de Amazon) tiene su propio almacén, guardado en S3.
 
@@ -29,15 +34,17 @@ Detalles:
 
 ```
 ├── ask-resources.json          Configuración de ASK CLI (despliegue Alexa-hosted)
+├── scripts/generar-modelo.js   Fuente del modelo de interacción (genera es-ES.json)
 ├── skill-package/
 │   ├── skill.json              Manifiesto: nombre, descripción, permisos, privacidad
-│   ├── interactionModels/custom/es-ES.json   Modelo de interacción
+│   ├── interactionModels/custom/es-ES.json   Modelo de interacción (generado, no editar a mano)
 │   └── assets/images/          Iconos de la tienda
 └── lambda/                     Código que se ejecuta en AWS Lambda
     ├── index.js                Construye la skill y exporta el handler
     ├── handlers/               Un fichero por intent (sistema.js agrupa los de Amazon)
     ├── inventario.js           Lógica pura: nombres, plurales, unidades, sumar, restar…
-    ├── almacen.js              Lee y guarda el almacén del usuario
+    ├── almacen.js              Lee y guarda el almacén del usuario; copia para deshacer
+    ├── listas.js               Lectura de listas por páginas
     ├── persistencia.js         Adaptador S3 (SDK del runtime de Lambda) y adaptador en memoria
     ├── textos.js               Todo lo que dice la skill
     ├── comun.js                Utilidades de los handlers
@@ -47,7 +54,7 @@ Detalles:
 Los datos de cada usuario se guardan en un objeto JSON en el bucket S3 de la skill:
 
 ```json
-{ "version": 2, "sesiones": 4, "productos": [{ "clave": "tomat", "nombre": "tomates", "cantidad": 5 }] }
+{ "version": 2, "sesiones": 4, "umbral": 5, "productos": [{ "clave": "arroz", "nombre": "arroz", "cantidad": 3, "unidad": "kilo" }] }
 ```
 
 `clave` es la forma normalizada con la que se comparan los nombres. `nombre` es el texto que se lee al usuario.
@@ -75,6 +82,22 @@ Los tests cubren:
 - **El adaptador S3** (`persistencia.test.js`): usa imitaciones de AWS SDK v2 y v3.
 
 Ninguno necesita credenciales ni conexión.
+
+### Modelo de interacción
+
+Las frases de ejemplo, los slots y el catálogo de productos y unidades se definen en `scripts/generar-modelo.js`. Para cambiarlos, edita ese fichero y ejecuta:
+
+```bash
+node scripts/generar-modelo.js
+```
+
+El script regenera `skill-package/interactionModels/custom/es-ES.json` y avisa si una frase está repetida en dos intents.
+
+Para comprobar qué entiende Alexa de una frase con el modelo desplegado en desarrollo:
+
+```bash
+ask smapi profile-nlu -s <SKILL_ID> -g development -l es-ES --utterance "guarda tres tomates"
+```
 
 ## Despliegue
 
