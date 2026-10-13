@@ -30,6 +30,7 @@ function leerPedido(handlerInput) {
         producto: producto.valor,
         productoResuelto: producto.resuelto,
         cantidad: leerSlot(handlerInput, 'cantidad').valor,
+        uno: leerSlot(handlerInput, 'uno').valor,
         unidad: unidad.valor,
         unidadResuelta: unidad.resuelto,
     };
@@ -43,10 +44,14 @@ function responder(handlerInput, texto) {
         .getResponse();
 }
 
-/** Respuesta para un pedido que interpretarPedido no ha podido entender. */
-function responderErrorPedido(handlerInput, error) {
-    const texto = error === 'cantidad' ? textos.cantidadNoValida : textos.productoNoEntendido;
-    return handlerInput.responseBuilder.speak(texto).reprompt(textos.reprompt).getResponse();
+/** Hace una pregunta concreta (sin añadir "¿Qué más quieres hacer?") y deja la sesión abierta. */
+function preguntar(handlerInput, texto, reprompt = textos.reprompt) {
+    return handlerInput.responseBuilder.speak(texto).reprompt(reprompt).getResponse();
 }
 
-module.exports = { esIntent, leerSlot, leerPedido, responder, responderErrorPedido };
+/** Respuesta para un pedido que interpretarPedido no ha podido entender. */
+function responderErrorPedido(handlerInput, error) {
+    return preguntar(handlerInput, error === 'cantidad' ? textos.cantidadNoValida : textos.productoNoEntendido);
+}
+
+module.exports = { esIntent, leerSlot, leerPedido, responder, preguntar, responderErrorPedido };

@@ -2,7 +2,7 @@
 // motivo llega sin ella, se pide aquí antes de borrar nada.
 
 const textos = require('../textos');
-const { obtenerAlmacen, guardarAlmacen } = require('../almacen');
+const { obtenerAlmacen, guardarAlmacen, recordarParaDeshacer } = require('../almacen');
 const { esIntent, responder } = require('../comun');
 
 module.exports = {
@@ -23,6 +23,7 @@ module.exports = {
         const almacen = await obtenerAlmacen(handlerInput);
         if (!almacen.productos.length) return responder(handlerInput, textos.yaVacio);
 
+        recordarParaDeshacer(handlerInput, almacen, textos.operaciones.vaciar);
         almacen.productos = [];
         await guardarAlmacen(handlerInput);
         return responder(handlerInput, textos.vaciado);

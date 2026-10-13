@@ -31,25 +31,25 @@ test('limpiarNombre quita artículos iniciales pero no los del medio', () => {
 test('interpretarPedido con cantidad, unidad en su slot y docenas', () => {
     assert.deepStrictEqual(
         inv.interpretarPedido({ producto: 'arroz', cantidad: '3', unidad: 'kilos' }),
-        { nombre: 'arroz', nombreDicho: 'arroz', cantidad: 3, dicho: '3 kilos de arroz' },
+        { nombre: 'arroz', nombreDicho: 'arroz', cantidad: 3, unidad: 'kilo', dicho: '3 kilos de arroz' },
     );
     assert.deepStrictEqual(
         inv.interpretarPedido({ producto: 'huevos', cantidad: '2', unidad: 'docenas', unidadResuelta: 'docena' }),
-        { nombre: 'huevos', nombreDicho: 'huevos', cantidad: 24, dicho: '2 docenas de huevos' },
+        { nombre: 'huevos', nombreDicho: 'huevos', cantidad: 24, unidad: null, dicho: '2 docenas de huevos' },
     );
 });
 
 test('interpretarPedido separa la unidad cuando Alexa la mete dentro del producto', () => {
     assert.deepStrictEqual(
         inv.interpretarPedido({ producto: 'paquetes de arroz', cantidad: '2' }),
-        { nombre: 'arroz', nombreDicho: 'arroz', cantidad: 2, dicho: '2 paquetes de arroz' },
+        { nombre: 'arroz', nombreDicho: 'arroz', cantidad: 2, unidad: 'paquete', dicho: '2 paquetes de arroz' },
     );
     assert.strictEqual(inv.interpretarPedido({ producto: 'latas de atún', cantidad: '3' }).nombre, 'atún');
     assert.strictEqual(inv.interpretarPedido({ producto: 'lata', cantidad: '1' }).nombre, 'lata');
     // Un producto del catálogo que empieza por una unidad no se separa.
     assert.deepStrictEqual(
         inv.interpretarPedido({ producto: 'bolsas de basura', productoResuelto: 'bolsa de basura', cantidad: '2' }),
-        { nombre: 'bolsa de basura', nombreDicho: 'bolsas de basura', cantidad: 2, dicho: '2 bolsas de basura' },
+        { nombre: 'bolsa de basura', nombreDicho: 'bolsas de basura', cantidad: 2, unidad: null, dicho: '2 bolsas de basura' },
     );
 });
 
@@ -96,4 +96,51 @@ test('conPocoStock devuelve los que están por debajo del umbral', () => {
     inv.anadir(productos, 'sal', 1);
     assert.deepStrictEqual(inv.conPocoStock(productos).map((p) => p.nombre), ['arroz', 'sal']);
     assert.strictEqual(inv.UMBRAL_POCO_STOCK, 10);
+});
+
+test('interpretarPedido entiende "un" y "una" como cantidad 1', () => {
+    assert.deepStrictEqual(
+        inv.interpretarPedido({ producto: 'tomate', uno: 'un' }),
+        { nombre: 'tomate', nombreDicho: 'tomate', cantidad: 1, unidad: null, dicho: 'un tomate' },
+    );
+    assert.deepStrictEqual(
+        inv.interpretarPedido({ producto: 'lata de atún', uno: 'una' }),
+        { nombre: 'atún', nombreDicho: 'atún', cantidad: 1, unidad: 'lata', dicho: 'una lata de atún' },
+    );
+    // Si Alexa rellena ambos, manda el número.
+    assert.strictEqual(inv.interpretarPedido({ producto: 'tomates', cantidad: '3', uno: 'un' }).cantidad, 3);
+});
+
+test('cantidadLeida usa la unidad en singular o plural', () => {
+    assert.strictEqual(inv.cantidadLeida({ cantidad: 4 }), '4');
+    assert.strictEqual(inv.cantidadLeida({ cantidad: 1, unidad: 'kilo' }), '1 kilo');
+    assert.strictEqual(inv.cantidadLeida({ cantidad: 3, unidad: 'lata' }), '3 latas');
+});
+
+test('anadir fija la unidad solo al crear el producto', () => {
+    const productos = [];
+    inv.anadir(productos, 'arroz', 2, 'kilo');
+    inv.anadir(productos, 'arroz', 1, 'paquete');
+    inv.anadir(productos, 'sal', 1);
+    assert.deepStrictEqual(productos.map((p) => [p.nombre, p.cantidad, p.unidad]),
+        [['arroz', 3, 'kilo'], ['sal', 1, undefined]]);
+});
+
+test('pideTodo reconoce "borra todo" y "borra el almacén"', () => {
+    for (const texto of ['todo', 'todo el almacén', 'el almacén', 'todos los productos', 'todo lo que tengo']) {
+        assert.strictEqual(inv.pideTodo(texto), true, texto);
+    }
+    for (const texto of ['tomates', 'todo a cien', undefined]) {
+        assert.strictEqual(inv.pideTodo(texto), false, String(texto));
+    }
+});
+
+test('ordenados devuelve una copia en orden alfabético', () => {
+    const productos = [];
+    inv.anadir(productos, 'tomates', 1);
+    inv.anadir(productos, 'aceite', 1);
+    inv.anadir(productos, 'Ñoquis', 1);
+    inv.anadir(productos, 'nata', 1);
+    assert.deepStrictEqual(inv.ordenados(productos).map((p) => p.nombre), ['aceite', 'nata', 'ñoquis', 'tomates']);
+    assert.strictEqual(productos[0].nombre, 'tomates');
 });

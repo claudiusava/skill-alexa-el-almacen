@@ -2,10 +2,14 @@
 
 const Alexa = require('ask-sdk-core');
 const textos = require('../textos');
-const { esIntent } = require('../comun');
+const { esIntent, responder, preguntar } = require('../comun');
+const { hayListaPendiente, continuarLista, abandonarLista } = require('../listas');
 
-function preguntar(handlerInput, texto) {
-    return handlerInput.responseBuilder.speak(texto).reprompt(textos.reprompt).getResponse();
+function despedirse(handlerInput) {
+    return handlerInput.responseBuilder
+        .speak(textos.despedida)
+        .withShouldEndSession(true)
+        .getResponse();
 }
 
 const Ayuda = {
@@ -13,20 +17,42 @@ const Ayuda = {
     handle: (handlerInput) => preguntar(handlerInput, textos.ayuda),
 };
 
-// "Sí" fuera de una confirmación: el usuario quiere seguir.
+// "Sí": sigue leyendo una lista a medias o, si no hay ninguna, pregunta qué hacer.
 const Si = {
     canHandle: (handlerInput) => esIntent(handlerInput, 'AMAZON.YesIntent'),
-    handle: (handlerInput) => preguntar(handlerInput, textos.queHacer),
+    handle(handlerInput) {
+        if (hayListaPendiente(handlerInput)) return continuarLista(handlerInput);
+        return preguntar(handlerInput, textos.queHacer);
+    },
 };
 
-// "No" a "¿Qué más quieres hacer?", "para", "cancela" o volver al inicio: se despide.
+// "No": deja una lista a medias o, si no hay ninguna, responde a "¿Qué más quieres hacer?" y se despide.
+const No = {
+    canHandle: (handlerInput) => esIntent(handlerInput, 'AMAZON.NoIntent'),
+    handle(handlerInput) {
+        if (hayListaPendiente(handlerInput)) {
+            abandonarLista(handlerInput);
+            return responder(handlerInput, textos.finLista);
+        }
+        return despedirse(handlerInput);
+    },
+};
+
+// "Para", "cancela" o volver al inicio.
 const Salir = {
     canHandle: (handlerInput) => esIntent(handlerInput,
-        'AMAZON.NoIntent', 'AMAZON.CancelIntent', 'AMAZON.StopIntent', 'AMAZON.NavigateHomeIntent'),
-    handle: (handlerInput) => handlerInput.responseBuilder
-        .speak(textos.despedida)
-        .withShouldEndSession(true)
-        .getResponse(),
+        'AMAZON.CancelIntent', 'AMAZON.StopIntent', 'AMAZON.NavigateHomeIntent'),
+    handle: despedirse,
+};
+
+// "Repite": vuelve a decir la última respuesta, que guarda el interceptor GuardarUltimaRespuesta.
+const Repetir = {
+    canHandle: (handlerInput) => esIntent(handlerInput, 'AMAZON.RepeatIntent'),
+    handle(handlerInput) {
+        const { ultimaRespuesta } = handlerInput.attributesManager.getSessionAttributes();
+        if (!ultimaRespuesta) return preguntar(handlerInput, textos.nadaQueRepetir);
+        return preguntar(handlerInput, ultimaRespuesta.texto, ultimaRespuesta.reprompt);
+    },
 };
 
 const Fallback = {
@@ -60,4 +86,6 @@ const Errores = {
     },
 };
 
-module.exports = { Ayuda, Si, Salir, Fallback, FinDeSesion, IntentDesconocido, Errores };
+module.exports = {
+    Ayuda, Si, No, Salir, Repetir, Fallback, FinDeSesion, IntentDesconocido, Errores,
+};

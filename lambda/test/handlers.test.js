@@ -57,7 +57,8 @@ test('guardar, sumar, buscar y listar', async () => {
 
     assert.match((await hablar(intent('BuscarProductoIntent', { producto: 'Tomate' }))).texto, /De tomates tienes 5\./);
     assert.match((await hablar(intent('BuscarProductoIntent', { producto: 'peras' }))).texto, /No tienes peras en el almacén\./);
-    assert.match((await hablar(intent('ListarProductosIntent'))).texto, /Tienes 2 productos: tomates: 5; arroz: 2\./);
+    assert.match((await hablar(intent('BuscarProductoIntent', { producto: 'arroz' }))).texto, /De arroz tienes 2 kilos\./);
+    assert.match((await hablar(intent('ListarProductosIntent'))).texto, /Tienes 2 productos: arroz: 2 kilos; tomates: 5\./);
 });
 
 test('guardar sin cantidad válida pide repetir sin tocar el almacén', async () => {
@@ -122,7 +123,7 @@ test('productos con poco stock', async () => {
     assert.match((await hablar(intent('ProductosPocoStockIntent'))).texto, /no tienes ningún producto con menos de 10/);
     await hablar(guardar('arroz', 12));
     await hablar(guardar('sal', 2));
-    assert.match((await hablar(intent('ProductosPocoStockIntent'))).texto, /Con menos de 10 unidades tienes: sal: 2\./);
+    assert.match((await hablar(intent('ProductosPocoStockIntent'))).texto, /Con menos de 10 unidades tienes un producto: sal: 2\./);
 });
 
 test('vaciar el almacén respeta la confirmación', async () => {
@@ -146,10 +147,101 @@ test('los nombres con caracteres especiales no rompen el SSML', async () => {
     assert.doesNotMatch(ssml, /&|<b>/);
 });
 
-test('las listas largas se cortan', async () => {
+/** Simula una conversación: los atributos de sesión de cada respuesta van en la siguiente petición. */
+function conversacion(skill) {
+    let atributos = {};
+    return {
+        get atributos() { return atributos; },
+        async decir(peticion) {
+            peticion.session.attributes = atributos;
+            peticion.session.new = false;
+            const respuesta = await skill.invoke(peticion);
+            atributos = respuesta.sessionAttributes;
+            const { response } = respuesta;
+            return {
+                response,
+                texto: response.outputSpeech ? response.outputSpeech.ssml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : '',
+            };
+        },
+    };
+}
+
+test('las listas largas se leen de diez en diez, en orden alfabético', async () => {
+    const { skill } = crearSkillDePrueba();
+    for (let i = 32; i >= 10; i -= 1) await skill.invoke(guardar(`producto ${i}`, 1));
+    const c = conversacion(skill);
+
+    let { texto } = await c.decir(intent('ListarProductosIntent'));
+    assert.match(texto, /^Tienes 23 productos\. Te digo los 10 primeros: producto 10: 1;.*producto 19: 1\. Quedan 13 más\. ¿Quieres oírlos\?$/);
+    ({ texto } = await c.decir(intent('AMAZON.YesIntent')));
+    assert.match(texto, /^producto 20: 1;.*producto 29: 1\. Quedan 3 más\. ¿Quieres oírlos\?$/);
+    ({ texto } = await c.decir(intent('AMAZON.YesIntent')));
+    assert.strictEqual(texto, 'producto 30: 1; producto 31: 1; producto 32: 1. ¿Qué más quieres hacer?');
+    ({ texto } = await c.decir(intent('AMAZON.YesIntent')));
+    assert.match(texto, /^¿Qué quieres hacer\?/);
+
+    await c.decir(intent('ListarProductosIntent'));
+    ({ texto } = await c.decir(intent('AMAZON.NoIntent')));
+    assert.strictEqual(texto, 'Vale. ¿Qué más quieres hacer?');
+
+    // Cualquier otra petición abandona la lista.
+    await c.decir(intent('ListarProductosIntent'));
+    await c.decir(intent('BuscarProductoIntent', { producto: 'producto 10' }));
+    assert.strictEqual(c.atributos.listaPendiente, undefined);
+});
+
+test('"un tomate" no necesita preguntar la cantidad', async () => {
     const { hablar } = crearSkillDePrueba();
-    for (let i = 0; i < 45; i += 1) await hablar(guardar(`producto ${i}`, 1));
-    assert.match((await hablar(intent('ListarProductosIntent'))).texto, /Tienes 45 productos: .*; y 5 productos más\./);
+    const { texto } = await hablar(intent('RegistrarProductoIntent', { producto: 'tomate', uno: 'un' }));
+    assert.match(texto, /^He guardado un tomate\./);
+});
+
+test('sin cantidad se pregunta cuánto guardar', async () => {
+    const { hablar } = crearSkillDePrueba();
+    const { response, texto } = await hablar(intent('RegistrarProductoIntent', { producto: 'tomates' }));
+    assert.strictEqual(texto, '¿Qué cantidad de tomates quieres guardar?');
+    assert.strictEqual(response.directives[0].type, 'Dialog.ElicitSlot');
+    assert.strictEqual(response.directives[0].slotToElicit, 'cantidad');
+});
+
+test('"borra todo" pasa a vaciar el almacén', async () => {
+    const { hablar } = crearSkillDePrueba();
+    const { response } = await hablar(intent('BorrarProductoIntent', { producto: 'todo' }));
+    assert.strictEqual(response.directives[0].type, 'Dialog.Delegate');
+    assert.strictEqual(response.directives[0].updatedIntent.name, 'RestaurarAlmacenIntent');
+});
+
+test('cambiar el umbral de poco stock', async () => {
+    const { hablar } = crearSkillDePrueba();
+    await hablar(guardar('arroz', 4));
+    await hablar(guardar('sal', 2));
+    assert.match((await hablar(intent('ConfigurarUmbralIntent', { umbral: 3 }))).texto, /menos de 3 unidades/);
+    assert.match((await hablar(intent('ProductosPocoStockIntent'))).texto, /Con menos de 3 unidades tienes un producto: sal: 2\./);
+    assert.match((await hablar(intent('ConfigurarUmbralIntent', { umbral: 0 }))).texto, /Necesito un número entero mayor que cero/);
+});
+
+test('deshacer lo último restaura los productos', async () => {
+    const { skill } = crearSkillDePrueba();
+    const c = conversacion(skill);
+    assert.match((await c.decir(intent('DeshacerIntent'))).texto, /No hay nada que deshacer/);
+
+    await c.decir(guardar('arroz', 4));
+    await c.decir(guardar('arroz', 2));
+    assert.match((await c.decir(intent('DeshacerIntent'))).texto, /He deshecho lo último: guardar 2 arroz\./);
+    assert.match((await c.decir(intent('BuscarProductoIntent', { producto: 'arroz' }))).texto, /tienes 4\./);
+
+    await c.decir(intent('RestaurarAlmacenIntent', {}, { confirmacion: 'CONFIRMED' }));
+    assert.match((await c.decir(intent('DeshacerIntent'))).texto, /He deshecho lo último: vaciar el almacén\./);
+    assert.match((await c.decir(intent('ListarProductosIntent'))).texto, /arroz: 4/);
+    assert.match((await c.decir(intent('DeshacerIntent'))).texto, /No hay nada que deshacer/);
+});
+
+test('repite vuelve a decir la última respuesta', async () => {
+    const { skill } = crearSkillDePrueba();
+    const c = conversacion(skill);
+    assert.match((await c.decir(intent('AMAZON.RepeatIntent'))).texto, /No tengo nada que repetir/);
+    await c.decir(guardar('arroz', 4));
+    assert.strictEqual((await c.decir(intent('AMAZON.RepeatIntent'))).texto, 'He guardado 4 arroz. ¿Qué más quieres hacer?');
 });
 
 test('ayuda, sí, fallback e intent desconocido mantienen la sesión abierta', async () => {

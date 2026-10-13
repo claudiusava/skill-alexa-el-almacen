@@ -14,7 +14,7 @@ module.exports = {
         const almacen = await obtenerAlmacen(handlerInput);
         const producto = inventario.buscar(almacen.productos, pedido.nombre);
         return responder(handlerInput, producto
-            ? textos.encontrado(producto.nombre, producto.cantidad)
+            ? textos.encontrado(producto)
             : textos.noEncontrado(pedido.nombreDicho));
     },
 };

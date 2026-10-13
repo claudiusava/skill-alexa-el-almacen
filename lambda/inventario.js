@@ -1,5 +1,5 @@
 // Lógica pura del inventario: no depende de Alexa ni de la persistencia.
-// Un inventario es un array de productos { clave, nombre, cantidad }.
+// Un inventario es un array de productos { clave, nombre, cantidad, unidad? }.
 
 const UMBRAL_POCO_STOCK = 10;
 
@@ -26,8 +26,29 @@ const UNIDADES = {
     unidad: 'unidad', unidades: 'unidad',
 };
 
-// Unidades que multiplican la cantidad en lugar de describir el envase.
+// Singular y plural con que se lee cada unidad que se guarda con el producto.
+const FORMAS_UNIDAD = {
+    kilo: ['kilo', 'kilos'],
+    gramo: ['gramo', 'gramos'],
+    litro: ['litro', 'litros'],
+    paquete: ['paquete', 'paquetes'],
+    caja: ['caja', 'cajas'],
+    bote: ['bote', 'botes'],
+    lata: ['lata', 'latas'],
+    botella: ['botella', 'botellas'],
+    bolsa: ['bolsa', 'bolsas'],
+    saco: ['saco', 'sacos'],
+    rollo: ['rollo', 'rollos'],
+    bandeja: ['bandeja', 'bandejas'],
+    brik: ['brik', 'briks'],
+    garrafa: ['garrafa', 'garrafas'],
+};
+
+// "Docena" multiplica la cantidad; "unidad" no aporta nada. Ninguna se guarda.
 const MULTIPLICADORES = { docena: 12 };
+
+// Formas de decir "todo" al pedir borrar: "borra todo", "borra el almacén"...
+const TODO = new Set(['todo', 'todos', 'almacen', 'todo almacen', 'todos productos', 'todo que tengo', 'todo lo que tengo']);
 
 /** Minúsculas, sin acentos ni signos, con espacios simples. */
 function normalizarTexto(texto) {
@@ -67,6 +88,12 @@ function claveDe(nombre) {
     return normalizarTexto(limpiarNombre(nombre)).split(' ').filter(Boolean).map(raiz).join(' ');
 }
 
+/** ¿El "producto" que se quiere borrar es en realidad todo el almacén? */
+function pideTodo(producto) {
+    const palabras = normalizarTexto(producto).split(' ').filter((p) => p && !ARTICULOS.has(p));
+    return TODO.has(palabras.join(' '));
+}
+
 /** Separa una unidad inicial: "kilos de arroz" -> { unidad: 'kilo', unidadDicha: 'kilos', resto: 'arroz' }. */
 function separarUnidad(texto) {
     const palabras = texto.split(' ');
@@ -79,12 +106,15 @@ function separarUnidad(texto) {
 
 /**
  * Interpreta los valores de los slots de un pedido.
- * @param {object} slots { producto, productoResuelto, cantidad, unidad, unidadResuelta } (texto tal como llega de Alexa)
- * @returns {{ error: 'producto'|'cantidad' } | { nombre: string, nombreDicho: string, cantidad: number|null, dicho: string }}
- *   `nombre` es el que se guarda; `nombreDicho` es el producto tal como lo dijo el usuario ("latas de atún")
+ * @param {object} slots { producto, productoResuelto, cantidad, uno, unidad, unidadResuelta } (texto tal como llega
+ *   de Alexa; `uno` es "un"/"una" cuando el usuario dice "guarda un tomate").
+ * @returns {{ error: 'producto'|'cantidad' }
+ *   | { nombre: string, nombreDicho: string, cantidad: number|null, unidad: string|null, dicho: string }}
+ *   `nombre` es el que se guarda; `nombreDicho` es el producto tal como lo dijo el usuario ("latas de atún");
+ *   `unidad` es la unidad canónica que se guarda con el producto, si la hay;
  *   y `dicho` incluye además la cantidad y la unidad ("3 kilos de arroz").
  */
-function interpretarPedido({ producto, productoResuelto, cantidad, unidad, unidadResuelta }) {
+function interpretarPedido({ producto, productoResuelto, cantidad, uno, unidad, unidadResuelta }) {
     const texto = limpiarNombre(producto);
     if (!texto || !claveDe(texto)) return { error: 'producto' };
 
@@ -99,16 +129,26 @@ function interpretarPedido({ producto, productoResuelto, cantidad, unidad, unida
         : separado.unidad;
     const nombreDicho = separado.resto;
     const nombre = !separado.unidad && productoResuelto ? productoResuelto : nombreDicho;
+    const unidadGuardada = FORMAS_UNIDAD[unidadCanonica] ? unidadCanonica : null;
 
-    if (cantidad === undefined || cantidad === null || cantidad === '') {
-        return { nombre, nombreDicho, cantidad: null, dicho: nombreDicho };
+    const sinCantidad = cantidad === undefined || cantidad === null || cantidad === '';
+    if (sinCantidad && !uno) {
+        return { nombre, nombreDicho, cantidad: null, unidad: unidadGuardada, dicho: nombreDicho };
     }
-    const numero = Number(cantidad);
+    const numero = sinCantidad ? 1 : Number(cantidad);
     if (!Number.isInteger(numero) || numero < 1) return { error: 'cantidad' };
 
     const multiplicador = MULTIPLICADORES[unidadCanonica] || 1;
-    const dicho = [numero, unidadDicha && `${unidadDicha} de`, nombreDicho].filter(Boolean).join(' ');
-    return { nombre, nombreDicho, cantidad: numero * multiplicador, dicho };
+    const numeroDicho = sinCantidad ? limpiarNombre(uno) : numero;
+    const dicho = [numeroDicho, unidadDicha && `${unidadDicha} de`, nombreDicho].filter(Boolean).join(' ');
+    return { nombre, nombreDicho, cantidad: numero * multiplicador, unidad: unidadGuardada, dicho };
+}
+
+/** "4", "2 kilos", "1 kilo": la cantidad de un producto tal como se lee. */
+function cantidadLeida(producto) {
+    const formas = FORMAS_UNIDAD[producto.unidad];
+    if (!formas) return String(producto.cantidad);
+    return `${producto.cantidad} ${producto.cantidad === 1 ? formas[0] : formas[1]}`;
 }
 
 function buscar(productos, nombre) {
@@ -116,14 +156,15 @@ function buscar(productos, nombre) {
     return productos.find((p) => p.clave === clave) || null;
 }
 
-/** Suma `cantidad` al producto, creándolo si no existe. */
-function anadir(productos, nombre, cantidad) {
+/** Suma `cantidad` al producto, creándolo si no existe. La unidad solo se fija al crearlo. */
+function anadir(productos, nombre, cantidad, unidad = null) {
     const existente = buscar(productos, nombre);
     if (existente) {
         existente.cantidad += cantidad;
         return { producto: existente, nuevo: false };
     }
     const producto = { clave: claveDe(nombre), nombre: limpiarNombre(nombre), cantidad };
+    if (unidad) producto.unidad = unidad;
     productos.push(producto);
     return { producto, nuevo: true };
 }
@@ -150,15 +191,23 @@ function conPocoStock(productos, umbral = UMBRAL_POCO_STOCK) {
     return productos.filter((p) => p.cantidad < umbral);
 }
 
+/** Copia ordenada alfabéticamente, para leer listas. */
+function ordenados(productos) {
+    return [...productos].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+}
+
 module.exports = {
     UMBRAL_POCO_STOCK,
     normalizarTexto,
     limpiarNombre,
     claveDe,
+    pideTodo,
     interpretarPedido,
+    cantidadLeida,
     buscar,
     anadir,
     quitar,
     eliminar,
     conPocoStock,
+    ordenados,
 };
