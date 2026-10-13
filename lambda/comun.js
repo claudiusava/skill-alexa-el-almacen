@@ -26,11 +26,12 @@ function leerSlot(handlerInput, nombre) {
 function leerPedido(handlerInput) {
     const producto = leerSlot(handlerInput, 'producto');
     const unidad = leerSlot(handlerInput, 'unidad');
+    const uno = leerSlot(handlerInput, 'uno'); // Alexa envía "1" como valor y "un"/"una" como resuelto
     return {
         producto: producto.valor,
         productoResuelto: producto.resuelto,
         cantidad: leerSlot(handlerInput, 'cantidad').valor,
-        uno: leerSlot(handlerInput, 'uno').valor,
+        uno: uno.resuelto || uno.valor,
         unidad: unidad.valor,
         unidadResuelta: unidad.resuelto,
     };

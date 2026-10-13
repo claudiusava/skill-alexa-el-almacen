@@ -36,7 +36,8 @@ const PRODUCTOS = [
 ];
 // Valores con sinónimos fijos en vez de plural automático.
 const SINONIMOS = {
-    agua: [], té: [], cacao: [], lavavajillas: [], 'papel higiénico': ['rollos de papel higiénico', 'rollo de papel higiénico'],
+    // Sin sinónimos que empiecen por una unidad ("rollos de papel higiénico"): Alexa metía la cantidad dentro del producto.
+    agua: [], té: [], cacao: [], lavavajillas: [], 'papel higiénico': [],
     pienso: ['piensos'], 'comida para perro': ['comida de perro', 'comida para perros'],
     'arena para gato': ['arena de gato', 'arena para gatos'], champú: ['champús'],
 };

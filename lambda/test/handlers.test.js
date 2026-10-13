@@ -192,7 +192,7 @@ test('las listas largas se leen de diez en diez, en orden alfabético', async ()
 
 test('"un tomate" no necesita preguntar la cantidad', async () => {
     const { hablar } = crearSkillDePrueba();
-    const { texto } = await hablar(intent('RegistrarProductoIntent', { producto: 'tomate', uno: 'un' }));
+    const { texto } = await hablar(intent('RegistrarProductoIntent', { producto: 'tomate', uno: { valor: '1', resuelto: 'un' } }));
     assert.match(texto, /^He guardado un tomate\./);
 });
 
@@ -233,6 +233,16 @@ test('deshacer lo último restaura los productos', async () => {
     await c.decir(intent('RestaurarAlmacenIntent', {}, { confirmacion: 'CONFIRMED' }));
     assert.match((await c.decir(intent('DeshacerIntent'))).texto, /He deshecho lo último: vaciar el almacén\./);
     assert.match((await c.decir(intent('ListarProductosIntent'))).texto, /arroz: 4/);
+    assert.match((await c.decir(intent('DeshacerIntent'))).texto, /No hay nada que deshacer/);
+});
+
+test('con un almacén muy grande no se guarda copia para deshacer', async () => {
+    const { skill, persistencia } = crearSkillDePrueba();
+    const productos = Array.from({ length: 300 }, (_, i) => ({ clave: `p${i}`, nombre: `producto ${i}`, cantidad: 1 }));
+    persistencia.datos.set('usuario-1', JSON.stringify({ version: 2, sesiones: 1, productos }));
+    const c = conversacion(skill);
+    await c.decir(guardar('arroz', 1));
+    assert.strictEqual(c.atributos.deshacer, undefined);
     assert.match((await c.decir(intent('DeshacerIntent'))).texto, /No hay nada que deshacer/);
 });
 

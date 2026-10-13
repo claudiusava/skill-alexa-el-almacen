@@ -25,13 +25,22 @@ function umbralDe(almacen) {
     return almacen.umbral || UMBRAL_POCO_STOCK;
 }
 
+// La copia viaja en los atributos de sesión, que cuentan para el límite de
+// tamaño de la respuesta de Alexa; con almacenes muy grandes no se guarda.
+const MAX_COPIA_DESHACER = 8000;
+
 /**
  * Guarda en la sesión una copia de los productos antes de modificarlos, para
  * poder decir "deshaz lo último". Solo se recuerda la última operación.
  */
 function recordarParaDeshacer(handlerInput, almacen, descripcion) {
     const sesion = handlerInput.attributesManager.getSessionAttributes();
-    sesion.deshacer = { descripcion, productos: JSON.parse(JSON.stringify(almacen.productos)) };
+    const copia = JSON.stringify(almacen.productos);
+    if (copia.length > MAX_COPIA_DESHACER) {
+        delete sesion.deshacer;
+        return;
+    }
+    sesion.deshacer = { descripcion, productos: JSON.parse(copia) };
 }
 
 module.exports = { VERSION, obtenerAlmacen, guardarAlmacen, umbralDe, recordarParaDeshacer };

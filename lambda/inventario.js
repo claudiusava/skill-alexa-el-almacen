@@ -114,8 +114,14 @@ function separarUnidad(texto) {
  *   `unidad` es la unidad canónica que se guarda con el producto, si la hay;
  *   y `dicho` incluye además la cantidad y la unidad ("3 kilos de arroz").
  */
-function interpretarPedido({ producto, productoResuelto, cantidad, uno, unidad, unidadResuelta }) {
-    const texto = limpiarNombre(producto);
+function interpretarPedido({ producto, productoResuelto, cantidad: cantidadSlot, uno, unidad, unidadResuelta }) {
+    let texto = limpiarNombre(producto);
+    let cantidad = cantidadSlot;
+    // A veces Alexa mete el número dentro del producto: "20 rollos de papel higiénico".
+    const numeroInicial = /^(\d+) (.+)$/.exec(texto);
+    if (numeroInicial && (cantidad === undefined || cantidad === null || cantidad === '')) {
+        [, cantidad, texto] = numeroInicial;
+    }
     if (!texto || !claveDe(texto)) return { error: 'producto' };
 
     // "bolsas de basura" es un producto del catálogo, no 'bolsa' + 'basura'.

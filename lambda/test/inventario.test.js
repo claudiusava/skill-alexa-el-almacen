@@ -98,6 +98,15 @@ test('conPocoStock devuelve los que están por debajo del umbral', () => {
     assert.strictEqual(inv.UMBRAL_POCO_STOCK, 10);
 });
 
+test('interpretarPedido saca la cantidad si Alexa la mete dentro del producto', () => {
+    assert.deepStrictEqual(
+        inv.interpretarPedido({ producto: '20 rollos de papel higiénico', productoResuelto: 'papel higiénico' }),
+        { nombre: 'papel higiénico', nombreDicho: 'papel higiénico', cantidad: 20, unidad: 'rollo', dicho: '20 rollos de papel higiénico' },
+    );
+    // Si el slot de cantidad viene relleno, el número del producto se respeta como parte del nombre.
+    assert.strictEqual(inv.interpretarPedido({ producto: '7 up', cantidad: '2' }).nombre, '7 up');
+});
+
 test('interpretarPedido entiende "un" y "una" como cantidad 1', () => {
     assert.deepStrictEqual(
         inv.interpretarPedido({ producto: 'tomate', uno: 'un' }),
