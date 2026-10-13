@@ -3,44 +3,30 @@
     "publishingInformation": {
       "locales": {
         "es-ES": {
-          "summary": "Skill que simula un almacén.",
+          "summary": "Lleva por voz el inventario de tu almacén, tu despensa o tu negocio.",
           "examplePhrases": [
-            "Alexa, abre guardar en almacén"
+            "Alexa, abre guardar en almacén",
+            "Alexa, pide a guardar en almacén que guarde tres paquetes de arroz",
+            "Alexa, pregunta a guardar en almacén qué se está acabando"
           ],
           "keywords": [
             "almacén",
-            "cantidad",
-            "abre",
-            "el",
-            "listar",
-            "abre",
-            "cosas",
-            "de",
-            "guardar",
-            "objetos",
             "inventario",
             "despensa",
+            "stock",
             "productos",
             "negocio",
-            "skills",
-            "aplicacion",
-            "app",
             "tienda",
-            "deposito",
-            "factoría",
-            "nave",
-            "local",
             "comercio",
-            "recordar",
-            "objetos",
+            "depósito",
+            "existencias",
+            "compra",
+            "guardar",
             "cantidad",
-            "almacenar",
-            "guardado",
-            "cuanto",
-            "skill"
+            "listar"
           ],
           "name": "Almacén",
-          "description": "Te presentamos \"Alexa, abre guardar en almacén\", una Skill muy intuitiva, fácil de utilizar y útil en la que podrás guardar cualquier objeto en la cantidad que quieras, como si fuera un almacén. Te puede servir de gran ayuda para tu pequeño negocio, tu despensa o depósito.\n\nTienes las opciones de:\n    -Guardar un objeto con su cantidad o sumar una cantidad a un objeto ya existente.\n    -Borrar un objeto o restar una cantidad a un objeto ya existente.\n    -Listar todos los objetos.\n    -Buscar un objeto.\n    -Restaurar el almacén completo.\n\nUna Skill imprescindible si quieres tener bien controlado tu inventario.\n*Requiere de forma opcional de permiso de nombre de usuario\n\nSi tienes alguna sugerencia, has encontrado algún fallo o quieres que diseñemos tu propia Skill escríbenos a:\n4c.claudiusava@gmail.com",
+          "description": "Con \"Alexa, abre guardar en almacén\" llevas por voz el inventario de tu pequeño negocio, tu despensa o tu depósito.\n\nPuedes:\n- Guardar un producto con su cantidad, o sumar a uno que ya tienes: \"guarda tres paquetes de arroz\".\n- Quitar una cantidad o borrar un producto entero: \"he gastado dos latas de atún\", \"borra el arroz\".\n- Preguntar cuánto te queda: \"¿cuántos tomates tengo?\".\n- Escuchar todo el inventario: \"lista los productos\".\n- Saber qué se está acabando (menos de 10 unidades): \"¿qué se está acabando?\".\n- Vaciar el almacén por completo, con confirmación.\n\nEntiende el singular y el plural (\"tomate\" y \"tomates\" son el mismo producto) y unidades como kilos, paquetes, latas o docenas.\n\nSi das permiso para leer tu nombre en la app de Alexa, la skill te saludará por tu nombre. Es opcional y el nombre no se guarda.",
           "smallIconUri": "file://assets/images/es-ES_smallIconUri.png",
           "largeIconUri": "file://assets/images/es-ES_largeIconUri.png"
         }
@@ -55,7 +41,7 @@
         "isActive": true
       },
       "isAvailableWorldwide": true,
-      "testingInstructions": "Solo requiere de forma opcional permisos de nombre de usuario.",
+      "testingInstructions": "No necesita cuenta vinculada. El permiso de nombre (given_name) es opcional y solo se usa para saludar; sin él la skill funciona igual. Prueba: \"guarda tres tomates\", \"cuántos tomates tengo\", \"quita dos tomates\", \"borra los tomates\" (pide confirmación), \"qué se está acabando\", \"vacía el almacén\" (pide confirmación).",
       "category": "ORGANIZERS_AND_ASSISTANTS",
       "distributionCountries": []
     },
@@ -71,9 +57,6 @@
     "permissions": [
       {
         "name": "alexa::profile:given_name:read"
-      },
-      {
-        "name": "alexa::person_id:read"
       }
     ],
     "privacyAndCompliance": {
@@ -86,7 +69,7 @@
       "containsAds": false,
       "isExportCompliant": true,
       "isChildDirected": false,
-      "usesPersonalInfo": false
+      "usesPersonalInfo": true
     }
   }
 }
