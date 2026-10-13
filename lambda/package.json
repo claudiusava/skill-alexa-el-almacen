@@ -5,7 +5,7 @@
   "description": "Skill de Alexa en español para llevar el inventario de un almacén, una despensa o un negocio por voz.",
   "main": "index.js",
   "engines": {
-    "node": ">=16.17"
+    "node": ">=16"
   },
   "scripts": {
     "test": "node --test"
@@ -13,12 +13,7 @@
   "author": "Claudiu Sava",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-s3": "3.721.0",
     "ask-sdk-core": "^2.14.0",
     "ask-sdk-model": "^1.86.0"
-  },
-  "overrides": {
-    "fast-xml-parser": "4.5.7",
-    "uuid": "11.1.1"
   }
 }
